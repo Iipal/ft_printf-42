@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 18:44:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/09 22:36:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	add_parser(const char *format, t_printf *p)
 	const char	flags[] = {'-', '+', '0', '#', ' '};
 	int			i;
 
-	++(p->i);
+	*p = (t_printf){++(p->i), p->counter, 0, 0, false, {0}, 0, {0}};
 	while (format[p->i] && _IS_FLAG(format[p->i]) && (i = -1))
 	{
 		while (++i < MAX_FLAGS)
@@ -77,6 +77,7 @@ int			ft_printf(const char *restrict format, ...)
 {
 	t_printf	*p;
 	va_list		ap;
+	int			ret;
 
 	_NOTIS(E_ALLOC, p = (t_printf*)malloc(sizeof(t_printf)), -1);
 	*p = (t_printf){-1, 0, 0, 0, false, {0}, 0, {0}};
@@ -90,6 +91,7 @@ int			ft_printf(const char *restrict format, ...)
 			_NOTIS_F(add_choose_func(p, &ap));
 		}
 	va_end(ap);
+	ret = p->counter;
 	free(p);
-	return (p->counter);
+	return (ret);
 }

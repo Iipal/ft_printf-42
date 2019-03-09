@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 19:46:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/09 21:48:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static void		add_no_minus_flag_output(t_printf *p, int out_len,
 		_PUT('0');
 	ft_putstr(out_str);
 }
-
+/* 
 static void		add_choose_type(t_printf *p, va_list *ap)
 {
 	
-}
+} */
 
 bool			pf_output_decimal(t_printf *p, va_list *ap)
 {
