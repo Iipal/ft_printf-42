@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cputchar.c                                      :+:      :+:    :+:   */
+/*   pf_output_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 19:17:21 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/03/09 19:11:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_cputchar(char c, int *inc)
+bool			pf_output_string(t_printf *p, va_list *ap)
 {
-	write(1, &c, 1);
-	++(*inc);
+	if (p)
+	{
+	}
+	if (ap)
+	{
+	}
+	return (true);
 }

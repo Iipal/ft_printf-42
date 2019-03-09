@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 18:27:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/09 19:11:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@
 
 # define _PUT(c) ft_cputchar(c, &(p->counter))
 
-# define _U typedef unsigned u
-
-_U;
-
 typedef enum	e_flags
 {
 	none,
@@ -58,19 +54,20 @@ typedef struct	s_printf
 	int			i;
 	int			counter;
 	int			width;
-	u			precision;
+	int			precision;
 	bool		is_precision;
 	char		lenght[2];
 	char		symbol;
 	t_flags		flags[MAX_FLAGS];
 }				t_printf;
 
-typedef	bool (*t_fptr)(t_printf*, va_list*);
-
-void			ft_cputchar(char c, int *inc);
+typedef	bool	(*t_fptr)(t_printf*, va_list*);
 
 int				ft_printf(const char *restrict format, ...);
+
 bool			pf_output_decimal(t_printf *p, va_list *ap);
 bool			pf_output_string(t_printf *p, va_list *ap);
+
+void			ft_cputchar(char c, int *inc);
 
 #endif
