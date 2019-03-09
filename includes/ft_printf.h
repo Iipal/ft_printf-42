@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 15:57:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/09 18:27:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define FT_PRINTF_H
 
 # include "../libft/includes/libft.h"
+# include <limits.h>
 
 # define MAX_FLAGS  5
 
-# define E_ALLOC    "Where is memory, pal ?"
-# define E_WIDTH	" \\ Width can not be less than 0."
+# define E_ALLOC    "STOP: Where is memory, pal ?"
+# define E_WIDTH	" \\ STOP: Width can not be less than 0."
+# define E_MINUS	" \\ STOP: Invalid - specifier."
 
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
@@ -26,6 +28,7 @@
 # define _NOTISD(msg, ex, do, ret) if (!(ex)) {_MSGN(msg);do;return (ret);}
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _NOTIS_F(ex) if (!(ex)) return (false)
+# define _NOTISM_F(msg, ex) if (!(ex)) {_MSGN(msg);return (false);}
 # define _IS(ex, do, ret) if (ex) {do; return (ret);}
 # define _ISM(msg, ex, do, ret) if (ex) {_MSGN(msg);do;return (ret);}
 # define _IS_N(ex) if (ex) return (NULL)
@@ -33,6 +36,12 @@
 # define _ISM_F(msg, ex) if (ex) {_MSGN(msg);return (false);}
 
 # define _IS_FLAG(c) (c == '#' || c == '-' || c == '+' || c == ' ' || c == '0')
+
+# define _PUT(c) ft_cputchar(c, &(p->counter))
+
+# define _U typedef unsigned u
+
+_U;
 
 typedef enum	e_flags
 {
@@ -49,14 +58,19 @@ typedef struct	s_printf
 	int			i;
 	int			counter;
 	int			width;
-	unsigned	precision;
+	u			precision;
 	bool		is_precision;
 	char		lenght[2];
 	char		symbol;
 	t_flags		flags[MAX_FLAGS];
 }				t_printf;
 
+typedef	bool (*t_fptr)(t_printf*, va_list*);
+
+void			ft_cputchar(char c, int *inc);
+
 int				ft_printf(const char *restrict format, ...);
-bool			pf_valid_and_output(t_printf *p, va_list *ap);
+bool			pf_output_decimal(t_printf *p, va_list *ap);
+bool			pf_output_string(t_printf *p, va_list *ap);
 
 #endif

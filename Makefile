@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/09 14:59:20 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/03/09 17:16:20 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LC = ar rcs
 CC = gcc -march=native
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = srcs/ft_printf.c
+SRC = srcs/ft_printf.c srcs/ft_cputchar.c srcs/pf_output.c
 
 OBJ = $(SRC:.c=.o)
 

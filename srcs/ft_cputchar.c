@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_valid_and_output.c                              :+:      :+:    :+:   */
+/*   ft_cputchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 15:57:07 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/03/09 16:05:18 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/03/09 16:06:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-bool			pf_valid_and_output(t_printf *p, va_list *ap)
+void	ft_cputchar(char c, int *inc)
 {
-	return (true);
+	write(1, &c, 1);
+	++(*inc);
 }
+
