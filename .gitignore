@@ -8,3 +8,5 @@ test/
 .VScode
 .vscode
 **.cpp
+**/a.out
+**/*.dSYM

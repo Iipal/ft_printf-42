@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/09 13:23:08 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/03/09 14:59:20 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ endif
 
 LC = ar rcs
 CC = gcc -march=native
-CFLAGS = -Wall -Wextra -Werror -Ofast
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = srcs/ft_printf.c
 
@@ -54,6 +54,9 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(LC) $(NAME) $(OBJ)
 	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 
+ft_test:
+	@$(CC) $(CFLAGS) test/main.c $(NAME) $(LIBFT)
+	@$(ECHO) "$(INVERT)[$(GREEN)test$(WHITE)$(INVERT)]$(WHITE)"
 del:
 	@$(DEL) $(OBJ)
 
