@@ -1,0 +1,10 @@
+#ignore object files in source folders
+srcs/*.o
+libft/srcs/*/*.o
+libft/libft.a
+libftprintf.a
+**.DS_Store
+test/
+.VScode
+.vscode
+**.cpp
