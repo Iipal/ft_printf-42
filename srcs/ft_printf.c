@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 22:36:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/09 23:28:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static bool	add_parser_precision_length(const char *format, t_printf *p)
 	if (format[p->i] == 'l' || format[p->i] == 'L'
 	|| format[p->i] == 'h')
 	{
-		p->lenght[0] = format[p->i];
+		p->length[0] = format[p->i];
 		++(p->i);
 		if (format[p->i] == 'h' || format[p->i] == 'l')
 		{
-			p->lenght[1] = format[p->i];
+			p->length[1] = format[p->i];
 			++(p->i);
 		}
 	}

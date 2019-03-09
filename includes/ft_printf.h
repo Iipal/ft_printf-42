@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 19:11:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/09 23:28:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct	s_printf
 	int			width;
 	int			precision;
 	bool		is_precision;
-	char		lenght[2];
+	char		length[2];
 	char		symbol;
 	t_flags		flags[MAX_FLAGS];
 }				t_printf;
