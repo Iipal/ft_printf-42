@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 23:28:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 10:18:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define E_ALLOC    "STOP: Where is memory, pal ?"
 # define E_WIDTH	" \\ STOP: Width can not be less than 0."
-# define E_MINUS	" \\ STOP: Invalid - specifier."
+# define E_MINUS	" \\ STOP: Invalid \'-\' specifier."
 
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
@@ -61,12 +61,10 @@ typedef struct	s_printf
 	t_flags		flags[MAX_FLAGS];
 }				t_printf;
 
-typedef	bool	(*t_fptr)(t_printf*, va_list*);
-
 int				ft_printf(const char *restrict format, ...);
 
-bool			pf_output_decimal(t_printf *p, va_list *ap);
-bool			pf_output_string(t_printf *p, va_list *ap);
+bool			pf_decimal(t_printf *p, va_list *ap);
+bool			pf_string(t_printf *p, va_list *ap);
 
 void			ft_cputchar(char c, int *inc);
 

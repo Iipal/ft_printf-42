@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 08:14:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 10:19:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ static bool	add_parser_precision_length(const char *format, t_printf *p)
 	if (format[p->i] == '.')
 	{
 		++(p->i);
-		_ISM_F(E_MINUS, format[p->i] == '-');
+		_ISM(E_MINUS, format[p->i] == '-', exit(1), false);
 		p->is_precision = true;
 		p->precision = ft_atoi((string)(&(format[p->i])));
-		if (!p->precision)
-			p->is_precision = false;
 		while (format[p->i] && ft_isdigit(format[p->i]))
 			++(p->i);
 	}
@@ -52,7 +50,8 @@ static bool	add_parser(const char *format, t_printf *p)
 				p->flags[i] = i + 1;
 		++(p->i);
 	}
-	_ISM_F(E_WIDTH, (p->width = ft_atoi((string)(&(format[p->i])))) < 0);
+	_ISM(E_WIDTH, (p->width = ft_atoi((string)(&(format[p->i])))) < 0,
+		exit(1), false);
 	while (format[p->i] && ft_isdigit(format[p->i]))
 		++(p->i);
 	_NOTIS_F(add_parser_precision_length(format, p));
@@ -62,14 +61,18 @@ static bool	add_parser(const char *format, t_printf *p)
 
 static bool	add_choose_func(t_printf *p, va_list *ap)
 {
-	const char		symbols[] = {'d', 's'};
+	const char		symbols[] = {'d', 'i', 'u', 's', 'c'};
 	int				i;
-	const t_fptr	fptrs[] = {&pf_output_decimal, &pf_output_string};
 
 	i = -1;
-	while (++i < 2)
+	while (++i < 5)
 		if (symbols[i] == p->symbol)
-			_NOTIS_F(fptrs[i](p, ap));
+		{
+			if (i >= 0 && i < 3)
+				_NOTIS_F(pf_decimal(p, ap));
+			if (i >= 3 && i < 5)
+				_NOTIS_F(pf_string(p, ap));
+		}
 	return (true);
 }
 
