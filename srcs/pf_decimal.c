@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 10:05:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 14:51:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,27 @@ static void	add_no_minus_flag_output(t_printf *p, long out_len,
 										long out, string out_str)
 {
 	long	i;
+	long	prec;
 
 	i = -1;
 	while (++i < p->width - out_len - p->precision)
 		p->flags[2] ? _PUT('0') : _PUT(' ');
 	if (p->symbol != 'u')
 	{
-		if (p->flags[1] && out > 0)
-			ft_putchar('+');
+		if (p->flags[1] && out >= 0)
+			_PUT('+');
 		else if (p->flags[1] && out < 0)
 			--(p->counter);
 	}
-	while (p->precision--)
+	prec = p->precision;
+	while (prec--)
 		_PUT('0');
-	ft_putstr(out_str);
+	if (p->is_precision && !p->precision && !out)
+		p->counter -= out_len;
+	else
+		ft_putstr(out_str);
 }
- 
+
 static void	add_choose_di_datatype_length(t_printf *p, va_list *ap,
 											__int128 *out)
 {
@@ -62,6 +67,10 @@ static void	add_choose_di_datatype_length(t_printf *p, va_list *ap,
 		*out = (long)va_arg(*ap, long);
 	else if (p->length[0] == 'l' && p->length[1] == 'l')
 		*out = (long long)va_arg(*ap, long long);
+	else if (p->length[0] == 'z' && !p->length[1])
+		*out = (intmax_t)va_arg(*ap, intmax_t);
+	else if (p->length[0] == 'j' && !p->length[1])
+		*out = (size_t)va_arg(*ap, size_t);
 	else
 		*out = (int)va_arg(*ap, int);
 }
@@ -75,23 +84,36 @@ static void	add_choose_udatatype_length(t_printf *p, va_list *ap,
 	else if (p->length[0] == 'h' && !p->length[1])
 		*out = (unsigned short)va_arg(*ap, int);
 	else if (p->length[0] == 'l' && !p->length[1])
-		*out = (unsigned long)va_arg(*ap, long);
+		*out = (unsigned long)va_arg(*ap, unsigned long);
 	else if (p->length[0] == 'l' && p->length[1] == 'l')
-		*out = (unsigned long long)va_arg(*ap, long long);
+		*out = (unsigned long long)va_arg(*ap, unsigned long long);
+	else if (p->length[0] == 'z' && !p->length[1])
+		*out = (size_t)va_arg(*ap, size_t);
+	else if (p->length[0] == 'j' && !p->length[1])
+		*out = (uintmax_t)va_arg(*ap, uintmax_t);
 	else
 		*out = (unsigned int)va_arg(*ap, int);
 }
 
 bool		pf_decimal(t_printf *p, va_list *ap)
-{ 	
+{
 	__int128	out;
 	string		out_str;
 	long		out_len;
 
-	p->symbol == 'u' ? add_choose_udatatype_length(p, ap, &out)
+	(p->symbol == 'u' || p->symbol == 'x' || p->symbol == 88 || p->symbol == 79)
+	? add_choose_udatatype_length(p, ap, &out)
 	: add_choose_di_datatype_length(p, ap, &out);
-	_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false);
+	_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false)
+	if (p->symbol == 'x' || p->symbol == 'X')
+	{
+		out = ft_atoi_base(out_str, 16);
+		ft_strdel(&out_str);
+		_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false)
+	}
 	out_len = ft_strlen(out_str);
+	if (p->flags[4] && p->symbol != 'u' && !p->flags[1])
+		_PUT(' ');
 	if (p->is_precision)
 		(p->precision > out_len) ? (p->precision -= out_len)
 		: (p->precision = 0);

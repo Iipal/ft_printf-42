@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 10:25:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 14:43:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static bool	add_parser_precision_length(const char *format, t_printf *p)
 			++(p->i);
 	}
 	if (format[p->i] == 'l' || format[p->i] == 'L'
-	|| format[p->i] == 'h')
+	|| format[p->i] == 'h' || format[p->i] == 'z'
+	|| format[p->i] == 'j')
 	{
 		p->length[0] = format[p->i];
 		++(p->i);
@@ -61,21 +62,18 @@ static bool	add_parser(const char *format, t_printf *p)
 
 static bool	add_choose_func(t_printf *p, va_list *ap)
 {
-	const char		symbols[] = {'d', 'i', 'u', 's', 'c'};
+	const char		symbols[] = {'d', 'i', 'u', 'x', 's', 'c', '%'};
 	int				i;
 
 	i = -1;
-	if (p->symbol == '%')
-		_PUT('%');
-	else
-		while (++i < 5)
-			if (symbols[i] == p->symbol)
-			{
-				if (i >= 0 && i < 3)
-					_NOTIS_F(pf_decimal(p, ap));
-				if (i >= 3 && i < 5)
-					_NOTIS_F(pf_string(p, ap));
-			}
+	while (++i < 6)
+		if (symbols[i] == p->symbol)
+		{
+			if (i >= 0 && i <= 3)
+				_NOTIS_F(pf_decimal(p, ap));
+			if (i > 3 && i < 6)
+				_NOTIS_F(pf_string(p, ap));
+		}
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/25 11:27:37 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/09 23:51:53 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/03/10 11:55:10 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(ECHO) -n '\_______,-<=-=> ./libft/$(NAME): '
+	@$(ECHO) -n '\_______,-<=-=> ./libft/**/*.o: '
 	@$(LC) $(NAME) $(OBJS)
 	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 

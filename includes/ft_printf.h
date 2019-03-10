@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 10:18:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 14:41:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int				ft_printf(const char *restrict format, ...);
 
 bool			pf_decimal(t_printf *p, va_list *ap);
 bool			pf_string(t_printf *p, va_list *ap);
+bool			pf_hex(t_printf *p, va_list *ap);
 
 void			ft_cputchar(char c, int *inc);
 

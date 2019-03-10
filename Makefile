@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/10 10:20:42 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/03/10 13:55:10 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = srcs/ft_printf.c srcs/ft_cputchar.c srcs/pf_decimal.c srcs/pf_string.c
 
 OBJ = $(SRC:.c=.o)
 
+LOBJ = libft/srcs/*/*.o
 LIBFT = libft/libft.a
 LMAKE = make -C libft
 
@@ -51,11 +52,11 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(OBJ)
 	@$(ECHO) -n '\_______,-<=-=> ./$(NAME): '
-	@$(LC) $(NAME) $(OBJ)
+	@$(LC) $(NAME) $(OBJ) $(LOBJ)
 	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 
 ft_test:
-	@$(CC) $(CFLAGS) test/main.c $(NAME) $(LIBFT)
+	@$(CC) test/main.c $(NAME) $(LIBFT)
 	@$(ECHO) "$(INVERT)[$(GREEN)test$(WHITE)$(INVERT)]$(WHITE)"
 del:
 	@$(DEL) $(OBJ)
