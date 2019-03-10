@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 14:51:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 19:25:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,12 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 	_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false)
 	if (p->symbol == 'x' || p->symbol == 'X')
 	{
-		out = ft_atoi_base(out_str, 16);
-		ft_strdel(&out_str);
-		_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false)
+		_NOTISD(E_ALLOC, out_str = ft_itoa_base(out, 16), exit(1), false)
+		if (p->symbol == 'x')
+			ft_strtolower(out_str);
 	}
+	else
+		_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false);
 	out_len = ft_strlen(out_str);
 	if (p->flags[4] && p->symbol != 'u' && !p->flags[1])
 		_PUT(' ');
