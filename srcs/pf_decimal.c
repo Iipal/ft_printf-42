@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 19:25:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 20:24:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,14 @@ static void	add_no_minus_flag_output(t_printf *p, long out_len,
 	if (p->is_precision && !p->precision && !out)
 		p->counter -= out_len;
 	else
+	{
+		if (p->flags[3])
+			p->symbol == 'x' ? ft_putstr("0x") : ft_putstr("0X");
 		ft_putstr(out_str);
+	}
 }
 
-static void	add_choose_di_datatype_length(t_printf *p, va_list *ap,
+static void	add_choose_di_datatype(t_printf *p, va_list *ap,
 											__int128 *out)
 {
 	*out = 0;
@@ -75,7 +79,7 @@ static void	add_choose_di_datatype_length(t_printf *p, va_list *ap,
 		*out = (int)va_arg(*ap, int);
 }
 
-static void	add_choose_udatatype_length(t_printf *p, va_list *ap,
+static void	add_choose_udatatype(t_printf *p, va_list *ap,
 											__int128 *out)
 {
 	*out = 0;
@@ -101,25 +105,21 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 	string		out_str;
 	long		out_len;
 
-	(p->symbol == 'u' || p->symbol == 'x' || p->symbol == 88 || p->symbol == 79)
-	? add_choose_udatatype_length(p, ap, &out)
-	: add_choose_di_datatype_length(p, ap, &out);
-	_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false)
-	if (p->symbol == 'x' || p->symbol == 'X')
+	ft_is_one_of_n(p->symbol, 4, 'x', 'X', 'u', 'o')
+	? add_choose_udatatype(p, ap, &out) : add_choose_di_datatype(p, ap, &out);
+	if (ft_is_one_of_n(p->symbol, 2, 'x', 'X'))
 	{
 		_NOTISD(E_ALLOC, out_str = ft_itoa_base(out, 16), exit(1), false)
-		if (p->symbol == 'x')
-			ft_strtolower(out_str);
+		(p->symbol == 'x') ? ft_strtolower(out_str) : 0;
 	}
 	else
 		_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false);
 	out_len = ft_strlen(out_str);
-	if (p->flags[4] && p->symbol != 'u' && !p->flags[1])
-		_PUT(' ');
-	if (p->is_precision)
-		(p->precision > out_len) ? (p->precision -= out_len)
-		: (p->precision = 0);
+	(p->flags[4] && p->symbol != 'u' && !p->flags[1]) ? _PUT(' ') : 0;
+	(p->is_precision && p->precision > out_len) ? (p->precision -= out_len)
+	: (p->precision = 0);
 	p->flags[1] ? ++(out_len) : 0;
+	p->flags[3] ? (out_len += 2) : 0;
 	p->counter += out_len;
 	(p->flags[0]) ? add_is_minus_flag_output(p, out_len, out, out_str)
 	: add_no_minus_flag_output(p, out_len, out, out_str);

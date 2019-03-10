@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 19:26:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 20:27:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ static bool	add_parser_precision_length(const char *format, t_printf *p)
 		while (format[p->i] && ft_isdigit(format[p->i]))
 			++(p->i);
 	}
-	if (format[p->i] == 'l' || format[p->i] == 'L'
-	|| format[p->i] == 'h' || format[p->i] == 'z'
-	|| format[p->i] == 'j')
+	if (ft_is_one_of_n(format[p->i], 5, 'l', 'L', 'h', 'z', 'j'))
 	{
 		p->length[0] = format[p->i];
 		++(p->i);
-		if (format[p->i] == 'h' || format[p->i] == 'l')
+		if (ft_is_one_of_n(format[p->i], 2, 'h', 'l'))
 		{
 			p->length[1] = format[p->i];
 			++(p->i);
@@ -62,18 +60,18 @@ static bool	add_parser(const char *format, t_printf *p)
 
 static bool	add_choose_func(t_printf *p, va_list *ap)
 {
-	const char		symbols[] = {'d', 'i', 'u', 'x', 'X', 's', 'c', '%'};
-	int				i;
+	bool	is;
 
-	i = -1;
-	while (++i < 8)
-		if (symbols[i] == p->symbol)
-		{
-			if (i >= 0 && i <= 4)
-				_NOTIS_F(pf_decimal(p, ap));
-			if (i > 4 && i < 8)
-				_NOTIS_F(pf_string(p, ap));
-		}
+	is = false;
+	if (ft_is_one_of_n(p->symbol, 5, 'd', 'i', 'u', 'x', 'X') && (is = true))
+	{
+		_NOTIS_F(pf_decimal(p, ap))
+	}
+	else if (ft_is_one_of_n(p->symbol, 3, 's', 'c', '%') && (is = true))
+	{
+		_NOTIS_F(pf_string(p, ap));
+	}
+	_NOTISD(E_INVALID, is, exit(1), false);
 	return (true);
 }
 

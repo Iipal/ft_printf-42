@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 14:41:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 20:27:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@
 # define E_ALLOC    "STOP: Where is memory, pal ?"
 # define E_WIDTH	" \\ STOP: Width can not be less than 0."
 # define E_MINUS	" \\ STOP: Invalid \'-\' specifier."
+# define E_INVALID	"Invalid flag detected."
 
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
 # define _NOTIS(msg, ex, ret) if (!(ex)) {_MSGN(msg);return (ret);}
 # define _NOTISD(msg, ex, do, ret) if (!(ex)) {_MSGN(msg);do;return (ret);}
-# define _NOTIS_N(ex) if (!(ex)) return (NULL)
-# define _NOTIS_F(ex) if (!(ex)) return (false)
+# define _NOTIS_N(ex) if (!(ex)) {return (NULL);}
+# define _NOTIS_F(ex) if (!(ex)) {return (false);}
 # define _NOTISM_F(msg, ex) if (!(ex)) {_MSGN(msg);return (false);}
 # define _IS(ex, do, ret) if (ex) {do; return (ret);}
 # define _ISM(msg, ex, do, ret) if (ex) {_MSGN(msg);do;return (ret);}
-# define _IS_N(ex) if (ex) return (NULL)
-# define _IS_F(ex) if (ex) return (false)
+# define _IS_N(ex) if (ex) {return (NULL);}
+# define _IS_F(ex) if (ex) {return (false);}
 # define _ISM_F(msg, ex) if (ex) {_MSGN(msg);return (false);}
 
 # define _IS_FLAG(c) (c == '#' || c == '-' || c == '+' || c == ' ' || c == '0')
