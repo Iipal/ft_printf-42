@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 21:58:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 22:12:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	add_choose_di_datatype(t_printf *p, va_list *ap,
 	else if (p->length[0] == 'l' && p->length[1] == 'l')
 		*out = (long long)va_arg(*ap, long long);
 	else if (p->length[0] == 'z' && !p->length[1])
-		*out = (INTMAX_T)va_arg(*ap, INTMAX_T);
+		*out = (intmax_t)va_arg(*ap, intmax_t);
 	else if (p->length[0] == 'j' && !p->length[1])
 		*out = (size_t)va_arg(*ap, size_t);
 	else
@@ -94,7 +94,7 @@ static void	add_choose_udatatype(t_printf *p, va_list *ap,
 	else if (p->length[0] == 'z' && !p->length[1])
 		*out = (size_t)va_arg(*ap, size_t);
 	else if (p->length[0] == 'j' && !p->length[1])
-		*out = (UINTMAX_T)va_arg(*ap, UINTMAX_T);
+		*out = (uintmax_t)va_arg(*ap, uintmax_t);
 	else
 		*out = (unsigned int)va_arg(*ap, int);
 }

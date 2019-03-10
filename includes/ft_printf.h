@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 21:59:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 22:12:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,7 @@
 
 # include "../libft/includes/libft.h"
 # include <limits.h>
-
-# ifdef __APPLE__
-#  define INTMAX_T	intmax_t
-#  define UINTMAX_T	uintmax_t
-# endif
-
-# ifdef __linux__
-#  define INTMAX_T	long long
-#  define UINTMAX_T	unsigned long long
-# endif
+# include <inttypes.h>
 
 # define MAX_FLAGS  5
 
