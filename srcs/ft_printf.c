@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 10:19:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/10 10:25:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,17 @@ static bool	add_choose_func(t_printf *p, va_list *ap)
 	int				i;
 
 	i = -1;
-	while (++i < 5)
-		if (symbols[i] == p->symbol)
-		{
-			if (i >= 0 && i < 3)
-				_NOTIS_F(pf_decimal(p, ap));
-			if (i >= 3 && i < 5)
-				_NOTIS_F(pf_string(p, ap));
-		}
+	if (p->symbol == '%')
+		_PUT('%');
+	else
+		while (++i < 5)
+			if (symbols[i] == p->symbol)
+			{
+				if (i >= 0 && i < 3)
+					_NOTIS_F(pf_decimal(p, ap));
+				if (i >= 3 && i < 5)
+					_NOTIS_F(pf_string(p, ap));
+			}
 	return (true);
 }
 
