@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 23:32:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 23:55:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ static void	add_is_minus_flag_output(t_printf *p, string out, long prec)
 
 	out_len = ft_strlen(out);
 	(p->flags[H] || p->symbol == 'p') ? (out_len += 2) : 0;
+	p->flags[P] ? _PUT('+') : 0;
+	p->flags[P] ? --(p->width) : 0;
 	if (p->flags[H] || p->symbol == 'p')
 		ft_is_one_of_n(p->symbol, 2, 'x', 'p')
 		? ft_putstr("0x") : ft_putstr("0X");
+	i = -1;
 	while(++i < prec)
 		_PUT('0');
 	ft_putstr(out);
-	p->counter += out_len;
 	i = -1;
 	while (++i < p->width - out_len - prec)
 		_PUT(' ');
+	p->counter += out_len;
 }
 
 static void	add_no_minus_flag_output(t_printf *p, string out, long prec)
@@ -39,8 +42,10 @@ static void	add_no_minus_flag_output(t_printf *p, string out, long prec)
 	out_len = ft_strlen(out);
 	i = -1;
 	(p->flags[H] || p->symbol == 'p') ? (out_len += 2) : 0;
+	p->flags[P] ? --(p->width) : 0;
 	while (++i < p->width - out_len - prec)
 		_PUT(' ');
+	p->flags[P] ? _PUT('+') : 0;
 	if (p->flags[H] || p->symbol == 'p')
 		ft_is_one_of_n(p->symbol, 2, 'x', 'p')
 		? ft_putstr("0x") : ft_putstr("0X");
