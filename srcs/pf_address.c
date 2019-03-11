@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_addr.c                                       :+:      :+:    :+:   */
+/*   pf_address.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 20:20:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 20:52:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ static void	add_choose_addr_length(t_printf *p, va_list *ap, intptr_t *addr)
 	*addr = 0;
 	if (p->symbol == 'p')
 		*addr = (intptr_t)va_arg(*ap, void*);
+	else
+	{
+		if (p->length[0] == 'h' && p->length[1] == 'h')
+			*addr = (unsigned char)va_arg(*ap, int);
+		else if (p->length[0] == 'h' && !p->length[1])
+			*addr = (unsigned short)va_arg(*ap, int);
+		else if (p->length[0] == 'l' && !p->length[1])
+			*addr = (unsigned long)va_arg(*ap, unsigned long);
+		else if (p->length[0] == 'l' && p->length[1] == 'l')
+			*addr = (unsigned long long)va_arg(*ap, unsigned long long);
+		else if (p->length[0] == 'z' && !p->length[1])
+			*addr = (size_t)va_arg(*ap, size_t);
+		else if (p->length[0] == 'j' && !p->length[1])
+			*addr = (uintmax_t)va_arg(*ap, uintmax_t);
+		else
+			*addr = (unsigned int)va_arg(*ap, int);
+	}
+	
 }
 
 bool	pf_address(t_printf *p, va_list *ap)
