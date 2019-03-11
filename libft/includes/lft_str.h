@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:09:02 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 19:20:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 18:13:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_strclr(string s);
 void	ft_striter(string s, void (*f)(string));
 void	ft_striteri(string s, void (*f)(unsigned int, string));
 void	ft_strtolower(string str);
+void	ft_strtoupper(string str);
 
 long	ft_atol(string str);
 int		ft_atoi(string str);
@@ -50,8 +51,9 @@ size_t	ft_strlcat(string dest, cstring src,
 size_t	ft_strlcpy(string dest, cstring str, size_t dstsize);
 
 string	ft_itoa(int n);
-string	ft_ltoa(long n);
 string	ft_itoa_base(int value, int base);
+string	ft_ltoa(long n);
+string	ft_ltoa_base(long value, long base);
 string	ft_maxitoa(__int128 n);
 string	ft_strdup(cstring src);
 string	ft_strndup(cstring s1, size_t n);

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 10:50:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 20:17:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static bool	add_parser(const char *format, t_printf *p)
 	int			i;
 
 	*p = (t_printf){++(p->i), p->counter, 0, 0, false, {0}, 0, {0}};
-	while (format[p->i] && _IS_FLAG(format[p->i]) && (i = -1))
+	while (format[p->i] && (i = -1)
+	&& ft_is_one_of_n(format[p->i], 5, '-', '+', '0', '#', ' '))
 	{
 		while (++i < MAX_FLAGS)
 			if (format[p->i] == flags[i])
@@ -63,10 +64,12 @@ static bool	add_choose_func(t_printf *p, va_list *ap)
 	bool	is;
 
 	is = false;
-	if (ft_is_one_of_n(p->symbol, 5, 'd', 'i', 'u', 'x', 'X') && (is = true))
-		_NOTIS_F(pf_decimal(p, ap))
-	if (ft_is_one_of_n(p->symbol, 3, 's', 'c', '%') && (is = true))
+	if (ft_is_one_of_n(p->symbol, 4, 'd', 'i', 'u', 'o') && (is = true))
+		_NOTIS_F(pf_decimal(p, ap));
+	if (ft_is_one_of_n(p->symbol, 4, 's', 'S', 'c', '%') && (is = true))
 		_NOTIS_F(pf_string(p, ap));
+	if (ft_is_one_of_n(p->symbol, 3, 'x', 'X', 'p') && (is = true))
+		_NOTIS_F(pf_address(p, ap));
 	_NOTISD(E_INVALID, is, exit(1), false);
 	return (true);
 }
@@ -82,7 +85,7 @@ int			ft_printf(const char *restrict format, ...)
 	va_start(ap, format);
 	while (format[++(p->i)])
 		if (format[p->i] != '%')
-			ft_cputchar(format[p->i], &(p->counter));
+			pf_cputchar(format[p->i], &(p->counter));
 		else
 		{
 			_NOTIS_F(add_parser(format, p));

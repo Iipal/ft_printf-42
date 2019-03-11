@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cputchar.c                                      :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/09 19:17:21 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/03/11 16:33:01 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/03/11 16:33:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../../includes/lft_str.h"
+#include "../../includes/lft_ctype.h"
 
-void	ft_cputchar(char c, int *inc)
+void	ft_strtoupper(string str)
 {
-	write(1, &c, 1);
-	++(*inc);
+	long	i;
+
+	i = -1;
+	while (str[++i])
+		if (ft_islower(str[i]))
+			str[i] = ft_toupper(str[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 22:12:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 18:58:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,28 @@ static void	add_is_minus_flag_output(t_printf *p, long out_len,
 										long out, string out_str)
 {
 	long	i;
+	long	prec;
 
 	i = out_len - 1;
-	if (p->flags[1] && out >= 0)
-		ft_putchar('+');
-	else if (p->flags[1] && out < 0)
-		--(p->counter);
+	if (p->symbol != 'u')
+	{
+		if (p->is_precision && !p->precision && p->symbol == 'o')
+				;
+		else if (p->flags[P] && out >= 0)
+			_PUT('+');
+		else if (p->flags[P] && out < 0)
+			--(p->counter);
+	}
+	prec = p->precision;
 	i += p->precision;
-	while (p->precision--)
+	while (prec--)
 		_PUT('0');
-	ft_putstr(out_str);
+	if (p->is_precision && !p->precision && !out)
+		p->counter -= out_len;
+	else
+		ft_putstr(out_str);
 	while (++i < p->width)
-		p->flags[2] ? _PUT('0') : _PUT(' ');
+		p->flags[Z] ? _PUT('0') : _PUT(' ');
 }
 
 static void	add_no_minus_flag_output(t_printf *p, long out_len,
@@ -38,25 +48,32 @@ static void	add_no_minus_flag_output(t_printf *p, long out_len,
 
 	i = -1;
 	while (++i < p->width - out_len - p->precision)
-		p->flags[2] ? _PUT('0') : _PUT(' ');
+		p->flags[Z] ? _PUT('0') : _PUT(' ');
 	if (p->symbol != 'u')
 	{
-		if (p->flags[1] && out >= 0)
+		if (p->is_precision && !p->precision && p->flags[P] && p->symbol == 'o')
+			;
+		else if (p->is_precision && !p->precision && p->symbol == 'o')
 			_PUT('+');
-		else if (p->flags[1] && out < 0)
+		else if (p->flags[P] && out >= 0)
+			_PUT('+');
+		else if (p->flags[P] && out < 0)
 			--(p->counter);
 	}
 	prec = p->precision;
 	while (prec--)
 		_PUT('0');
 	if (p->is_precision && !p->precision && !out)
-		p->counter -= out_len;
-	else
 	{
-		if (p->flags[3])
-			p->symbol == 'x' ? ft_putstr("0x") : ft_putstr("0X");
-		ft_putstr(out_str);
+		p->counter -= out_len;
+		if (p->symbol == 'o')
+		{
+			ft_putstr(out_str);
+			p->counter += ft_strlen(out_str);
+		}
 	}
+	else
+		ft_putstr(out_str);
 }
 
 static void	add_choose_di_datatype(t_printf *p, va_list *ap,
@@ -103,25 +120,19 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 {
 	__int128	out;
 	string		out_str;
-	long		out_len;
+	long		out_len;	
 
-	ft_is_one_of_n(p->symbol, 4, 'x', 'X', 'u', 'o')
+	ft_is_one_of_n(p->symbol, 2, 'u', 'o')
 	? add_choose_udatatype(p, ap, &out) : add_choose_di_datatype(p, ap, &out);
-	if (ft_is_one_of_n(p->symbol, 2, 'x', 'X'))
-	{
-		_NOTISD(E_ALLOC, out_str = ft_itoa_base(out, 16), exit(1), false)
-		(p->symbol == 'x') ? ft_strtolower(out_str) : 0;
-	}
-	else
-		_NOTISD(E_ALLOC, out_str = ft_maxitoa(out), exit(1), false);
+	_NOTIS_F(add_choose_out_str(&out_str, p->symbol, out));
 	out_len = ft_strlen(out_str);
-	(p->flags[4] && p->symbol != 'u' && !p->flags[1]) ? _PUT(' ') : 0;
+	(p->flags[4] && !ft_is_one_of_n(p->symbol, 2, 'u', 'o')
+	&& !p->flags[P]) ? _PUT(' ') : 0;
 	(p->is_precision && p->precision > out_len) ? (p->precision -= out_len)
 	: (p->precision = 0);
-	p->flags[1] ? ++(out_len) : 0;
-	p->flags[3] ? (out_len += 2) : 0;
+	p->flags[P] ? ++(out_len) : 0;
 	p->counter += out_len;
-	(p->flags[0]) ? add_is_minus_flag_output(p, out_len, out, out_str)
+	(p->flags[M]) ? add_is_minus_flag_output(p, out_len, out, out_str)
 	: add_no_minus_flag_output(p, out_len, out, out_str);
 	ft_strdel(&out_str);
 	return (true);

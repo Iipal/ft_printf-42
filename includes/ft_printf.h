@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/10 22:12:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 18:23:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,13 @@
 
 # define _IS_FLAG(c) (c == '#' || c == '-' || c == '+' || c == ' ' || c == '0')
 
-# define _PUT(c) ft_cputchar(c, &(p->counter))
+# define _PUT(c) pf_cputchar(c, &(p->counter))
+
+# define M 0
+# define P 1
+# define Z 2
+# define H 3
+# define S 4
 
 typedef enum	e_flags
 {
@@ -65,10 +71,11 @@ typedef struct	s_printf
 
 int				ft_printf(const char *restrict format, ...);
 
+bool			add_choose_out_str(string *out_str, char symbol, __int128 out);
 bool			pf_decimal(t_printf *p, va_list *ap);
 bool			pf_string(t_printf *p, va_list *ap);
-bool			pf_hex(t_printf *p, va_list *ap);
+bool			pf_address(t_printf *p, va_list *ap);
 
-void			ft_cputchar(char c, int *inc);
+void			pf_cputchar(char c, int *inc);
 
 #endif
