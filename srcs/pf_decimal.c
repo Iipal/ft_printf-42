@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 15:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 20:58:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 23:10:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static void	add_choose_udatatype(t_printf *p, va_list *ap,
 	else if (p->length[0] == 'j' && !p->length[1])
 		*out = (uintmax_t)va_arg(*ap, uintmax_t);
 	else
-		*out = (unsigned int)va_arg(*ap, int);
+		*out = (unsigned int)va_arg(*ap, unsigned int);
 }
 
 bool		pf_decimal(t_printf *p, va_list *ap)
