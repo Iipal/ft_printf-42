@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 10:04:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/08 10:11:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/11 10:50:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ _BOOL;
 
 int		ft_gnl(const int fd, char **line);
 size_t	ft_rand(size_t limits);
-bool	ft_is_one_of_n(long cmp, long n, ...);
+bool	ft_is_one_of_n(int cmp, int n, ...);
 
 #endif
