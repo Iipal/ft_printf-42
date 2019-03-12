@@ -1,4 +1,5 @@
 #ignore object files in source folders
+*_remove.c
 srcs/*.o
 libft/srcs/*/*.o
 libft/libft.a
