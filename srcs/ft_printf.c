@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 23:08:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/12 17:26:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static bool	add_choose_func(t_printf *p, va_list *ap)
 		_NOTIS_F(pf_decimal(p, ap));
 	if (ft_is_one_of_n(p->symbol, 4, 's', 'S', 'c', '%') && (is = true))
 		_NOTIS_F(pf_string(p, ap));
-	if (ft_is_one_of_n(p->symbol, 3, 'x', 'X', 'p') && (is = true))
+	if (p->symbol == 'p' && (is = true))
 		_NOTIS_F(pf_address(p, ap));
 	_NOTISD(E_INVALID, is, exit(1), false);
 	return (true);
