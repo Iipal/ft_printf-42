@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/12 22:14:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/12 22:20:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 	add_choose_decimal_length(p, ap, &out);
 	out_str = ft_maxitoa(out);
 	out_len = ft_strlen(out_str);
+	if (out_len||prec)
+	{}
+	ft_putstr(out_str);
+	p->counter += out_len;
 	ft_strdel(&out_str);
 	return (true);
 }
