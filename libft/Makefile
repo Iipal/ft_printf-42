@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/25 11:27:37 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/11 18:14:03 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/03/12 18:36:32 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCS = srcs/ctype/ft_isalnum.c srcs/ctype/ft_isalpha.c srcs/ctype/ft_isascii.c \
 		srcs/mem/ft_memcpy.c srcs/mem/ft_memccpy.c srcs/mem/ft_memmove.c \
 		srcs/mem/ft_memchr.c srcs/mem/ft_memcmp.c srcs/mem/ft_memdel.c \
 		srcs/put/ft_putchar.c srcs/put/ft_putchar_fd.c srcs/put/ft_putendl.c \
-		srcs/put/ft_putendl_fd.c srcs/put/ft_putnbr.c srcs/put/ft_putnbr_fd.c \
+		srcs/put/ft_putendl_fd.c srcs/put/ft_putnbr.c srcs/put/ft_putnbr_fd.c srcs/put/ft_putnstr.c \
 		srcs/put/ft_putstr.c srcs/put/ft_putstr_fd.c srcs/str/ft_strtolower.c srcs/str/ft_strtoupper.c \
 		srcs/str/ft_atoi.c srcs/str/ft_atol.c srcs/str/ft_atoi_base.c srcs/str/ft_count_if.c \
 		srcs/str/ft_maxitoa.c srcs/str/ft_itoa.c srcs/str/ft_itoa_base.c srcs/str/ft_ltoa_base.c \

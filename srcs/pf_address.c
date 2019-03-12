@@ -6,26 +6,21 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 23:55:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/12 22:08:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	add_is_minus_flag_output(t_printf *p, string out, long prec)
+static void	add_is_minus_output(t_printf *p, string out, long prec)
 {
 	long	i;
 	long	out_len;
 
-	out_len = ft_strlen(out);
-	(p->flags[H] || p->symbol == 'p') ? (out_len += 2) : 0;
-	p->flags[P] ? _PUT('+') : 0;
-	p->flags[P] ? --(p->width) : 0;
-	if (p->flags[H] || p->symbol == 'p')
-		ft_is_one_of_n(p->symbol, 2, 'x', 'p')
-		? ft_putstr("0x") : ft_putstr("0X");
 	i = -1;
-	while(++i < prec)
+	out_len = ft_strlen(out) + 2;
+	ft_putstr("0x");
+	while (++i < prec)
 		_PUT('0');
 	ft_putstr(out);
 	i = -1;
@@ -34,66 +29,47 @@ static void	add_is_minus_flag_output(t_printf *p, string out, long prec)
 	p->counter += out_len;
 }
 
-static void	add_no_minus_flag_output(t_printf *p, string out, long prec)
+static void	add_no_minus_output(t_printf *p, string out, long prec)
 {
 	long	i;
 	long	out_len;
 
-	out_len = ft_strlen(out);
 	i = -1;
-	(p->flags[H] || p->symbol == 'p') ? (out_len += 2) : 0;
-	p->flags[P] ? --(p->width) : 0;
-	while (++i < p->width - out_len - prec)
+	out_len = ft_strlen(out) + 2;
+	while (++i < p->width - out_len - prec && !p->flags[Z])
 		_PUT(' ');
-	p->flags[P] ? _PUT('+') : 0;
-	if (p->flags[H] || p->symbol == 'p')
-		ft_is_one_of_n(p->symbol, 2, 'x', 'p')
-		? ft_putstr("0x") : ft_putstr("0X");
-	if (p->is_precision && (i = -1))
-		while(++i < prec)
+	ft_putstr("0x");
+	if (p->flags[Z])
+		if (p->width > (int)ft_strlen(out))
+			prec = p->width - ft_strlen(out) - 2;
+	if ((p->is_precision || p->flags[Z]) && (i = -1))
+		while (++i < prec)
 			_PUT('0');
-	ft_putstr(out);
-	p->counter += out_len;
-}
-
-static void	add_choose_addr_length(t_printf *p, va_list *ap, intptr_t *addr)
-{
-	*addr = 0;
-	if (p->symbol == 'p')
-		*addr = (intptr_t)va_arg(*ap, void*);
+	if (p->is_precision && !p->precision)
+		p->counter += 2;
 	else
 	{
-		if (p->length[0] == 'h' && p->length[1] == 'h')
-			*addr = (unsigned char)va_arg(*ap, int);
-		else if (p->length[0] == 'h' && !p->length[1])
-			*addr = (unsigned short)va_arg(*ap, int);
-		else if (p->length[0] == 'l' && !p->length[1])
-			*addr = (unsigned long)va_arg(*ap, unsigned long);
-		else if (p->length[0] == 'l' && p->length[1] == 'l')
-			*addr = (unsigned long long)va_arg(*ap, unsigned long long);
-		else if (p->length[0] == 'z' && !p->length[1])
-			*addr = (size_t)va_arg(*ap, size_t);
-		else if (p->length[0] == 'j' && !p->length[1])
-			*addr = (uintmax_t)va_arg(*ap, uintmax_t);
-		else
-			*addr = (unsigned int)va_arg(*ap, unsigned int);
+		ft_putstr(out);
+		p->counter += out_len;
 	}
 }
 
-bool	pf_address(t_printf *p, va_list *ap)
+bool		pf_address(t_printf *p, va_list *ap)
 {
 	intptr_t	addr;
 	string		out;
 	long		prec;
 
 	prec = 0;
-	add_choose_addr_length(p, ap, &addr);
-	out = ft_ltoa_base(addr, 16);	
-	(ft_is_one_of_n(p->symbol, 2, 'x', 'p')) ? ft_strtolower(out) : 0;
+	addr = (intptr_t)va_arg(*ap, void*);
+	_NOTIS_F(out = ft_ltoa_base(addr, 16));
+	ft_strtolower(out);
 	if (p->is_precision)
 		if (p->precision > (int)ft_strlen(out))
 			prec = p->precision - (int)ft_strlen(out);
-	(p->flags[M]) ? add_is_minus_flag_output(p, out, prec) : 0;
-	(p->flags[M]) ? 0 : add_no_minus_flag_output(p, out, prec);
+	(p->flags[M])
+	? add_is_minus_output(p, out, prec)
+	: add_no_minus_output(p, out, prec);
+	ft_strdel(&out);
 	return (true);
 }

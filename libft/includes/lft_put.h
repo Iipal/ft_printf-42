@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/15 09:20:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/03/12 18:28:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 
 void	ft_putchar(char c);
+void	ft_putnstr(char *str, size_t n);
 void	ft_putstr(char const *s);
 void	ft_putendl(char const *s);
 void	ft_putnbr(int n);

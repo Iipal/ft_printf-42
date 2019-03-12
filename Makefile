@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/11 16:49:05 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/03/12 19:08:08 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LC = ar rcs
 CC = gcc -march=native
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = srcs/ft_printf.c srcs/pf_cputchar.c srcs/pf_decimal.c srcs/pf_decimal2.c \
+SRC = srcs/ft_printf.c srcs/pf_cputchar.c srcs/pf_decimal.c \
 srcs/pf_string.c srcs/pf_address.c
 
 OBJ = $(SRC:.c=.o)
