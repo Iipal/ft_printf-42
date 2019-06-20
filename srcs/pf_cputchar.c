@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/11 10:53:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 00:05:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	pf_cputchar(char c, int *inc)
 {

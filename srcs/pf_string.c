@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/12 20:06:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 00:21:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 static void	add_is_minus_output(t_printf *p, int out_len, string out)
 {
@@ -43,7 +43,7 @@ static void	add_choose_data(char sym, va_list *ap, string *s, char *c)
 	{
 		*s = (string)va_arg(*ap, string);
 		if (*s && sym == 'S')
-			ft_strtoupper(*s);
+			ft_strupr(*s);
 	}
 	else if (sym == '%')
 		*c = '%';

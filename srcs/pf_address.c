@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/03/12 22:08:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 00:21:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 static void	add_is_minus_output(t_printf *p, string out, long prec)
 {
@@ -62,8 +62,8 @@ bool		pf_address(t_printf *p, va_list *ap)
 
 	prec = 0;
 	addr = (intptr_t)va_arg(*ap, void*);
-	_NOTIS_F(out = ft_ltoa_base(addr, 16));
-	ft_strtolower(out);
+	NO_F(out = ft_ltoa_base(addr, 16));
+	ft_strlwr(out);
 	if (p->is_precision)
 		if (p->precision > (int)ft_strlen(out))
 			prec = p->precision - (int)ft_strlen(out);

@@ -6,32 +6,32 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/03/12 19:08:08 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/21 00:25:22 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
+NPWD = $(CURDIR)/$(NAME)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	ECHO = echo -e
+	LC := gcc-ar
 endif
 ifeq ($(UNAME_S),Darwin)
-	ECHO = echo
+	LC := ar
 endif
 
-LC = ar rcs
-CC = gcc -march=native
-CFLAGS = -Wall -Wextra -Werror -g
+LC += rcs
 
-SRC = srcs/ft_printf.c srcs/pf_cputchar.c srcs/pf_decimal.c \
-srcs/pf_string.c srcs/pf_address.c
+CC := gcc -flto -Ofast -pipe
+CC_DEBUG := gcc -g3 -D DEBUG -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -Wunused
+IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
-OBJ = $(SRC:.c=.o)
+SRCS := $(abspath $(wildcard srcs/*.c))
+OBJS := $(SRCS:%.c=%.o)
 
-LOBJ = libft/srcs/*/*.o
-LIBFT = libft/libft.a
-LMAKE = make -C libft
+DEL := rm -rf
 
 WHITE=\033[0m
 BGREEN=\033[42m
@@ -39,38 +39,37 @@ GREEN=\033[32m
 RED=\033[31m
 INVERT=\033[7m
 
-DEL = rm -rf
-
 all: $(NAME)
 
-$(OBJ): %.o: %.c
-	@$(ECHO) -n ' $@: '
-	@$(CC) -c $(CFLAGS) $< -o $@
-	@$(ECHO) "[$(GREEN)✓$(WHITE)]"
+$(OBJS): %.o: %.c
+	@echo -n ' $@: '
+	@$(CC) -c $(CFLAGS) $(IFLAGS) $< -o $@
+	@echo "[$(GREEN)✓$(WHITE)]"
 
-$(LIBFT):
-	@$(LMAKE)
+$(NAME): $(OBJS)
+	@echo "$(INVERT)"
+	@echo -n ' <=-=> | $(NPWD): '
+	@$(LC) $(NAME) $(OBJS)
+	@echo "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
+	@echo
 
-$(NAME): $(LIBFT) $(OBJ)
-	@$(ECHO) -n '\_______,-<=-=> ./$(NAME): '
-	@$(LC) $(NAME) $(OBJ) $(LOBJ)
-	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
+pre: fclean $(NAME)
+	@echo "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
 
-ft_test:
-	@$(CC) test/main.c $(NAME) $(LIBFT)
-	@$(ECHO) "$(INVERT)[$(GREEN)test$(WHITE)$(INVERT)]$(WHITE)"
-del:
-	@$(DEL) $(OBJ)
+set_cc_debug:
+	@$(eval CC=$(CC_DEBUG))
+debug_all: set_cc_debug pre
+	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+debug: set_cc_debug all
+	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
 
 clean:
-	@$(DEL) $(OBJ)
-	@$(LMAKE) clean
+	@$(DEL) $(OBJS)
 
 fclean: clean
-	@$(LMAKE) fclean
 	@$(DEL) $(NAME)
-	@$(ECHO) "$(RED)deleted$(WHITE): ./$(NAME)"
+	@echo "$(RED)deleted$(WHITE): ./$(NAME)"
 
 re: fclean all
 
-.PHONY: all fclean clean re
+.PHONY: re fclean clean all norme del pre debug debug_all
