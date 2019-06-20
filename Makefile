@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/06/21 00:25:22 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/21 00:35:31 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,4 +72,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: re fclean clean all norme del pre debug debug_all
+norme:
+	@echo "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
+	@norminette includes/
+	@norminette $(SRCS)
+
+.PHONY: re fclean clean all norme del pre debug debug_all norme
