@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:39:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 20:30:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	add_no_minus_output(t_printf *const p,
 	size_t	i;
 
 	i = ~0ULL;
-	while ((p->width - out_len) > ++i)
+	while ((long)(p->width - out_len) > (long)++i)
 		(p->symbol == '%' && p->flags[Z]) ? PUTC('0') : PUTC(' ');
 	i = ~0ULL;
 	while (++i < out_len)

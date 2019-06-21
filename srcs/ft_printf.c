@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:45:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 20:26:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static bool	add_parser_precision_length(const char *format, t_printf *p)
 {
-	if (format[(p->i)++] == '.')
+	if (format[p->i] == '.')
 	{
+		++(p->i);
 		IFM_F(E_MINUS, format[p->i] == '-');
 		p->is_precision = true;
 		p->precision = ft_atoi((string)(&(format[p->i])));
@@ -38,7 +39,7 @@ static bool	add_parser(const char *format, t_printf *p)
 
 	*p = (t_printf){++(p->i), p->counter, 0, 0, false, {0}, 0, {0}};
 	while (format[p->i] && (i = ~0ULL)
-	&& ft_is_one_of_n(format[p->i], 5ULL, '-', '+', '0', '#', ' '))
+	&& ft_is_one_of_n((int64_t)format[p->i], 5UL, 45LL, 43LL, 48LL, 35LL, 32LL))
 	{
 		while (++i < MAX_FLAGS)
 			if (format[p->i] == flags[i])
