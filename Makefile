@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/06/21 00:35:31 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/21 08:46:59 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,11 @@ $(NAME): $(OBJS)
 	@echo "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 	@echo
 
-pre: fclean $(NAME)
+del:
+	$(DEL) $(OBJS)
+	$(DEL) $(NAME)
+
+pre: del $(NAME)
 	@echo "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
 
 set_cc_debug:
@@ -68,7 +72,7 @@ clean:
 
 fclean: clean
 	@$(DEL) $(NAME)
-	@echo "$(RED)deleted$(WHITE): ./$(NAME)"
+	@echo "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
 
 re: fclean all
 

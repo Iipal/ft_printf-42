@@ -6,35 +6,39 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 00:21:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 08:39:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	add_is_minus_output(t_printf *p, int out_len, string out)
+static void	add_is_minus_output(t_printf *const p,
+				const size_t out_len,
+				const string out)
 {
-	long	i;
+	size_t	i;
 
-	i = -1;
-	while (++i < out_len)
-		_PUT(out[i]);
+	i = ~0ULL;
+	while (out_len > ++i)
+		PUTC(out[i]);
 	i = out_len - 1;
 	while (++i < p->width)
 		(p->symbol == '%' && p->flags[Z] && !p->flags[M])
-		? _PUT('0') : _PUT(' ');
+			? PUTC('0') : PUTC(' ');
 }
 
-static void	add_no_minus_output(t_printf *p, int out_len, string out)
+static void	add_no_minus_output(t_printf *const p,
+				const size_t out_len,
+				const string out)
 {
-	long	i;
+	size_t	i;
 
-	i = -1;
-	while (++i < p->width - out_len)
-		(p->symbol == '%' && p->flags[Z]) ? _PUT('0') : _PUT(' ');
-	i = -1;
+	i = ~0ULL;
+	while ((p->width - out_len) > ++i)
+		(p->symbol == '%' && p->flags[Z]) ? PUTC('0') : PUTC(' ');
+	i = ~0ULL;
 	while (++i < out_len)
-		_PUT(out[i]);
+		PUTC(out[i]);
 }
 
 static void	add_choose_data(char sym, va_list *ap, string *s, char *c)
@@ -56,8 +60,8 @@ static void	add_choose_data(char sym, va_list *ap, string *s, char *c)
 bool		pf_string(t_printf *p, va_list *ap)
 {
 	string	out;
+	size_t	out_len;
 	char	c_out;
-	long	out_len;
 	bool	is_str;
 
 	c_out = 0;

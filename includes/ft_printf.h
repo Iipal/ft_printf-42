@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 00:16:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 08:45:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,9 @@
 # define E_MINUS	" \\ STOP: Invalid \'-\' specifier."
 # define E_INVALID	"Invalid flag detected."
 
-# define _MSG(msg) ft_putstr(msg);
-# define _MSGN(msg) ft_putendl(msg);
-# define _NOTIS(msg, ex, ret) if (!(ex)) {_MSGN(msg);return (ret);}
-# define _NOTISD(msg, ex, do, ret) if (!(ex)) {_MSGN(msg);do;return (ret);}
-# define _NOTIS_N(ex) if (!(ex)) {return (NULL);}
-# define _NOTIS_F(ex) if (!(ex)) {return (false);}
-# define _NOTISM_F(msg, ex) if (!(ex)) {_MSGN(msg);return (false);}
-# define _IS(ex, do, ret) if (ex) {do; return (ret);}
-# define _ISM(msg, ex, do, ret) if (ex) {_MSGN(msg);do;return (ret);}
-# define _IS_N(ex) if (ex) {return (NULL);}
-# define _IS_F(ex) if (ex) {return (false);}
-# define _ISM_F(msg, ex) if (ex) {_MSGN(msg);return (false);}
+# define IS_FLAG(c) (c == '#' || c == '-' || c == '+' || c == ' ' || c == '0')
 
-# define _IS_FLAG(c) (c == '#' || c == '-' || c == '+' || c == ' ' || c == '0')
-
-# define _PUT(c) pf_cputchar(c, &(p->counter))
+# define PUTC(c) pf_cputchar(c, &(p->counter))
 
 # define M 0
 # define P 1
@@ -60,23 +47,23 @@ typedef enum	e_flags
 
 typedef struct	s_printf
 {
-	int			i;
-	int			counter;
-	int			width;
-	int			precision;
-	bool		is_precision;
-	char		length[2];
-	char		symbol;
-	t_flags		flags[MAX_FLAGS];
+	size_t	i;
+	size_t	counter;
+	size_t	width;
+	size_t	precision;
+	bool	is_precision;
+	char	length[2];
+	char	symbol;
+	t_flags	flags[MAX_FLAGS];
 }				t_printf;
 
 int				ft_printf(const char *restrict format, ...);
 
-bool			add_choose_out_str(string *out_str, char symbol, __int128 out);
+// bool			add_choose_out_str(string *out_str, char symbol, __int128 out);
 bool			pf_decimal(t_printf *p, va_list *ap);
 bool			pf_string(t_printf *p, va_list *ap);
 bool			pf_address(t_printf *p, va_list *ap);
 
-void			pf_cputchar(char c, int *inc);
+void			pf_cputchar(char c, size_t *inc);
 
 #endif
