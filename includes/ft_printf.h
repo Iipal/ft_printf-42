@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:45:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 08:50:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 # define MAX_FLAGS  5
 
-# define E_ALLOC    "STOP: Where is memory, pal ?"
-# define E_WIDTH	" \\ STOP: Width can not be less than 0."
 # define E_MINUS	" \\ STOP: Invalid \'-\' specifier."
 # define E_INVALID	"Invalid flag detected."
 

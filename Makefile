@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/06/21 08:46:59 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/21 08:54:00 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
 SRCS := $(abspath $(wildcard srcs/*.c))
 OBJS := $(SRCS:%.c=%.o)
+SRCS_LFT := $(abspath $(wildcard ../libft/srcs/*.c ../libft/srcs/*/*.c))
+OBJS_LFT := $(SRCS_LFT:%.c=%.o)
 
 DEL := rm -rf
 
@@ -49,13 +51,13 @@ $(OBJS): %.o: %.c
 $(NAME): $(OBJS)
 	@echo "$(INVERT)"
 	@echo -n ' <=-=> | $(NPWD): '
-	@$(LC) $(NAME) $(OBJS)
+	@$(LC) $(NAME) $(OBJS) $(OBJS_LFT)
 	@echo "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 	@echo
 
 del:
-	$(DEL) $(OBJS)
-	$(DEL) $(NAME)
+	@$(DEL) $(OBJS)
+	@$(DEL) $(NAME)
 
 pre: del $(NAME)
 	@echo "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
