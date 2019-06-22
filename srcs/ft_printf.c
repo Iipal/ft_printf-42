@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 20:26:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 23:07:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static bool	add_parser(const char *format, t_printf *p)
 
 static bool	add_choose_func(t_printf *p, va_list *ap)
 {
-	// if (ft_is_one_of_n(p->symbol, 4, 'd', 'i', 'u', 'o') && (is = true))
-		// NO_F(pf_decimal(p, ap));
 	if (p->symbol == 'd')
 		return (pf_decimal(p, ap));
 	else if (p->symbol == 'p')

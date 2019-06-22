@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:50:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 23:06:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct	s_printf
 
 int				ft_printf(const char *restrict format, ...);
 
-// bool			add_choose_out_str(string *out_str, char symbol, __int128 out);
 bool			pf_decimal(t_printf *p, va_list *ap);
 bool			pf_string(t_printf *p, va_list *ap);
 bool			pf_address(t_printf *p, va_list *ap);
