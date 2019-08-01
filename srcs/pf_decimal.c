@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:44:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 22:02:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,18 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 {
 	__int128_t	out;
 	string		out_str;
-	long		out_len;
+	size_t		out_len;
+	size_t 		i;
 
+	i = ~0ULL;
 	add_choose_decimal_length(p, ap, &out);
 	out_str = ft_i128toa(out);
 	out_len = ft_strlen(out_str);
+	if (p->width && p->width > out_len)
+	{
+		while (p->width - out_len > ++i)
+			PUTC(' ');
+	}
 	ft_putstr(out_str);
 	p->counter += out_len;
 	ft_strdel(&out_str);
