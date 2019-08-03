@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 23:07:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 20:45:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,29 @@ static bool	add_choose_func(t_printf *p, va_list *ap)
 	return (false);
 }
 
+char g_buff[MAX_BUFF] = { 0 };
+size_t g_buff_i = 0;
+
 int			ft_printf(const char *restrict format, ...)
 {
 	t_printf	p;
 	va_list		ap;
 
-	p = (t_printf){-1, 0, 0, 0, false, {0}, 0, {0}};
+	p = (t_printf){~0UL, 0UL, 0UL, 0UL, false, {0}, 0, {0}};
+	ft_bzero(g_buff, sizeof(char) * MAX_BUFF);
+	g_buff_i = 0UL;
 	va_start(ap, format);
 	while (format[++(p.i)])
 		if (format[p.i] != '%')
-			pf_cputchar(format[p.i], &(p.counter));
+		{
+			PUT_CH_BUFF(format[p.i]);
+		}
 		else
 		{
 			NODO_F(add_parser(format, &p), va_end(ap));
 			NODO_F(add_choose_func(&p, &ap), va_end(ap));
 		}
 	va_end(ap);
-	return (p.counter);
+	ft_putstr(g_buff);
+	return (g_buff_i);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:43:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 20:42:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	add_is_minus_output(t_printf *p, string out, size_t prec)
 
 	i = ~0ULL;
 	out_len = ft_strlen(out) + 2;
-	ft_putstr("0x");
+	ft_strncpy(g_buff, "0x", sizeof("0x"));
 	while (++i < prec)
-		PUTC('0');
-	ft_putstr(out);
+		PUT_CH_BUFF('0');
+	ft_strncpy(g_buff, out, out_len - 2);
 	i = ~0ULL;
 	while (++i < p->width - out_len - prec)
-		PUTC(' ');
-	p->counter += out_len;
+		PUT_CH_BUFF(' ');
+	g_buff_i += out_len;
 }
 
 static void	add_no_minus_output(t_printf *p, string out, size_t prec)
@@ -37,20 +37,20 @@ static void	add_no_minus_output(t_printf *p, string out, size_t prec)
 	i = ~0ULL;
 	out_len = ft_strlen(out) + 2;
 	while (++i < p->width - out_len - prec && !p->flags[Z])
-		PUTC(' ');
-	ft_putstr("0x");
+		PUT_CH_BUFF(' ');
+	ft_strncpy(g_buff, "0x", sizeof("0x"));
 	if (p->flags[Z])
 		if (p->width > ft_strlen(out))
 			prec = p->width - ft_strlen(out) - 2;
 	if ((p->is_precision || p->flags[Z]) && (i = -1))
 		while (++i < prec)
-			PUTC('0');
+			PUT_CH_BUFF('0');
 	if (p->is_precision && !p->precision)
-		p->counter += 2;
+		g_buff_i += 2;
 	else
 	{
-		ft_putstr(out);
-		p->counter += out_len;
+		ft_strncpy(g_buff, out, out_len - 2);
+		g_buff_i += out_len;
 	}
 }
 

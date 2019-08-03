@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 22:02:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 20:37:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 	if (p->width && p->width > out_len)
 	{
 		while (p->width - out_len > ++i)
-			PUTC(' ');
+			PUT_CH_BUFF(' ');
 	}
-	ft_putstr(out_str);
-	p->counter += out_len;
+	ft_strncpy(g_buff + g_buff_i, out_str, out_len);
+	g_buff_i += out_len;
 	ft_strdel(&out_str);
 	return (true);
 }

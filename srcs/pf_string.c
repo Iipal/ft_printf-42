@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 20:30:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 20:44:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	add_is_minus_output(t_printf *const p,
 
 	i = ~0ULL;
 	while (out_len > ++i)
-		PUTC(out[i]);
+		PUT_CH_BUFF(out[i]);
 	i = out_len - 1;
 	while (++i < p->width)
 		(p->symbol == '%' && p->flags[Z] && !p->flags[M])
-			? PUTC('0') : PUTC(' ');
+			? PUT_CH_BUFF('0') : PUT_CH_BUFF(' ');
 }
 
 static void	add_no_minus_output(t_printf *const p,
@@ -35,10 +35,10 @@ static void	add_no_minus_output(t_printf *const p,
 
 	i = ~0ULL;
 	while ((long)(p->width - out_len) > (long)++i)
-		(p->symbol == '%' && p->flags[Z]) ? PUTC('0') : PUTC(' ');
+		(p->symbol == '%' && p->flags[Z]) ? PUT_CH_BUFF('0') : PUT_CH_BUFF(' ');
 	i = ~0ULL;
 	while (++i < out_len)
-		PUTC(out[i]);
+		PUT_CH_BUFF(out[i]);
 }
 
 static void	add_choose_data(char sym, va_list *ap, string *s, char *c)
