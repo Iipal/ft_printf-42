@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/04 12:34:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/04 12:49:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	add_parser_precision_length(char const *format, t_printf *p)
 		IFM_F(E_MINUS, format[p->i] == '-');
 		p->is_precision = true;
 		p->precision = ft_atoi(&(format[p->i]));
-		while (format[p->i] && ft_isdigit(format[p->i]))
+		while (format[p->i] && F_ISDIGIT(format[p->i]))
 			++(p->i);
 	}
 	if (ft_is_one_of_n(format[p->i], 5, 'l', 'L', 'h', 'z', 'j'))
@@ -48,7 +48,7 @@ static bool	add_parser(char const *format, t_printf *p)
 		++(p->i);
 	}
 	p->width = ft_atoi(&(format[p->i]));
-	while (format[p->i] && ft_isdigit(format[p->i]))
+	while (format[p->i] && F_ISDIGIT(format[p->i]))
 		++(p->i);
 	NO_F(add_parser_precision_length(format, p));
 	p->symbol = format[p->i];
