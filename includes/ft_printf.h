@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 20:33:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/04 12:33:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@
 # define H 3
 # define S 4
 
-# define MAX_BUFF 1024
+# define F_MINUS (1 << 0)
+# define F_PLUS  (1 << 1)
+# define F_ZERO  (1 << 2)
+# define F_TAG   (1 << 3)
+# define F_SPACE (1 << 4)
 
-extern char		g_buff[MAX_BUFF];
-extern size_t	g_buff_i;
-
-# define PUT_CH_BUFF(c) ((MAX_BUFF > g_buff_i) ? (g_buff[g_buff_i++] = (c)) : 0)
+# define SET_BIT(mask, bit) ((mask) |= (bit))
+# define IS_BIT(mask, bit) (((mask) & (bit)) == (bit))
 
 typedef enum	e_flags
 {
@@ -51,7 +53,6 @@ typedef enum	e_flags
 typedef struct	s_printf
 {
 	size_t	i;
-	size_t	counter;
 	size_t	width;
 	size_t	precision;
 	bool	is_precision;
@@ -60,7 +61,7 @@ typedef struct	s_printf
 	t_flags	flags[MAX_FLAGS];
 }				t_printf;
 
-int				ft_printf(const char *restrict format, ...);
+int				ft_printf(char const *const format, ...);
 
 bool			pf_decimal(t_printf *p, va_list *ap);
 bool			pf_string(t_printf *p, va_list *ap);

@@ -6,13 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 20:42:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/04 12:31:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "ft_printf_global_variables.h"
 
-static void	add_is_minus_output(t_printf *p, string out, size_t prec)
+static void	add_is_minus_output(t_printf *p, char *out, size_t prec)
 {
 	size_t	i;
 	size_t	out_len;
@@ -29,7 +30,7 @@ static void	add_is_minus_output(t_printf *p, string out, size_t prec)
 	g_buff_i += out_len;
 }
 
-static void	add_no_minus_output(t_printf *p, string out, size_t prec)
+static void	add_no_minus_output(t_printf *p, char *out, size_t prec)
 {
 	size_t	i;
 	size_t	out_len;
@@ -57,7 +58,7 @@ static void	add_no_minus_output(t_printf *p, string out, size_t prec)
 bool		pf_address(t_printf *p, va_list *ap)
 {
 	intptr_t	addr;
-	string		out;
+	char		*out;
 	size_t		prec;
 
 	prec = 0;

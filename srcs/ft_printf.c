@@ -6,20 +6,21 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 20:45:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/04 12:34:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "ft_printf_global_variables.h"
 
-static bool	add_parser_precision_length(const char *format, t_printf *p)
+static bool	add_parser_precision_length(char const *format, t_printf *p)
 {
 	if (format[p->i] == '.')
 	{
 		++(p->i);
 		IFM_F(E_MINUS, format[p->i] == '-');
 		p->is_precision = true;
-		p->precision = ft_atoi((string)(&(format[p->i])));
+		p->precision = ft_atoi(&(format[p->i]));
 		while (format[p->i] && ft_isdigit(format[p->i]))
 			++(p->i);
 	}
@@ -32,12 +33,12 @@ static bool	add_parser_precision_length(const char *format, t_printf *p)
 	return (true);
 }
 
-static bool	add_parser(const char *format, t_printf *p)
+static bool	add_parser(char const *format, t_printf *p)
 {
 	const char	flags[] = {'-', '+', '0', '#', ' '};
 	size_t		i;
 
-	*p = (t_printf){++(p->i), p->counter, 0, 0, false, {0}, 0, {0}};
+	*p = (t_printf){++(p->i), 0, 0, false, {0}, 0, {0}};
 	while (format[p->i] && (i = ~0ULL)
 	&& ft_is_one_of_n((int64_t)format[p->i], 5UL, 45LL, 43LL, 48LL, 35LL, 32LL))
 	{
@@ -46,7 +47,7 @@ static bool	add_parser(const char *format, t_printf *p)
 				p->flags[i] = i + 1;
 		++(p->i);
 	}
-	p->width = ft_atoi((string)(&(format[p->i])));
+	p->width = ft_atoi(&(format[p->i]));
 	while (format[p->i] && ft_isdigit(format[p->i]))
 		++(p->i);
 	NO_F(add_parser_precision_length(format, p));
@@ -69,12 +70,12 @@ static bool	add_choose_func(t_printf *p, va_list *ap)
 char g_buff[MAX_BUFF] = { 0 };
 size_t g_buff_i = 0;
 
-int			ft_printf(const char *restrict format, ...)
+int			ft_printf(char const *const format, ...)
 {
 	t_printf	p;
 	va_list		ap;
 
-	p = (t_printf){~0UL, 0UL, 0UL, 0UL, false, {0}, 0, {0}};
+	p = (t_printf){~0UL, 0UL, 0UL, false, {0}, 0, {0}};
 	ft_bzero(g_buff, sizeof(char) * MAX_BUFF);
 	g_buff_i = 0UL;
 	va_start(ap, format);

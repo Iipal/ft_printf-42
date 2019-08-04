@@ -6,15 +6,16 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 20:44:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/04 12:32:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "ft_printf_global_variables.h"
 
 static void	add_is_minus_output(t_printf *const p,
 				const size_t out_len,
-				const string out)
+				const char *out)
 {
 	size_t	i;
 
@@ -29,7 +30,7 @@ static void	add_is_minus_output(t_printf *const p,
 
 static void	add_no_minus_output(t_printf *const p,
 				const size_t out_len,
-				const string out)
+				const char *out)
 {
 	size_t	i;
 
@@ -41,11 +42,11 @@ static void	add_no_minus_output(t_printf *const p,
 		PUT_CH_BUFF(out[i]);
 }
 
-static void	add_choose_data(char sym, va_list *ap, string *s, char *c)
+static void	add_choose_data(char sym, va_list *ap, char **s, char *c)
 {
 	if (ft_is_one_of_n(sym, 2, 'S', 's'))
 	{
-		*s = (string)va_arg(*ap, string);
+		*s = (char*)va_arg(*ap, char*);
 		if (*s && sym == 'S')
 			ft_strupr(*s);
 	}
@@ -59,7 +60,7 @@ static void	add_choose_data(char sym, va_list *ap, string *s, char *c)
 
 bool		pf_string(t_printf *p, va_list *ap)
 {
-	string	out;
+	char	*out;
 	size_t	out_len;
 	char	c_out;
 	bool	is_str;

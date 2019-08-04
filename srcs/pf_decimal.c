@@ -6,11 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 20:37:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/04 12:32:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "ft_printf_global_variables.h"
 
 static void	add_choose_decimal_length(t_printf *p, va_list *ap, __int128_t *o)
 {
@@ -34,7 +35,7 @@ static void	add_choose_decimal_length(t_printf *p, va_list *ap, __int128_t *o)
 bool		pf_decimal(t_printf *p, va_list *ap)
 {
 	__int128_t	out;
-	string		out_str;
+	char		*out_str;
 	size_t		out_len;
 	size_t 		i;
 
