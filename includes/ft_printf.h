@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/04 12:33:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 10:11:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <limits.h>
 # include <inttypes.h>
 
-# define MAX_FLAGS  5
+# define MAX_PF_FLAGS  5
 
 # define E_MINUS	" \\ STOP: Invalid \'-\' specifier."
 # define E_INVALID	"Invalid flag detected."
@@ -58,7 +58,7 @@ typedef struct	s_printf
 	bool	is_precision;
 	char	length[2];
 	char	symbol;
-	t_flags	flags[MAX_FLAGS];
+	t_flags	flags[MAX_PF_FLAGS];
 }				t_printf;
 
 int				ft_printf(char const *const format, ...);

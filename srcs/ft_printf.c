@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/04 12:49:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 10:11:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static bool	add_parser(char const *format, t_printf *p)
 	while (format[p->i] && (i = ~0ULL)
 	&& ft_is_one_of_n((int64_t)format[p->i], 5UL, 45LL, 43LL, 48LL, 35LL, 32LL))
 	{
-		while (++i < MAX_FLAGS)
+		while (++i < MAX_PF_FLAGS)
 			if (format[p->i] == flags[i])
 				p->flags[i] = i + 1;
 		++(p->i);
