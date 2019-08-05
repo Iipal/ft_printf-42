@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/04 12:32:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 16:10:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool		pf_decimal(t_printf *p, va_list *ap)
 	__int128_t	out;
 	char		*out_str;
 	size_t		out_len;
-	size_t 		i;
+	size_t		i;
 
 	i = ~0ULL;
 	add_choose_decimal_length(p, ap, &out);
