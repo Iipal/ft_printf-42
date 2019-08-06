@@ -6,79 +6,49 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/04 12:32:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:48:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_printf_global_variables.h"
+#include "ft_printf_local.h"
 
-static void	add_is_minus_output(t_printf *const p,
-				const size_t out_len,
-				const char *out)
+static void	s_out_data(void)
 {
 	size_t	i;
 
-	i = ~0ULL;
-	while (out_len > ++i)
-		PUT_CH_BUFF(out[i]);
-	i = out_len - 1;
-	while (++i < p->width)
-		(p->symbol == '%' && p->flags[Z] && !p->flags[M])
-			? PUT_CH_BUFF('0') : PUT_CH_BUFF(' ');
+	i = ~0UL;
+	while (g_flag_width + g_data_len > ++i)
+		PUT_CH_BUFF(g_flag_width > i ? ' ' : g_data_ptr[i - g_flag_width]);
 }
 
-static void	add_no_minus_output(t_printf *const p,
-				const size_t out_len,
-				const char *out)
+static void	s_choose_data(va_list *ap, char *c)
 {
-	size_t	i;
-
-	i = ~0ULL;
-	while ((long)(p->width - out_len) > (long)++i)
-		(p->symbol == '%' && p->flags[Z]) ? PUT_CH_BUFF('0') : PUT_CH_BUFF(' ');
-	i = ~0ULL;
-	while (++i < out_len)
-		PUT_CH_BUFF(out[i]);
-}
-
-static void	add_choose_data(char sym, va_list *ap, char **s, char *c)
-{
-	if (ft_is_one_of_n(sym, 2, 'S', 's'))
-	{
-		*s = (char*)va_arg(*ap, char*);
-		if (*s && sym == 'S')
-			ft_strupr(*s);
-	}
-	else if (sym == '%')
+	if ('s' == g_flag)
+		g_data_ptr = (char*)va_arg(*ap, char*);
+	else if ('%' == g_flag)
 		*c = '%';
 	else
 		*c = (char)va_arg(*ap, int);
-	if (!*s && ft_is_one_of_n(sym, 2, 'S', 's'))
-		*s = ft_strdup("(null)");
+	if ((!g_data_ptr || !*g_data_ptr) && 's' == g_flag)
+	{
+		ft_strcpy(g_buff + g_buff_i, "(null)");
+		g_buff_i += sizeof("(null)");
+	}
 }
 
-bool		pf_string(t_printf *p, va_list *ap)
+bool		pf_string(va_list *ap)
 {
-	char	*out;
-	size_t	out_len;
-	char	c_out;
+	char	ch;
 	bool	is_str;
 
-	c_out = 0;
-	out = NULL;
-	is_str = true;
-	if (p->symbol == 'c' || p->symbol == '%')
-		is_str = false;
-	add_choose_data(p->symbol, ap, &out, &c_out);
-	out_len = is_str ? ft_strlen(out) : 1;
+	ch = 0;
+	is_str = !(g_flag == 'c' || g_flag == '%');
+	s_choose_data(ap, &ch);
+	g_data_len = is_str ? ft_strlen(g_data_ptr) : 1;
 	if (is_str)
-		if (p->is_precision)
-			(p->precision >= out_len) ? (p->precision = 0)
-			: (out_len = p->precision);
-	if (p->flags[M])
-		add_is_minus_output(p, out_len, is_str ? out : &c_out);
+		s_out_data();
 	else
-		add_no_minus_output(p, out_len, is_str ? out : &c_out);
+		PUT_CH_BUFF(ch);
 	return (true);
 }

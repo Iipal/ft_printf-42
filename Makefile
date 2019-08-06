@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/06/21 08:54:00 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/08/06 11:09:36 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ endif
 LC += rcs
 
 CC := gcc -flto -Ofast -pipe
-CC_DEBUG := gcc -g3 -D DEBUG -fsanitize=address
+CC_DEBUG := gcc -g3 -D DEBUG
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 

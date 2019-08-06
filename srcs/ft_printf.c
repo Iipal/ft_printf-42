@@ -6,90 +6,76 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 10:11:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:41:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_printf_global_variables.h"
+#include "ft_printf_local.h"
 
-static bool	add_parser_precision_length(char const *format, t_printf *p)
+char	g_buff[MAX_BUFF] = { 0 };
+size_t	g_buff_i = 0UL;
+
+size_t	g_fmt_i = ~0UL;
+
+char	g_flag = 0;
+size_t	g_flag_width = 0UL;
+
+char	*g_data_ptr = NULL;
+size_t	g_data_len = 0UL;
+
+static bool	s_pf_parser(char const *const format)
 {
-	if (format[p->i] == '.')
-	{
-		++(p->i);
-		IFM_F(E_MINUS, format[p->i] == '-');
-		p->is_precision = true;
-		p->precision = ft_atoi(&(format[p->i]));
-		while (format[p->i] && F_ISDIGIT(format[p->i]))
-			++(p->i);
-	}
-	if (ft_is_one_of_n(format[p->i], 5, 'l', 'L', 'h', 'z', 'j'))
-	{
-		p->length[0] = format[(p->i)++];
-		if (ft_is_one_of_n(format[p->i], 2, 'h', 'l'))
-			p->length[1] = format[(p->i)++];
-	}
+	++g_fmt_i;
+	g_flag_width = strtoumax(&(format[g_fmt_i]), NULL, 10);
+	while (format[g_fmt_i] && F_ISDIGIT(format[g_fmt_i]))
+		++g_fmt_i;
+	g_flag = format[g_fmt_i];
 	return (true);
 }
 
-static bool	add_parser(char const *format, t_printf *p)
+static bool	s_choose_func(va_list *ap)
 {
-	const char	flags[] = {'-', '+', '0', '#', ' '};
-	size_t		i;
-
-	*p = (t_printf){++(p->i), 0, 0, false, {0}, 0, {0}};
-	while (format[p->i] && (i = ~0ULL)
-	&& ft_is_one_of_n((int64_t)format[p->i], 5UL, 45LL, 43LL, 48LL, 35LL, 32LL))
-	{
-		while (++i < MAX_PF_FLAGS)
-			if (format[p->i] == flags[i])
-				p->flags[i] = i + 1;
-		++(p->i);
-	}
-	p->width = ft_atoi(&(format[p->i]));
-	while (format[p->i] && F_ISDIGIT(format[p->i]))
-		++(p->i);
-	NO_F(add_parser_precision_length(format, p));
-	p->symbol = format[p->i];
-	return (true);
-}
-
-static bool	add_choose_func(t_printf *p, va_list *ap)
-{
-	if (p->symbol == 'd')
-		return (pf_decimal(p, ap));
-	else if (p->symbol == 'p')
-		return (pf_address(p, ap));
-	else if (ft_is_one_of_n(p->symbol, 4, 's', 'S', 'c', '%'))
-		return (pf_string(p, ap));
-	MSGN(E_INVALID);
+	if (g_flag == 'd')
+		return (pf_decimal(ap));
+	else if (g_flag == 'p')
+		return (pf_address(ap));
+	else if ('s' == g_flag || 'c' == g_flag || '%' == g_flag)
+		return (pf_string(ap));
+	write(STDERR_FILENO, E_INVALID, ft_strlen(E_INVALID));
 	return (false);
 }
 
-char g_buff[MAX_BUFF] = { 0 };
-size_t g_buff_i = 0;
+static void	s_zero_global_variables(void)
+{
+	ft_bzero(g_buff, sizeof(char) * MAX_BUFF);
+	g_buff_i = 0UL;
+	g_fmt_i = ~0UL;
+	g_flag = 0;
+	g_flag_width = 0UL;
+	g_data_ptr = NULL;
+	g_data_len = 0UL;
+}
 
 int			ft_printf(char const *const format, ...)
 {
-	t_printf	p;
-	va_list		ap;
+	bool	is_valid;
+	va_list	ap;
 
-	p = (t_printf){~0UL, 0UL, 0UL, false, {0}, 0, {0}};
-	ft_bzero(g_buff, sizeof(char) * MAX_BUFF);
-	g_buff_i = 0UL;
+	s_zero_global_variables();
 	va_start(ap, format);
-	while (format[++(p.i)])
-		if (format[p.i] != '%')
+	is_valid = true;
+	while (is_valid && format[++g_fmt_i])
+		if (format[g_fmt_i] != '%')
 		{
-			PUT_CH_BUFF(format[p.i]);
+			PUT_CH_BUFF(format[g_fmt_i]);
 		}
 		else
 		{
-			NODO_F(add_parser(format, &p), va_end(ap));
-			NODO_F(add_choose_func(&p, &ap), va_end(ap));
+			is_valid = s_pf_parser(format);
+			if (is_valid)
+				is_valid = s_choose_func(&ap);
 		}
 	va_end(ap);
-	ft_putstr(g_buff);
-	return (g_buff_i);
+	return (is_valid ? write(STDOUT_FILENO, g_buff, g_buff_i) : 0);
 }
