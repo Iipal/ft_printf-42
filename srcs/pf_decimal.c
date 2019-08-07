@@ -16,9 +16,7 @@
 bool		pf_decimal(va_list *ap)
 {
 	size_t const	out = va_arg(*ap, size_t);
-	size_t			i;
-
-	i = ~0ULL;
+	
 	g_data_ptr = ft_i128toa(out);
 	g_data_len = ft_strlen(g_data_ptr);
 	if (g_flag_width > g_data_len)

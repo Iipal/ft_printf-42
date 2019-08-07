@@ -16,9 +16,7 @@
 bool		pf_address(va_list *ap)
 {
 	intptr_t	addr;
-	size_t		prec;
-
-	prec = 0;
+	
 	addr = (intptr_t)va_arg(*ap, void*);
 	NO_F(g_data_ptr = ft_ltoa_base(addr, 16));
 	g_data_len = ft_strlen(g_data_ptr);
