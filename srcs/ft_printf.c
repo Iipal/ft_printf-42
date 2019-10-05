@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 11:41:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/05 19:07:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	g_flag_width = 0UL;
 char	*g_data_ptr = NULL;
 size_t	g_data_len = 0UL;
 
-static bool	s_pf_parser(char const *const format)
+static bool			s_pf_parser(char const *const format)
 {
 	++g_fmt_i;
 	g_flag_width = strtoumax(&(format[g_fmt_i]), NULL, 10);
@@ -34,7 +34,7 @@ static bool	s_pf_parser(char const *const format)
 	return (true);
 }
 
-static bool	s_choose_func(va_list *ap)
+static bool			s_choose_func(va_list *ap)
 {
 	if (g_flag == 'd')
 		return (pf_decimal(ap));
@@ -46,7 +46,7 @@ static bool	s_choose_func(va_list *ap)
 	return (false);
 }
 
-static void	s_zero_global_variables(void)
+static inline void	s_zero_global_variables(void)
 {
 	ft_bzero(g_buff, sizeof(char) * MAX_BUFF);
 	g_buff_i = 0UL;
@@ -57,7 +57,7 @@ static void	s_zero_global_variables(void)
 	g_data_len = 0UL;
 }
 
-int			ft_printf(char const *const format, ...)
+int					ft_printf(char const *const format, ...)
 {
 	bool	is_valid;
 	va_list	ap;
