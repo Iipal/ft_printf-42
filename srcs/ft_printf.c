@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/05 19:07:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 13:23:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	g_data_len = 0UL;
 static bool			s_pf_parser(char const *const format)
 {
 	++g_fmt_i;
-	g_flag_width = strtoumax(&(format[g_fmt_i]), NULL, 10);
+	g_flag_width = (size_t)ft_atol(&format[g_fmt_i]);
 	while (format[g_fmt_i] && F_ISDIGIT(format[g_fmt_i]))
 		++g_fmt_i;
 	g_flag = format[g_fmt_i];
