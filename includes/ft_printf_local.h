@@ -6,12 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 10:46:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 12:52:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_GLOBAL_VARIABLES_H
-# define FT_PRINTF_GLOBAL_VARIABLES_H
+#ifndef FT_PRINTF_LOCAL_H
+# define FT_PRINTF_LOCAL_H
 
 # include <stddef.h>
 # include <limits.h>
