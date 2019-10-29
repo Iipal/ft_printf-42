@@ -6,15 +6,17 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/10/05 17:50:29 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/10/29 23:04:09 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 NPWD = $(CURDIR)/$(NAME)
 
+ECHO := echo
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
+	ECHO += -e
 	LC := gcc-ar
 endif
 ifeq ($(UNAME_S),Darwin)
@@ -44,42 +46,42 @@ INVERT=\033[7m
 all: $(NAME)
 
 $(OBJS): %.o: %.c
-	@echo -n ' $@: '
+	@$(ECHO) -n ' $@: '
 	@$(CC) -c $(CFLAGS) $(IFLAGS) $< -o $@
-	@echo "[$(GREEN)✓$(WHITE)]"
+	@$(ECHO) "[$(GREEN)✓$(WHITE)]"
 
 $(NAME): $(OBJS)
-	@echo "$(INVERT)"
-	@echo -n ' <=-=> | $(NPWD): '
+	@$(ECHO) "$(INVERT)"
+	@$(ECHO) -n ' <=-=> | $(NPWD): '
 	@$(LC) $(NAME) $(OBJS) $(OBJS_LFT)
-	@echo "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
-	@echo
+	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
+	@$(ECHO)
 
 del:
 	@$(DEL) $(OBJS)
 	@$(DEL) $(NAME)
 
 pre: del $(NAME)
-	@echo "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
+	@$(ECHO) "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
 
 set_cc_debug:
 	@$(eval CC=$(CC_DEBUG))
 debug_all: set_cc_debug pre
-	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+	@$(ECHO) "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
 debug: set_cc_debug all
-	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+	@$(ECHO) "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
 
 clean:
 	@$(DEL) $(OBJS)
 
 fclean: clean
 	@$(DEL) $(NAME)
-	@echo "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
+	@$(ECHO) "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
 
 re: fclean all
 
 norme:
-	@echo "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
+	@$(ECHO) "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
 	@norminette includes/
 	@norminette $(SRCS)
 
