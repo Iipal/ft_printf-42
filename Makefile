@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/12 10:59:54 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/12 11:48:29 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ endif
 CC_BASE := clang
 
 CC := $(CC_BASE) -Ofast -pipe -flto
-CC_DEBUG := $(CC_BASE) -g3 -D DEBUG
+CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
 
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
