@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/10/29 23:04:09 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/12 10:59:54 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,17 @@ ECHO := echo
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	ECHO += -e
-	LC := gcc-ar
+	AR := llvm-ar -rcs
 endif
 ifeq ($(UNAME_S),Darwin)
-	LC := ar
+	AR := ar -rcs
 endif
 
-LC += rcs
+CC_BASE := clang
 
-CC := gcc -flto -Ofast -pipe
-CC_DEBUG := gcc -g3 -D DEBUG
+CC := $(CC_BASE) -Ofast -pipe -flto
+CC_DEBUG := $(CC_BASE) -g3 -D DEBUG
+
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
@@ -53,7 +54,7 @@ $(OBJS): %.o: %.c
 $(NAME): $(OBJS)
 	@$(ECHO) "$(INVERT)"
 	@$(ECHO) -n ' <=-=> | $(NPWD): '
-	@$(LC) $(NAME) $(OBJS) $(OBJS_LFT)
+	@$(AR) $(NAME) $(OBJS) $(OBJS_LFT)
 	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 	@$(ECHO)
 
