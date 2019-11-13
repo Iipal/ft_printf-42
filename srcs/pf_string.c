@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 11:48:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 11:55:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	s_out_data(void)
 
 	i = ~0UL;
 	while (g_flag_width + g_data_len > ++i)
-		PUT_CH_BUFF(g_flag_width > i ? ' ' : g_data_ptr[i - g_flag_width]);
+		PUT_CH_BUFF((g_flag_width > i) ? ' ' : g_data_ptr[i - g_flag_width]);
 }
 
 static void	s_choose_data(va_list *ap, char *c)
