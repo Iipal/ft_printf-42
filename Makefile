@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/12 11:55:25 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/15 15:13:41 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
-SRCS := $(abspath $(wildcard srcs/*.c))
+SRCS := $(abspath $(wildcard $(shell find srcs -name "*.c")))
 OBJS := $(SRCS:%.c=%.o)
-SRCS_LFT := $(abspath $(wildcard ../libft/srcs/*.c ../libft/srcs/*/*.c))
+SRCS_LFT := $(abspath $(wildcard $(shell find ../libft/srcs -name "*.c")))
 OBJS_LFT := $(SRCS_LFT:%.c=%.o)
 
 DEL := rm -rf
