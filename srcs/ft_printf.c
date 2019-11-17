@@ -6,10 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/17 22:37:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/18 01:27:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "ft_printf_local.h"
 
 size_t	g_max_buf = 128;
@@ -70,12 +71,12 @@ int					ft_printf(const char *restrict format, ...)
 {
 	bool	is_valid;
 	va_list	ap;
-	int		out;
+	ssize_t	out;
 
 	s_zero_global_variables();
 	va_start(ap, format);
 	is_valid = true;
-	out = 0;
+	out = 0L;
 	while (is_valid && format[++g_fmt_i])
 		if (format[g_fmt_i] != '%')
 			pf_put_ch_buf(format[g_fmt_i]);
@@ -87,6 +88,10 @@ int					ft_printf(const char *restrict format, ...)
 	va_end(ap);
 	if (is_valid)
 		out = write(STDOUT_FILENO, g_buf, g_buf_i);
-	FREE(g_buf, free);
-	return (out);
+	if (g_buf)
+	{
+		free(g_buf);
+		g_buf = NULL;
+	}
+	return ((int)out);
 }

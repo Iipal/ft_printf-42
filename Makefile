@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/17 22:44:40 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/18 01:24:36 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CC_BASE := clang -march=native -mtune=native
 CC := $(CC_BASE) -Ofast -pipe -flto -fpic
 CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
 
-CFLAGS := -Wall -Wextra -Werror -Wunused
+CFLAGS := -Wall -Wextra -Werror -Wunused -Weverything
 IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
 SRCS := $(abspath $(wildcard $(shell find srcs -name "*.c")))
@@ -42,12 +42,14 @@ GREEN=\033[32m
 RED=\033[31m
 INVERT=\033[7m
 
+multi:
+	@$(MAKE) -j4 all
+
 all: $(NAME)
 
 $(OBJS): %.o: %.c
-	@$(ECHO) -n ' $@: '
+	@$(ECHO) ' | $@  '
 	@$(CC) -c $(CFLAGS) $(IFLAGS) $< -o $@
-	@$(ECHO) "[$(GREEN)✓$(WHITE)]"
 
 $(NAME): $(OBJS)
 	@$(ECHO) "$(INVERT)"

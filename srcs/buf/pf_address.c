@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/17 16:43:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/18 01:26:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ bool	pf_address(va_list *ap)
 	intptr_t	addr;
 
 	addr = (intptr_t)va_arg(*ap, void*);
-	NO_F(g_data_ptr = ft_ltoa_base(addr, 16));
+	if (!(g_data_ptr = ft_ltoa_base(addr, 16)))
+		return (false);
 	g_data_len = ft_strlen(g_data_ptr);
 	ft_strcpy(g_buf + g_buf_i, "0x");
 	g_buf_i += sizeof("0x");
