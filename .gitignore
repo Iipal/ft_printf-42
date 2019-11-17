@@ -1,13 +1,6 @@
-#ignore object files in source folders
-*_remove.c
-srcs/*.o
-libft/srcs/*/*.o
-libft/libft.a
-libftprintf.a
+.vscode/
+.VScode/
+**.o
+**.a
 **.DS_Store
 test/
-.VScode
-.vscode
-**.cpp
-**/a.out
-**/*.dSYM
