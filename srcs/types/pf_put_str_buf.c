@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_address.c                                       :+:      :+:    :+:   */
+/*   pf_put_str_buf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 12:52:46 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/17 21:55:40 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/17 21:57:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "ft_printf_local.h"
 
-bool	pf_address(va_list *ap)
+void	pf_put_str_buf(const char *restrict str, size_t len)
 {
-	intptr_t	addr;
+	size_t	i;
 
-	addr = (intptr_t)va_arg(*ap, void*);
-	NO_F(g_data_ptr = ft_ltoa_base(addr, 16));
-	g_data_len = ft_strlen(g_data_ptr);
-	ft_strcpy(g_buff + g_buff_i, "0x");
-	g_buff_i += sizeof("0x");
-	ft_strncpy(g_buff + g_buff_i, g_data_ptr, g_data_len);
-	g_buff_i += g_data_len;
-	ft_strdel(&g_data_ptr);
-	return (true);
+	i = ~0UL;
+	while (len > ++i)
+		pf_put_ch_buf(str[i]);
 }

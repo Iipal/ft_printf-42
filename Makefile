@@ -33,8 +33,6 @@ IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
 SRCS := $(abspath $(wildcard $(shell find srcs -name "*.c")))
 OBJS := $(SRCS:%.c=%.o)
-SRCS_LFT := $(abspath $(wildcard $(shell find ../libft/srcs -name "*.c")))
-OBJS_LFT := $(SRCS_LFT:%.c=%.o)
 
 DEL := rm -rf
 
@@ -54,7 +52,7 @@ $(OBJS): %.o: %.c
 $(NAME): $(OBJS)
 	@$(ECHO) "$(INVERT)"
 	@$(ECHO) -n ' <=-=> | $(NPWD): '
-	@$(AR) $(NAME) $(OBJS) $(OBJS_LFT)
+	@$(AR) $(NAME) $(OBJS)
 	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
 	@$(ECHO)
 

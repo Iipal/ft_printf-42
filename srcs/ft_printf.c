@@ -6,28 +6,34 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 13:23:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/17 22:37:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "ft_printf_local.h"
 
-char	g_buff[MAX_BUFF] = { 0 };
-size_t	g_buff_i = 0UL;
+size_t	g_max_buf = 128;
+char	*g_buf = NULL;
+size_t	g_buf_i = 0UL;
 
 size_t	g_fmt_i = ~0UL;
 
+
 char	g_flag = 0;
+int		g_flag_spec_mask = 0;
 size_t	g_flag_width = 0UL;
 
 char	*g_data_ptr = NULL;
 size_t	g_data_len = 0UL;
 
-static bool			s_pf_parser(char const *const format)
+static bool			s_pf_parser(const char *restrict format)
 {
-	++g_fmt_i;
-	g_flag_width = (size_t)ft_atol(&format[g_fmt_i]);
+	if (format[++g_fmt_i] == '-')
+	{
+		SET_BIT(g_flag_spec_mask, FTPRINTF_BIT_MINUS);
+		++g_fmt_i;
+	}
+	g_flag_width = (size_t)ft_atol(format + g_fmt_i);
 	while (format[g_fmt_i] && F_ISDIGIT(format[g_fmt_i]))
 		++g_fmt_i;
 	g_flag = format[g_fmt_i];
@@ -48,34 +54,39 @@ static bool			s_choose_func(va_list *ap)
 
 static inline void	s_zero_global_variables(void)
 {
-	ft_bzero(g_buff, sizeof(char) * MAX_BUFF);
-	g_buff_i = 0UL;
-	g_fmt_i = ~0UL;
 	g_flag = 0;
-	g_flag_width = 0UL;
-	g_data_ptr = NULL;
 	g_data_len = 0UL;
+	g_data_ptr = NULL;
+	g_flag_width = 0UL;
+	g_flag_spec_mask = 0;
+	g_max_buf = 128;
+	g_fmt_i = ~0UL;
+	g_buf_i = 0UL;
+	if (!g_buf)
+		g_buf = ft_strnew(sizeof(char) * g_max_buf);
 }
 
-int					ft_printf(char const *const format, ...)
+int					ft_printf(const char *restrict format, ...)
 {
 	bool	is_valid;
 	va_list	ap;
+	int		out;
 
 	s_zero_global_variables();
 	va_start(ap, format);
 	is_valid = true;
+	out = 0;
 	while (is_valid && format[++g_fmt_i])
 		if (format[g_fmt_i] != '%')
-		{
-			PUT_CH_BUFF(format[g_fmt_i]);
-		}
+			pf_put_ch_buf(format[g_fmt_i]);
 		else
 		{
-			is_valid = s_pf_parser(format);
-			if (is_valid)
+			if ((is_valid = s_pf_parser(format)))
 				is_valid = s_choose_func(&ap);
 		}
 	va_end(ap);
-	return (is_valid ? write(STDOUT_FILENO, g_buff, g_buff_i) : 0);
+	if (is_valid)
+		out = write(STDOUT_FILENO, g_buf, g_buf_i);
+	FREE(g_buf, free);
+	return (out);
 }

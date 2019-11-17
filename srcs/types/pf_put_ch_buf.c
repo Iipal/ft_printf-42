@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_decimal.c                                       :+:      :+:    :+:   */
+/*   pf_put_ch_buf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 12:53:06 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/17 22:29:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "ft_printf_local.h"
 
-bool	pf_decimal(va_list *ap)
+void	pf_put_ch_buf(char c)
 {
-	size_t const	out = va_arg(*ap, size_t);
-
-	g_data_ptr = ft_i128toa(out);
-	g_data_len = ft_strlen(g_data_ptr);
-	if (g_flag_width > g_data_len)
+	if (g_max_buf <= g_buf_i)
 	{
-		ft_memset(g_buff + g_buff_i, ' ', g_flag_width - g_data_len);
-		g_buff_i += g_flag_width - g_data_len;
+		g_buf = ft_memrealloc(g_buf, g_max_buf, g_max_buf * 2);
+		g_max_buf *= 2;
 	}
-	ft_strncpy(g_buff + g_buff_i, g_data_ptr, g_data_len);
-	g_buff_i += g_data_len;
-	ft_strdel(&g_data_ptr);
-	return (true);
+	g_buf[g_buf_i++] = c;
 }

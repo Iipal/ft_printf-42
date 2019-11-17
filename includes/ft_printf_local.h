@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 12:52:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/17 22:02:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,45 @@
 
 # include "libft.h"
 
-# define MAX_BUFF 1024
+/*
+** global variables:
+**
+** global buffer for all data what will be printed:
+*/
+extern size_t	g_max_buf;
+extern char		*g_buf;
+extern size_t	g_buf_i;
 
-extern char		g_buff[MAX_BUFF];
-extern size_t	g_buff_i;
-
-# define PUT_CH_BUFF(c) ((MAX_BUFF > g_buff_i) ? (g_buff[g_buff_i++] = (c)) : 0)
-
+/*
+** iterator in format string for printf:
+*/
 extern size_t	g_fmt_i;
 
-extern size_t	g_flag_width;
+/*
+** g_flag: current data type flag(s d c ...)
+** g_flag_spec_mask: current data type specificators (such as '-' or else)
+** g_flag_width: cureent data type width
+*/
 extern char		g_flag;
+extern int		g_flag_spec_mask;
+extern size_t	g_flag_width;
 
+/*
+** pointer to string with data of current parsing data type and
+** what will be added to buffer
+*/
 extern char		*g_data_ptr;
 extern size_t	g_data_len;
+
+/*
+** functions for work with global buffer.
+*/
+void	pf_put_ch_buf(char ch);
+void	pf_put_n_ch_buf(char ch, size_t n);
+void	pf_put_str_buf(const char *restrict str, size_t len);
+void	pf_put_gstr_buf(void);
+
+# define FTPRINTF_BIT_MINUS (1 << 0)
 
 # define E_PF_PREFIX "ft_printf: "
 # define E_INVALID	E_PF_PREFIX "Invalid flag detected."
@@ -40,5 +65,6 @@ extern size_t	g_data_len;
 bool	pf_decimal(va_list *ap);
 bool	pf_string(va_list *ap);
 bool	pf_address(va_list *ap);
+
 
 #endif
