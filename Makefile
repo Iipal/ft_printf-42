@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/18 15:42:09 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/18 16:16:57 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,9 @@ SUCCESS_NO_CLR = [✓]
 .PHONY: multi all
 multi:
 ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
-	@$(MAKE) -j 3 -Otarget --no-print-directory CFLAGS="$(CFLAGS_DEBUG)" all
+	@$(MAKE) -j -Otarget --no-print-directory CFLAGS="$(CFLAGS_DEBUG)" all
 else
-	@$(MAKE) -j 3 -Otarget --no-print-directory all
+	@$(MAKE) -j -Otarget --no-print-directory all
 endif
 
 all: $(NAME)
