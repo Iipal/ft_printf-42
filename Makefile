@@ -6,11 +6,11 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/18 01:24:36 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/18 15:42:09 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = $(notdir $(CURDIR)).a
 NPWD = $(CURDIR)/$(NAME)
 
 ECHO := echo
@@ -23,15 +23,15 @@ ifeq ($(UNAME_S),Darwin)
 	AR := ar -rcs
 endif
 
-CC_BASE := clang -march=native -mtune=native
+CC := clang
 
-CC := $(CC_BASE) -Ofast -pipe -flto -fpic
-CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
+CFLAGS := -march=native -mtune=native -Ofast -pipe -flto -fpic
+CFLAGS_DEBUG := -glldb -D DEBUG
 
-CFLAGS := -Wall -Wextra -Werror -Wunused -Weverything
+CC_WARNINGS_FLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes -I $(CURDIR)/../libft/includes/
 
-SRCS := $(abspath $(wildcard $(shell find srcs -name "*.c")))
+SRCS := $(shell find srcs -name "*.c")
 OBJS := $(SRCS:%.c=%.o)
 
 DEL := rm -rf
@@ -42,48 +42,46 @@ GREEN=\033[32m
 RED=\033[31m
 INVERT=\033[7m
 
+SUCCESS = [$(GREEN)✓$(WHITE)]
+SUCCESS_NO_CLR = [✓]
+
+.PHONY: multi all
 multi:
-	@$(MAKE) -j4 all
+ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
+	@$(MAKE) -j 3 -Otarget --no-print-directory CFLAGS="$(CFLAGS_DEBUG)" all
+else
+	@$(MAKE) -j 3 -Otarget --no-print-directory all
+endif
 
 all: $(NAME)
 
-$(OBJS): %.o: %.c
-	@$(ECHO) ' | $@  '
-	@$(CC) -c $(CFLAGS) $(IFLAGS) $< -o $@
-
 $(NAME): $(OBJS)
-	@$(ECHO) "$(INVERT)"
-	@$(ECHO) -n ' <=-=> | $(NPWD): '
 	@$(AR) $(NAME) $(OBJS)
-	@$(ECHO) "$(INVERT)[$(GREEN)✓$(WHITE)$(INVERT)]$(WHITE)"
-	@$(ECHO)
+	@$(MAKE) -q STATUS --no-print-directory
 
-del:
-	@$(DEL) $(OBJS)
-	@$(DEL) $(NAME)
+$(OBJS): %.o: %.c
+	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
+	@$(ECHO) " | $@: $(SUCCESS)"
 
-pre: del $(NAME)
-	@$(ECHO) "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
+STATUS:
+	@$(info / compiled: $(NPWD): $(SUCCESS_NO_CLR))
+	@$(info \ flags: $(CFLAGS))
 
-set_cc_debug:
-	@$(eval CC=$(CC_DEBUG))
-debug_all: set_cc_debug pre
-	@$(ECHO) "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
-debug: set_cc_debug all
-	@$(ECHO) "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+debug_all: pre
+debug: multi
 
 clean:
 	@$(DEL) $(OBJS)
-
 fclean: clean
 	@$(DEL) $(NAME)
-	@$(ECHO) "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
+	@$(ECHO) "$(INVERT)deleted$(WHITE): $(NPWD)"
 
-re: fclean all
+pre: fclean multi
+re: fclean multi
 
 norme:
-	@$(ECHO) "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
+	@$(ECHO) "$(INVERT)norminette$(WHITE) for $(NPWD):"
 	@norminette includes/
 	@norminette $(SRCS)
 
-.PHONY: re fclean clean all norme del pre debug debug_all norme
+.PHONY: re fclean clean norme del pre debug debug_all norme STATUS
