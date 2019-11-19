@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/18 01:27:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/19 11:19:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,6 @@ size_t	g_flag_width = 0UL;
 
 char	*g_data_ptr = NULL;
 size_t	g_data_len = 0UL;
-
-static bool			s_pf_parser(const char *restrict format)
-{
-	if (format[++g_fmt_i] == '-')
-	{
-		SET_BIT(g_flag_spec_mask, FTPRINTF_BIT_MINUS);
-		++g_fmt_i;
-	}
-	g_flag_width = (size_t)ft_atol(format + g_fmt_i);
-	while (format[g_fmt_i] && F_ISDIGIT(format[g_fmt_i]))
-		++g_fmt_i;
-	g_flag = format[g_fmt_i];
-	return (true);
-}
 
 static bool			s_choose_func(va_list *ap)
 {
@@ -82,7 +68,7 @@ int					ft_printf(const char *restrict format, ...)
 			pf_put_ch_buf(format[g_fmt_i]);
 		else
 		{
-			if ((is_valid = s_pf_parser(format)))
+			if ((is_valid = pf_flag_parser(format)))
 				is_valid = s_choose_func(&ap);
 		}
 	va_end(ap);

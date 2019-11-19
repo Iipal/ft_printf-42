@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/17 22:35:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/19 11:31:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static inline void	s_put_str_to_buf(void)
 	if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_MINUS))
 	{
 		pf_put_gstr_buf();
-		if (0 < width)
+		if (0 < width && !IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
 			pf_put_n_ch_buf(' ', g_flag_width - g_data_len);
 	}
 	else
 	{
-		if (0 < width)
+		if (0 < width && !IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
 			pf_put_n_ch_buf(' ', g_flag_width - g_data_len);
 		pf_put_gstr_buf();
 	}

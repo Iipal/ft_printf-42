@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/17 22:02:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/19 11:22:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ void	pf_put_str_buf(const char *restrict str, size_t len);
 void	pf_put_gstr_buf(void);
 
 # define FTPRINTF_BIT_MINUS (1 << 0)
+# define FTPRINTF_BIT_DOT   (1 << 1)
 
 # define E_PF_PREFIX "ft_printf: "
 # define E_INVALID	E_PF_PREFIX "Invalid flag detected."
+
+bool    pf_flag_parser(const char *restrict format);
 
 bool	pf_decimal(va_list *ap);
 bool	pf_string(va_list *ap);
