@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_local.h                                  :+:      :+:    :+:   */
+/*   pf_global_vars.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 11:22:05 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/19 15:20:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_LOCAL_H
-# define FT_PRINTF_LOCAL_H
-
-# include <stddef.h>
-# include <limits.h>
-# include <inttypes.h>
-
-# include "libft.h"
+#ifndef PF_GLOBAL_VARS_H
+# define PF_GLOBAL_VARS_H
 
 /*
-** global variables:
 **
 ** global buffer for all data what will be printed:
 */
@@ -50,24 +43,35 @@ extern char		*g_data_ptr;
 extern size_t	g_data_len;
 
 /*
-** functions for work with global buffer.
+** put \param ch to g_buf
+**  and checks for is enought memory to put ch to g_buf.
 */
-void	pf_put_ch_buf(char ch);
-void	pf_put_n_ch_buf(char ch, size_t n);
-void	pf_put_str_buf(const char *restrict str, size_t len);
-void	pf_put_gstr_buf(void);
+extern void __attribute__((__overloadable__))
+pf_put_ch_buf(char ch);
 
-# define FTPRINTF_BIT_MINUS (1 << 0)
-# define FTPRINTF_BIT_DOT   (1 << 1)
+/*
+** put \param ch \param n times to g_buf.
+*/
+extern void __attribute__((__overloadable__))
+pf_put_ch_buf(char ch, size_t n);
 
-# define E_PF_PREFIX "ft_printf: "
-# define E_INVALID	E_PF_PREFIX "Invalid flag detected."
+/*
+** put g_data_ptr to g_buf.
+*/
+extern void __attribute__((__overloadable__))
+pf_put_str_buf(void);
 
-bool    pf_flag_parser(const char *restrict format);
+/*
+** put \param len bytes from g_data_ptr to g_buf.
+*/
+extern void __attribute__((__overloadable__))
+pf_put_str_buf(size_t len);
 
-bool	pf_decimal(va_list *ap);
-bool	pf_string(va_list *ap);
-bool	pf_address(va_list *ap);
+/*
+** put \param str with \param len length to g_buf.
+*/
+extern void __attribute__((__overloadable__))
+pf_put_str_buf(const char *restrict str, size_t len);
 
 
 #endif

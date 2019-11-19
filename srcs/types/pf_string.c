@@ -6,52 +6,66 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 11:31:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/19 15:43:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_local.h"
+#include "pf_local.h"
 
-static inline void	s_put_str_to_buf(void)
+static inline void __attribute__((__always_inline__))
+	s_put_str_to_buf(void)
 {
-	static ssize_t	width;
+	const register size_t swidth = (g_flag_width > g_data_len)
+								? (g_flag_width - g_data_len) : 0UL;
+	const register size_t dwidth = (g_data_len > g_flag_width)
+								? (g_data_len - g_flag_width) : g_data_len;
 
-	width = (ssize_t)g_flag_width - (ssize_t)g_data_len;
 	if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_MINUS))
 	{
-		pf_put_gstr_buf();
-		if (0 < width && !IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
-			pf_put_n_ch_buf(' ', g_flag_width - g_data_len);
+		if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
+			pf_put_str_buf(dwidth);
+		else
+		{
+			pf_put_str_buf();
+			pf_put_ch_buf(' ', swidth);
+		}
 	}
 	else
 	{
-		if (0 < width && !IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
-			pf_put_n_ch_buf(' ', g_flag_width - g_data_len);
-		pf_put_gstr_buf();
+		if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
+			pf_put_str_buf(dwidth);
+		else
+		{
+			pf_put_ch_buf(' ', swidth);
+			pf_put_str_buf();
+		}
 	}
 }
 
-static inline void	s_choose_data(va_list *ap, char *c)
+static inline int __attribute__((__always_inline__))
+	s_choose_data(va_list *ap)
 {
 	if ('s' == g_flag)
-		g_data_ptr = (char*)va_arg(*ap, char*);
+	{
+		if (!(g_data_ptr = (char*)va_arg(*ap, char*)))
+			g_data_ptr = "(null)";
+	}
 	else if ('%' == g_flag)
-		*c = '%';
+		return ('%');
 	else
-		*c = (char)va_arg(*ap, int);
-	if (!g_data_ptr && 's' == g_flag)
-		g_data_ptr = "(null)";
+		return (va_arg(*ap, int));
+	return (0);
 }
 
-bool				pf_string(va_list *ap)
+inline bool
+	pf_string(va_list *ap)
 {
 	static char	ch;
 	static bool	is_str;
 
-	ch = 0;
+	ch = s_choose_data(ap);
 	is_str = !(g_flag == 'c' || g_flag == '%');
-	s_choose_data(ap, &ch);
-	g_data_len = is_str ? ft_strlen(g_data_ptr) : 1;
+	g_data_len = is_str ? ft_strlen(g_data_ptr) : 1UL;
 	if (is_str)
 		s_put_str_to_buf();
 	else
