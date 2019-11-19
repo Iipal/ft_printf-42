@@ -6,23 +6,23 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 15:43:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 00:56:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pf_local.h"
+#include "pf_internal.h"
 
 static inline void __attribute__((__always_inline__))
 	s_put_str_to_buf(void)
 {
-	const register size_t swidth = (g_flag_width > g_data_len)
-								? (g_flag_width - g_data_len) : 0UL;
-	const register size_t dwidth = (g_data_len > g_flag_width)
-								? (g_data_len - g_flag_width) : g_data_len;
+	const size_t	swidth = (g_flag_width > g_data_len)
+							? (g_flag_width - g_data_len) : 0UL;
+	const size_t	dwidth = (g_data_len > g_flag_width)
+							? g_flag_width : g_data_len;
 
-	if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_MINUS))
+	if (IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_MINUS))
 	{
-		if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
+		if (IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_DOT))
 			pf_put_str_buf(dwidth);
 		else
 		{
@@ -32,7 +32,7 @@ static inline void __attribute__((__always_inline__))
 	}
 	else
 	{
-		if (IS_BIT(g_flag_spec_mask, FTPRINTF_BIT_DOT))
+		if (IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_DOT))
 			pf_put_str_buf(dwidth);
 		else
 		{
@@ -70,5 +70,6 @@ inline bool
 		s_put_str_to_buf();
 	else
 		pf_put_ch_buf(ch);
+	g_data_ptr = NULL;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 15:20:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/19 23:12:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,17 @@ extern size_t	g_fmt_i;
 
 /*
 ** g_flag: current data type flag(s d c ...)
-** g_flag_spec_mask: current data type specificators (such as '-' or else)
-** g_flag_width: cureent data type width
+** g_flag_spec_mask: current flag specificators (such as '-' or else)
+** g_flag_type_mask: current flag additional type spec. (such as 'll' or else)
+** g_flag_width: cureent flag width
 */
 extern char		g_flag;
 extern int		g_flag_spec_mask;
+extern int		g_flag_type_mask;
 extern size_t	g_flag_width;
 
 /*
-** pointer to string with data of current parsing data type and
+** pointer to string with data of current parsing flag and
 ** what will be added to buffer
 */
 extern char		*g_data_ptr;
@@ -72,6 +74,5 @@ pf_put_str_buf(size_t len);
 */
 extern void __attribute__((__overloadable__))
 pf_put_str_buf(const char *restrict str, size_t len);
-
 
 #endif

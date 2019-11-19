@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_local.h                                         :+:      :+:    :+:   */
+/*   pf_internal.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 15:30:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 00:03:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,30 @@
 # include "pf_global_vars.h"
 
 /*
-** Bit mask[g_flag_spec_mask] for each flag specifications:
+** Bit mask for each flag specifications:
 */
-# include "pf_flags.h"
+# include "pf_bits_masks.h"
 
-# define E_PF_PREFIX "ft_printf: "
-# define E_INVALID	E_PF_PREFIX "Invalid flag detected."
+/*
+** Errno:
+*/
+# include "pf_errno.h"
 
-bool    pf_flag_parser(const char *restrict format);
+extern bool
+pf_flag_parser(const char *restrict format);
 
-bool	pf_decimal(va_list *ap);
-extern bool	pf_string(va_list *ap);
-bool	pf_address(va_list *ap);
+extern bool
+pf_decimal(va_list *ap);
+extern bool
+pf_string(va_list *ap);
+extern bool
+pf_address(va_list *ap);
+extern bool
+pf_octal(va_list *ap);
 
+extern char
+*pf_get_signed_data(va_list *ap);
+extern char
+*pf_get_unsigned_data(va_list *ap);
 
 #endif

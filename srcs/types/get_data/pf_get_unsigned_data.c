@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_flags.h                                         :+:      :+:    :+:   */
+/*   pf_get_unsigned_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 13:20:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 13:21:27 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/19 23:42:39 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/19 23:49:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PF_FLAGS_H
-# define PF_FLAGS_H
+#include "pf_internal.h"
 
-# include "libft_bits_macroses.h"
-
-# define FTPRINTF_BIT_MINUS (1 << 0)
-# define FTPRINTF_BIT_DOT   (1 << 1)
-
-#endif /* PF_FLAGS_H */
+inline char	*pf_get_unsigned_data(va_list *ap)
+{
+	(void)ap;
+	return (NULL);
+}
