@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/18 16:16:57 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/20 14:48:33 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,19 @@ NAME = $(notdir $(CURDIR)).a
 NPWD = $(CURDIR)/$(NAME)
 
 ECHO := echo
+MAKE := make
+
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	ECHO += -e
-	AR := llvm-ar -rcs
+ECHO += -e
+AR := llvm-ar -rcs
 endif
 ifeq ($(UNAME_S),Darwin)
-	AR := ar -rcs
+AR := ar -rcs
+MAKE := ~/.brew/bin/gmake
 endif
+
+MAKE += -Otarget --no-print-directory
 
 CC := clang
 
@@ -48,16 +53,16 @@ SUCCESS_NO_CLR = [✓]
 .PHONY: multi all
 multi:
 ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
-	@$(MAKE) -j -Otarget --no-print-directory CFLAGS="$(CFLAGS_DEBUG)" all
+	@$(MAKE) -j CFLAGS="$(CFLAGS_DEBUG)" all
 else
-	@$(MAKE) -j -Otarget --no-print-directory all
+	@$(MAKE) -j all
 endif
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@$(MAKE) -q STATUS --no-print-directory
+	@$(MAKE) -q STATUS
 
 $(OBJS): %.o: %.c
 	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
