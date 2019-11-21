@@ -5,8 +5,10 @@ CC := clang
 
 CFLAGS := -march=native -mtune=native -Ofast -pipe -flto -fpic
 CFLAGS_DEBUG := -glldb -D DEBUG
+CFLAGS_SANITIZE := -glldb -D DEBUG -fsanitize=address
 
 CFLAGS_WARN := -Wall -Wextra -Werror -Wunused
+
 IFLAGS := $(addprefix -I,$(shell find ../.. -name includes))
 
 SRCS := $(shell find srcs -name "*.c")
