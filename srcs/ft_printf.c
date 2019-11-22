@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 16:43:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 02:16:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int					ft_printf(const char *restrict format, ...)
 	va_end(ap);
 	if (is_valid)
 		out = write(STDOUT_FILENO, g_buf, g_buf_i);
-	FREE(g_buf, free);
+	ft_strdel(&g_buf);
 	return ((int)out);
 }
