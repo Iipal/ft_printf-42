@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 16:44:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 15:44:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,15 @@ inline bool
 
 	ch = s_choose_data(ap);
 	is_str = !(g_flag == 'c' || g_flag == '%');
-	g_data_len = is_str ? ft_strlen(g_data_ptr) : 1UL;
+	if (is_str)
+	{
+		if (!*g_data_ptr)
+			g_data_len = 0UL;
+		else
+			g_data_len = ft_strlen(g_data_ptr);
+	}
+	else
+		g_data_len = 1UL;
 	if (is_str)
 		s_put_str_to_buf();
 	else
