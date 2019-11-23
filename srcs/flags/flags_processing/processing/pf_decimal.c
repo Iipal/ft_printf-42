@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_address.c                                       :+:      :+:    :+:   */
+/*   pf_decimal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 23:22:15 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/23 21:57:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pf_internal.h"
+#include "ft_printf_internal.h"
 
-inline bool	pf_address(va_list *ap)
+inline bool
+	pf_decimal(va_list *ap)
 {
-	intptr_t	addr;
-	ssize_t		width;
+	const int	wch = IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_DOT) ? '0' : ' ';
 
-	addr = (intptr_t)va_arg(*ap, void*);
-	if (!(g_data_ptr = ft_ltoa_base(addr, 16)))
+	g_data_ptr = pf_get_signed_data(ap);
+	if (!g_data_ptr)
 		return (false);
 	g_data_len = ft_strlen(g_data_ptr);
-	width = (ssize_t)g_flag_width - (ssize_t)(g_data_len + 2L);
-	if (0 < width && !IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_MINUS))
-		pf_put_ch_buf(' ', (size_t)width);
-	pf_put_str_buf("0x", sizeof("0x"));
-	pf_put_str_buf();
-	if (0 < width && IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_MINUS))
-		pf_put_ch_buf(' ', (size_t)width);
+	if (IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_MINUS) && wch != '0')
+		pf_put_str_buf();
+	if (g_flag_width > g_data_len)
+		pf_put_ch_buf(wch, g_flag_width - g_data_len);
+	if (!IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_MINUS) || wch == '0')
+		pf_put_str_buf();
 	ft_strdel(&g_data_ptr);
 	return (true);
 }

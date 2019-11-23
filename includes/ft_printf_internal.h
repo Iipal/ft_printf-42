@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_internal.h                                      :+:      :+:    :+:   */
+/*   ft_printf_internal.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 16:42:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 21:42:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 /*
 ** global variables:
 */
-# include "pf_global_vars.h"
+# include "global_vars.h"
 
 /*
 ** Bit mask for each flag specifications:
 */
-# include "pf_bits_masks.h"
+# include "bits_masks.h"
 
 /*
 ** Errno:
@@ -36,6 +36,9 @@
 
 extern bool
 pf_flag_parser(const char *restrict format);
+
+extern bool
+pf_get_processing_func(va_list *ap);
 
 extern bool
 pf_decimal(va_list *ap);

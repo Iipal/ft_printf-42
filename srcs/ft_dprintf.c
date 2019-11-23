@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:47:13 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/23 21:33:42 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/23 21:55:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "ft_printf_internal.h"
 
-int	ft_printf(const char *restrict format, ...)
+int	ft_dprintf(int fd, const char *restrict format, ...)
 {
 	va_list	ap;
 	ssize_t	out;
@@ -30,7 +30,7 @@ int	ft_printf(const char *restrict format, ...)
 			is_valid = pf_get_processing_func(&ap);
 	va_end(ap);
 	if (is_valid)
-		out = write(STDOUT_FILENO, g_buf, g_buf_i);
+		out = write(fd, g_buf, g_buf_i);
 	ft_strdel(&g_buf);
 	return ((int)out);
 }

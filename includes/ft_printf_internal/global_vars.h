@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_global_vars.h                                   :+:      :+:    :+:   */
+/*   global_vars.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 16:42:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 21:45:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PF_GLOBAL_VARS_H
 # define PF_GLOBAL_VARS_H
+
+# include <sys/types.h>
 
 /*
 ** global buffer for all data what will be printed:
@@ -42,6 +44,12 @@ extern size_t	g_flag_width;
 */
 extern char		*g_data_ptr;
 extern size_t	g_data_len;
+
+extern void
+refresh_flag_global_data(void);
+
+extern void
+refresh_all_global_data(void);
 
 /*
 ** put \param ch to g_buf
