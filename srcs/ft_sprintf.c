@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:48:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:55:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/24 02:27:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 int	ft_sprintf(char *str, const char *restrict format, ...)
 {
 	va_list	ap;
-	ssize_t	out;
+	size_t	out;
 	int		is_valid;
 
 	refresh_all_global_data();
 	va_start(ap, format);
 	is_valid = true;
-	out = 0L;
+	out = 0UL;
 	while (is_valid && format[++g_fmt_i])
 		if (format[g_fmt_i] != '%')
 			pf_put_ch_buf(format[g_fmt_i]);
