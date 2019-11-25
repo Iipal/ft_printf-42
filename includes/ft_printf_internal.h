@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:42:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 21:34:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ extern bool
 pf_address(va_list *ap);
 extern bool
 pf_octal(va_list *ap);
+extern bool
+pf_unsigned(va_list *ap);
 
 extern char
 *pf_get_signed_data(va_list *ap);
