@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:48:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:04:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 20:23:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_sprintf(char *str, const char *restrict format, ...)
 	if (is_valid)
 	{
 		ft_strncpy(str, g_buf, g_buf_i);
+		str[g_buf_i] = '\0';
 		out = g_buf_i;
 	}
 	ft_strdel(&g_buf);
