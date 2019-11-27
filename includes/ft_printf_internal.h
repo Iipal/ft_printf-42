@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:41:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 12:02:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ pf_unsigned(va_list *ap);
 extern char
 *pf_get_signed_data(va_list *ap);
 extern char
-*pf_get_unsigned_data(va_list *ap);
+*pf_get_unsigned_data(va_list *ap, int base);
 
 #endif

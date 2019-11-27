@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:31:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 21:33:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 12:03:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static inline void __attribute__((__always_inline__))
 inline bool
 	pf_unsigned(va_list *ap)
 {
-	g_data_ptr = pf_get_unsigned_data(ap);
+	g_data_ptr = pf_get_unsigned_data(ap, 10);
 	g_data_len = ft_strlen(g_data_ptr);
 	s_put_str_to_buf();
 	ft_strdel(&g_data_ptr);

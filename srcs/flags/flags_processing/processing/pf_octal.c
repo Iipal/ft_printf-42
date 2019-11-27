@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:38:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:57:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 12:03:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,10 @@ static inline void __attribute__((__always_inline__))
 		pf_put_str_buf();
 }
 
-static inline char __attribute__((__always_inline__))
-	*s_get_octal_data(va_list *ap)
-{
-	g_data_ptr = ft_strnew(24UL);
-	if (!g_flag_type_mask
-	|| IS_BIT(g_flag_type_mask, PF_BIT_TYPE_H)
-	|| IS_BIT(g_flag_type_mask, PF_BIT_TYPE_HH))
-		return (ft_ultoa(va_arg(*ap, unsigned int), g_data_ptr, 8));
-	else if (g_flag_type_mask)
-		return (ft_ultoa(va_arg(*ap, unsigned long), g_data_ptr, 8));
-	return (NULL);
-}
-
 inline bool
 	pf_octal(va_list *ap)
 {
-	g_data_ptr = s_get_octal_data(ap);
+	g_data_ptr = pf_get_unsigned_data(ap, 8);
 	g_data_len = ft_strlen(g_data_ptr);
 	s_put_str_to_buf();
 	ft_strdel(&g_data_ptr);
