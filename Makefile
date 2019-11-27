@@ -41,7 +41,7 @@ sanitize: multi
 
 clean:
 	@$(DEL) $(OBJS)
-	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NAME) source objects."
+	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD) source objects"
 fclean: clean
 	@$(DEL) $(NAME)
 	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD)"
