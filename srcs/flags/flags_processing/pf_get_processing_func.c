@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:41:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 13:16:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 14:40:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ static inline size_t __attribute__((__const__))
 inline bool
 	pf_get_processing_func(va_list *ap)
 {
-	const bool	ret = s_run_func(s_get_func_index(), ap);
+	bool	ret;
 
+	ret = s_run_func(s_get_func_index(), ap);
 	refresh_flag_global_data();
 	if (!ret)
 		ft_putendl_fd(E_PF_INVALID, STDERR_FILENO);
