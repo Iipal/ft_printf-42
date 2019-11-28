@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/24 02:28:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 16:07:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 ** inlcude stdio.h only for FILE struct.
 */
 # include <stdio.h>
+
+/*
+** Output color defines. Don't use with ft_sprintf\ft_snprintf.
+*/
+# include "ft_printf_colors.h"
 
 /*
 ** Simple implementation of 'printf' (man 3 printf).
