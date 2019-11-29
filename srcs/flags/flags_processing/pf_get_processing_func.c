@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:41:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 14:40:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 17:51:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline size_t __attribute__((__const__))
 	ptrdiff_t			i;
 
 	i = 0L;
-	while (g_flag != arr[i])
+	while (arr[i] && g_flag != arr[i])
 		++i;
 	if (2L > i)
 		return (1L);
