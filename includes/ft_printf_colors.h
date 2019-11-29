@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 15:52:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 16:04:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 16:10:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 /*
 ** default foreground colors:
 */
+#  define PF_FG_CLR_BLACK    "\033[30m"
 #  define PF_FG_CLR_RED      "\033[31m"
 #  define PF_FG_CLR_GREEN    "\033[32m"
 #  define PF_FG_CLR_YELLOW   "\033[33m"
@@ -39,6 +40,7 @@
 /*
 ** default foreground light colors:
 */
+#  define PF_FG_CLR_LBLACK   "\033[90m"
 #  define PF_FG_CLR_LRED     "\033[91m"
 #  define PF_FG_CLR_LGREEN   "\033[92m"
 #  define PF_FG_CLR_LYELLOW  "\033[93m"
@@ -49,6 +51,7 @@
 /*
 ** default background colors:
 */
+#  define PF_BG_CLR_BLACK    "\033[40m"
 #  define PF_BG_CLR_RED      "\033[41m"
 #  define PF_BG_CLR_GREEN    "\033[42m"
 #  define PF_BG_CLR_YELLOW   "\033[43m"
@@ -59,6 +62,7 @@
 /*
 ** default background light colors:
 */
+#  define PF_BG_CLR_LBLACK   "\033[100m"
 #  define PF_BG_CLR_LRED     "\033[101m"
 #  define PF_BG_CLR_LGREEN   "\033[102m"
 #  define PF_BG_CLR_LYELLOW  "\033[103m"
