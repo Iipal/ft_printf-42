@@ -30,6 +30,7 @@ ifeq ($(UNAME_S),Linux)
 ECHO += -e
 
 NPROCS := $(shell grep -c ^processor /proc/cpuinfo)
+MAKE_PARALLEL_FLAGS := -j $(NPROCS) -l $(NPROCS) -Otarget
 AR := llvm-ar -rcs
 endif
 
@@ -38,14 +39,16 @@ ifeq ($(UNAME_S),Darwin)
 # Only for MacOS where brew install path on home directory
 #  or user don't have enought permissions to install latest version of GNUMake on system globally.
 # Remove this line if in your MacOS system already installed GNUMake 4.0.0 or later.
-MAKE := ~/.brew/bin/gmake
+ifneq ($(wildcard ~/.brew/bin/gmake),)
+	MAKE := ~/.brew/bin/gmake
+	NPROCS := $(shell sysctl -n hw.ncpu)
+	MAKE_PARALLEL_FLAGS := -j $(NPROCS) -l $(NPROCS) -Otarget
+endif
 
-NPROCS := $(shell sysctl -n hw.ncpu)
 AR := ar -rcs
 endif
 
 MAKE += --no-print-directory
-MAKE_PARALLEL_FLAGS := -j $(NPROCS) -l $(NPROCS) -Otarget
 
 CLR_INVERT := \033[7m
 CLR_GREEN := \033[32m
