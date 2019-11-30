@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_internal.h                               :+:      :+:    :+:   */
+/*   libftprintf_internal.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 12:02:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:43:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_INTERNAL_H
-# define FT_PRINTF_INTERNAL_H
+#ifndef LIBFTPRINTF_INTERNAL_H
+# define LIBFTPRINTF_INTERNAL_H
 
 # include <stddef.h>
 # include <limits.h>
@@ -32,7 +32,7 @@
 /*
 ** Errno:
 */
-# include "pf_errno.h"
+# include "errno.h"
 
 extern bool
 pf_flag_parser(const char *restrict format);

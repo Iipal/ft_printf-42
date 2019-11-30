@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:42:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:19:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_internal.h"
+#include "libftprintf_internal.h"
 
 size_t	g_max_buf = 256;
 char	*g_buf = NULL;

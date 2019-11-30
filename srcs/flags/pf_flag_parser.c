@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:18:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:57:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_internal.h"
+#include "libftprintf_internal.h"
 
 static inline void __attribute__((__always_inline__))
 	s_get_flag_type(const char *restrict format)

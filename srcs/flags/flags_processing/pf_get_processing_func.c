@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:41:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:51:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_internal.h"
+#include "libftprintf_internal.h"
 
 static inline bool __attribute__((__const__))
 	invalid(va_list *ap)

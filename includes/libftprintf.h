@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 16:07:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:42:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
 /*
 ** inlcude stdio.h only for FILE struct.
@@ -21,7 +21,7 @@
 /*
 ** Output color defines. Don't use with ft_sprintf\ft_snprintf.
 */
-# include "ft_printf_colors.h"
+# include "libftprintf_colors.h"
 
 /*
 ** Simple implementation of 'printf' (man 3 printf).

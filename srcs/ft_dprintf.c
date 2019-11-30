@@ -6,12 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:33:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:55:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:44:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "ft_printf_internal.h"
+#include "libftprintf.h"
+#include "libftprintf_internal.h"
 
 int	ft_dprintf(int fd, const char *restrict format, ...)
 {
