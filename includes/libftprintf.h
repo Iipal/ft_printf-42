@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:42:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/01 17:27:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 /*
 ** Simple implementation of 'printf' (man 3 printf).
-** Flags: 'd', 'i', 'p', 's', 'c' and 'o'.
+** Flags: 'd', 'i', 'p', 's', 'c', 'u' and 'o'.
 ** Specificators: '-', '.' and width.
 */
 int __attribute__((format(printf,1,2),__nonnull__(1)))
@@ -36,6 +36,8 @@ ft_fprintf(FILE *stream, const char *restrict format, ...);
 
 int __attribute__((format(printf,2,3),__nonnull__(2)))
 ft_dprintf(int fd, const char *restrict format, ...);
+int __attribute__((__nonnull__(2,3)))
+ft_vdprintf(int fd, const char *restrict format, va_list *restrict ap);
 
 int __attribute__((format(printf,2,3),__nonnull__(1,2)))
 ft_sprintf(char *dst, const char *restrict format, ...);
