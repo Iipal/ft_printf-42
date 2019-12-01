@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vprint.c                                        :+:      :+:    :+:   */
+/*   ft_vprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:16:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/01 18:16:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/01 21:40:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libftprintf_internal.h"
 
-int	ft_printf(const char *restrict format, va_list *restrict ap)
+int	ft_vprintf(const char *restrict format, va_list *restrict ap)
 {
 	ssize_t	out;
 	int		is_valid;
