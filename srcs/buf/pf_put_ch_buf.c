@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:56:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_internal.h"
+#include "libftprintf_internal.h"
 
 inline void __attribute__((__overloadable__))
 	pf_put_ch_buf(char ch)

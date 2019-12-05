@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 22:06:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_internal.h"
+#include "libftprintf_internal.h"
 
 static inline void __attribute__((__always_inline__))
 	s_put_str_to_buf(void)
