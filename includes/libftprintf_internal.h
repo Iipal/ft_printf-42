@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:43:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:48:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 /*
 ** global variables:
 */
-# include "global_vars.h"
+# include "lftprintf_global_vars.h"
 
 /*
 ** Bit mask for each flag specifications:
 */
-# include "bits_masks.h"
+# include "lftprintf_bits_masks.h"
 
 /*
 ** Errno:
 */
-# include "errno.h"
+# include "lftprintf_errno.h"
 
 extern bool
 pf_flag_parser(const char *restrict format);

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_colors.h                                 :+:      :+:    :+:   */
+/*   libftprintf_colors.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 15:52:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 16:10:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:50:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_COLORS_H
-# define FT_PRINTF_COLORS_H
+#ifndef LIBFTPRINTF_COLORS_H
+# define LIBFTPRINTF_COLORS_H
 
 # ifndef NO_PF_CLRS
 

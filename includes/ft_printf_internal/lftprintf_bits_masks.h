@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_bits_masks.h                                    :+:      :+:    :+:   */
+/*   lftprintf_bits_masks.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:20:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 16:42:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:49:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PF_BITS_MASKS_H
-# define PF_BITS_MASKS_H
+#ifndef LFTPRINTF_BITS_MASKS_H
+# define LFTPRINTF_BITS_MASKS_H
 
 # include "libft_bits_macroses.h"
 

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   global_vars.h                                      :+:      :+:    :+:   */
+/*   lftprintf_global_vars.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 21:45:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:49:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PF_GLOBAL_VARS_H
-# define PF_GLOBAL_VARS_H
+#ifndef LFTPRINTF_GLOBAL_VARS_H
+# define LFTPRINTF_GLOBAL_VARS_H
 
 # include <sys/types.h>
 
