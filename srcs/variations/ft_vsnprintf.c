@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:07:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 17:28:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 21:54:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ inline int	ft_vsnprintf(char *dst,
 
 	if ((out = internal_vprintf(format, ap)))
 	{
-		ft_strncpy(dst, g_buf, len);
-		dst[g_buf_i] = '\0';
-		out = g_buf_i;
+		if (len <= out)
+			out = len;
+		ft_strncpy(dst, g_buf, out);
+		dst[out] = '\0';
 	}
 	ft_strdel(&g_buf);
-	return ((int)out);
+	return (out);
 }

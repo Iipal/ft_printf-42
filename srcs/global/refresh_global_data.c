@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:42:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 21:51:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,11 @@ inline void	refresh_flag_global_data(void)
 
 inline void	refresh_all_global_data(void)
 {
-	if (g_buf)
-		ft_strdel(&g_buf);
+	refresh_flag_global_data();
+	ft_strdel(&g_buf);
 	g_buf = ft_strnew(sizeof(char) * g_max_buf);
-	g_flag = 0;
 	g_data_len = 0UL;
 	g_data_ptr = NULL;
-	g_flag_width = 0UL;
-	g_flag_spec_mask = 0;
-	g_flag_type_mask = 0;
 	g_max_buf = 256;
 	g_fmt_i = ~0UL;
 	g_buf_i = 0UL;

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:16:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 17:30:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 21:47:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 inline int	ft_vprintf(const char *restrict format, va_list *restrict ap)
 {
-	return (ft_vfprintf(stdout, format, ap));
+	return (ft_vdprintf(STDOUT_FILENO, format, ap));
 }
