@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:33:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 19:18:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@
 */
 # include "lftprintf_errno.h"
 
-int __attribute__((visibility("hidden")))
+int
 internal_vprintf(const char *restrict format, va_list *restrict ap);
 
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_flag_parser(const char *restrict format);
 
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_get_processing_func(va_list *ap);
 
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_decimal(va_list *ap);
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_string(va_list *ap);
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_address(va_list *ap);
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_octal(va_list *ap);
-extern bool __attribute__((visibility("hidden")))
+extern bool
 pf_unsigned(va_list *ap);
 
 extern char
