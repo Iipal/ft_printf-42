@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/05 20:42:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 17:24:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@
 ** Flags: 'd', 'i', 'p', 's', 'c', 'u' and 'o'.
 ** Specificators: '-', '.' and width.
 */
-int __attribute__((format(printf,1,2),__nonnull__(1)))
+extern int __attribute__((format(printf,1,2),__nonnull__(1)))
 ft_printf(const char *restrict format, ...);
-int __attribute__((format(printf,1,0),__nonnull__(1,2)))
+extern int __attribute__((format(printf,1,0),__nonnull__(1,2)))
 ft_vprintf(const char *restrict format, va_list *restrict ap);
 
-int __attribute__((format(printf,2,3),__nonnull__(1,2)))
+extern int __attribute__((format(printf,2,3),__nonnull__(1,2)))
 ft_fprintf(FILE *stream, const char *restrict format, ...);
 int __attribute__((format(printf,2,0),__nonnull__(1,2,3)))
 ft_vfprintf(FILE *stream, const char *restrict format, va_list *restrict ap);
 
-int __attribute__((format(printf,2,3),__nonnull__(2)))
+extern int __attribute__((format(printf,2,3),__nonnull__(2)))
 ft_dprintf(int fd, const char *restrict format, ...);
 int __attribute__((format(printf,2,0),__nonnull__(2,3)))
 ft_vdprintf(int fd, const char *restrict format, va_list *restrict ap);
 
-int __attribute__((format(printf,2,3),__nonnull__(1,2)))
+extern int __attribute__((format(printf,2,3),__nonnull__(1,2)))
 ft_sprintf(char *dst, const char *restrict format, ...);
-int __attribute__((format(printf,2,0),__nonnull__(1,2,3)))
-ft_vsprintf(char *str, const char *restrict format, va_list *restrict ap);
+extern int __attribute__((format(printf,2,0),__nonnull__(1,2,3)))
+ft_vsprintf(char *dst, const char *restrict format, va_list *restrict ap);
 
-int __attribute__((format(printf,3,4),__nonnull__(1,3)))
+extern int __attribute__((format(printf,3,4),__nonnull__(1,3)))
 ft_snprintf(char *dst, size_t len, const char *restrict format, ...);
-int __attribute__((format(printf,3,0),__nonnull__(1,3,4)))
+extern int __attribute__((format(printf,3,0),__nonnull__(1,3,4)))
 ft_vsnprintf(char *dst,
 	size_t len,
 	const char *restrict format,

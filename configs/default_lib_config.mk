@@ -22,6 +22,8 @@ DEL := rm -rf
 
 NPROCS := 1
 
+ARFLAGS = -Trcs
+
 UNAME_S := $(shell uname -s)
 # Linux Specifications:
 ifeq ($(UNAME_S),Linux)
@@ -31,7 +33,7 @@ ECHO += -e
 
 NPROCS := $(shell grep -c ^processor /proc/cpuinfo)
 MAKE_PARALLEL_FLAGS := -j $(NPROCS) -l $(NPROCS) -Otarget
-AR := llvm-ar -rcs
+AR := llvm-ar
 endif
 
 # MacOS Specifications:
@@ -45,12 +47,14 @@ ifneq ($(wildcard ~/.brew/bin/gmake),)
 	MAKE_PARALLEL_FLAGS := -j $(NPROCS) -l $(NPROCS) -Otarget
 endif
 
-AR := ar -rcs
+AR := ar
 endif
 
 MAKE += --no-print-directory
 
 CLR_INVERT := \033[7m
+CLR_UNDERLINE := \033[4m
+
 CLR_GREEN := \033[32m
 CLR_WHITE := \033[0m
 CLR_BLUE := \033[34m
