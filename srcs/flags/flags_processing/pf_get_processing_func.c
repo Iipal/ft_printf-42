@@ -6,19 +6,19 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:41:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:12:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf_internal.h"
 
-static inline bool __attribute__((__const__))
+static inline bool __attribute__((__const__,__always_inline__))
 	invalid(va_list *ap)
 {
 	return (!ap);
 }
 
-static inline bool __attribute__((__const__))
+static inline bool __attribute__((__const__,__always_inline__))
 	s_run_func(const size_t index, va_list *ap)
 {
 	static bool	(*fn[])(va_list*) = { invalid, pf_decimal, pf_string,
@@ -46,7 +46,7 @@ static inline size_t __attribute__((__const__))
 		return (0L);
 }
 
-inline bool
+inline bool __attribute__((__always_inline__))
 	pf_get_processing_func(va_list *ap)
 {
 	bool	ret;

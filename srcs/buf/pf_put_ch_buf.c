@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:39:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ inline void __attribute__((__overloadable__))
 {
 	if (g_max_buf <= g_buf_i)
 	{
-		g_buf = ft_memrealloc(g_buf, g_max_buf, g_max_buf * 2);
-		g_max_buf *= 2;
+		g_buf = ft_memrealloc(g_buf, g_max_buf, g_max_buf + DEFAULT_BUF_SIZE);
+		g_max_buf += DEFAULT_BUF_SIZE;
 	}
 	g_buf[g_buf_i++] = ch;
 }
@@ -26,9 +26,6 @@ inline void __attribute__((__overloadable__))
 inline void __attribute__((__overloadable__))
 	pf_put_ch_buf(char ch, size_t n)
 {
-	size_t	i;
-
-	i = ~0UL;
-	while (n > ++i)
+	while (n--)
 		pf_put_ch_buf(ch);
 }

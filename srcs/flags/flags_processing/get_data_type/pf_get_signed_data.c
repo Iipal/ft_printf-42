@@ -6,13 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:40:54 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:14:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf_internal.h"
 
-inline char	*pf_get_signed_data(va_list *ap)
+inline char __attribute__((__const__,__always_inline__))
+	*pf_get_signed_data(va_list *ap)
 {
 	if (!g_flag_type_mask
 	|| IS_BIT(g_flag_type_mask, PF_BIT_TYPE_H)

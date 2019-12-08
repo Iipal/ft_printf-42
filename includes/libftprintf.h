@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:05:21 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 17:24:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 14:48:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ ft_vprintf(const char *restrict format, va_list *restrict ap);
 
 extern int __attribute__((format(printf,2,3),__nonnull__(1,2)))
 ft_fprintf(FILE *stream, const char *restrict format, ...);
-int __attribute__((format(printf,2,0),__nonnull__(1,2,3)))
+extern int __attribute__((format(printf,2,0),__nonnull__(1,2,3)))
 ft_vfprintf(FILE *stream, const char *restrict format, va_list *restrict ap);
 
 extern int __attribute__((format(printf,2,3),__nonnull__(2)))
 ft_dprintf(int fd, const char *restrict format, ...);
-int __attribute__((format(printf,2,0),__nonnull__(2,3)))
+extern int __attribute__((format(printf,2,0),__nonnull__(2,3)))
 ft_vdprintf(int fd, const char *restrict format, va_list *restrict ap);
 
 extern int __attribute__((format(printf,2,3),__nonnull__(1,2)))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lftprintf_global_vars.h                            :+:      :+:    :+:   */
+/*   lftprintf_global_data.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/05 20:49:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:41:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LFTPRINTF_GLOBAL_VARS_H
 
 # include <sys/types.h>
+
+# define DEFAULT_BUF_SIZE 256UL
 
 /*
 ** global buffer for all data what will be printed:
@@ -33,7 +35,7 @@ extern size_t	g_fmt_i;
 ** g_flag_type_mask: current flag additional type spec. (such as 'll' or else)
 ** g_flag_width: cureent flag width
 */
-extern char		g_flag;
+extern short	g_flag;
 extern int		g_flag_spec_mask;
 extern int		g_flag_type_mask;
 extern size_t	g_flag_width;

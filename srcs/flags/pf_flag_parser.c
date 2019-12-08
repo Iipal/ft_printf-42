@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:18:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:06:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,9 @@ static inline void __attribute__((__always_inline__))
 {
 	SET_BIT(g_flag_type_mask,
 		ft_is_one_of_n(format[g_fmt_i], 5UL, 'l', 'h', 'j', 't', 'z'));
-	if (g_flag_type_mask)
-	{
+	if (g_flag_type_mask
+	&& (format[++g_fmt_i] == 'l' || format[g_fmt_i] == 'h'))
 		++g_fmt_i;
-		if (IS_BIT(g_flag_type_mask, PF_BIT_TYPE_L)
-		&& format[g_fmt_i] == 'l')
-		{
-			SET_BIT(g_flag_type_mask, PF_BIT_TYPE_LL);
-			++g_fmt_i;
-		}
-		else if (IS_BIT(g_flag_type_mask, PF_BIT_TYPE_H)
-		&& format[g_fmt_i] == 'h')
-		{
-			SET_BIT(g_flag_type_mask, PF_BIT_TYPE_HH);
-			++g_fmt_i;
-		}
-	}
 }
 
 inline bool
@@ -49,7 +36,7 @@ inline bool
 		++g_fmt_i;
 	}
 	g_flag_width = (size_t)ft_atol(format + g_fmt_i);
-	while (format[g_fmt_i] && F_ISDIGIT(format[g_fmt_i]))
+	while (F_ISDIGIT(format[g_fmt_i]) && format[g_fmt_i])
 		++g_fmt_i;
 	s_get_flag_type(format);
 	g_flag = format[g_fmt_i];
