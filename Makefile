@@ -56,6 +56,9 @@ STATUS:
 	@$(ECHO) "| compiled                : $(NAME) $(MSG_SUCCESS)"
   endif
  endif
+ ifneq (,$(CC))
+	@$(ECHO) "| compiler                : $(CC)"
+ endif
  ifneq (,$(DEFINES))
 	@$(ECHO) "| compiler custom defines : $(foreach dfns,$(DEFINES),$(CLR_INVERT)$(dfns)$(CLR_WHITE) )"
  endif
