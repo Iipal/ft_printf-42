@@ -3,5 +3,6 @@
 **.o
 **.a
 **.d
+**.S
 **.DS_Store
 test/
