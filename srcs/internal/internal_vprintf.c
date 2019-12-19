@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:24:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:35:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 17:43:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ struct s_data_buf *_Nullable
 	size_t				fmt_i;
 	bool				is_valid;
 
-	if (!(buf = ft_memalloc(sizeof(*buf))))
+	if (!(buf = calloc(1UL, sizeof(*buf))))
 		return (NULL);
 	*buf = (struct s_data_buf) { S_DATA_BUF_INIT };
 	flag = (struct s_flag_info) { S_FLAG_INFO_REFRESH };
