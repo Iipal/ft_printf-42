@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:33:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 17:58:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ inline bool
 	width = (ssize_t)flag->width - (ssize_t)(data.len + 2UL);
 	if (0 < width && !IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS))
 		buf_add_ch(buf, ' ', (size_t)width);
-	buf_add_data(buf, "0x", sizeof("0x"));
+	buf_add_data(buf, "0x", 2UL);
 	buf_add_data(buf, &data);
 	if (0 < width && IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS))
 		buf_add_ch(buf, ' ', (size_t)width);
