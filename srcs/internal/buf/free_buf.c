@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_get_signed_data.c                               :+:      :+:    :+:   */
+/*   free_buf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 23:40:54 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 15:14:13 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/12/19 14:52:59 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/19 15:22:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf_internal.h"
+#define LIBFTPRINTF_INTERNAL
+# include "libftprintf_internal.h"
+#undef LIBFTPRINTF_INTERNAL
 
-inline char __attribute__((__const__,__always_inline__))
-	*pf_get_signed_data(va_list *ap)
+inline void *_Nullable
+	free_buf(struct s_data_buf *restrict _Nonnull buf)
 {
-	if (!g_flag_type_mask
-	|| IS_BIT(g_flag_type_mask, PF_BIT_TYPE_H)
-	|| IS_BIT(g_flag_type_mask, PF_BIT_TYPE_HH))
-		return (ft_itoa(va_arg(*ap, int)));
-	else if (g_flag_type_mask)
-		return (ft_ltoa(va_arg(*ap, long)));
+	if (buf->buf)
+		ft_strdel(&buf->buf);
+	free(buf);
 	return (NULL);
 }

@@ -6,12 +6,16 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:20:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/05 20:49:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:47:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LFTPRINTF_BITS_MASKS_H
 # define LFTPRINTF_BITS_MASKS_H
+
+# ifndef LIBFTPRINTF_INTERNAL_H
+#  error "include only libftprintf.h"
+# endif
 
 # include "libft_bits_macroses.h"
 

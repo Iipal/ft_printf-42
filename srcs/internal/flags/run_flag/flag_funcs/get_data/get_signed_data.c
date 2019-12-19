@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal_vprintf.c                                 :+:      :+:    :+:   */
+/*   get_signed_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/07 17:24:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 14:51:18 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/19 23:40:54 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/19 15:34:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf_internal.h"
+#define LIBFTPRINTF_INTERNAL
+# include "libftprintf_internal.h"
+#undef LIBFTPRINTF_INTERNAL
 
-int	internal_vprintf(const char *restrict format, va_list *restrict ap)
+inline char __attribute__((__const__,__always_inline__)) *_Nullable
+	get_signed_data(va_list *restrict _Nonnull ap, int8_t type)
 {
-	bool	is_valid;
-
-	refresh_all_global_data();
-	is_valid = true;
-	while (is_valid && format[++g_fmt_i])
-		if (format[g_fmt_i] != '%')
-			pf_put_ch_buf(format[g_fmt_i]);
-		else if ((is_valid = pf_flag_parser(format)))
-			is_valid = pf_get_processing_func(ap);
-	return (is_valid ? (int)g_buf_i : 0UL);
+	if (!type || IS_BIT(type, PF_BIT_TYPE_H) || IS_BIT(type, PF_BIT_TYPE_HH))
+		return (ft_itoa(va_arg(*ap, int)));
+	else if (type)
+		return (ft_ltoa(va_arg(*ap, long)));
+	return (NULL);
 }

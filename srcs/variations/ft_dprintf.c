@@ -6,14 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:33:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 17:01:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:05:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libftprintf_internal.h"
 
-inline int	ft_dprintf(int fd, const char *restrict format, ...)
+inline int	ft_dprintf(int fd, const char *restrict _Nonnull format, ...)
 {
 	va_list	ap;
 	int		out;

@@ -1,45 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_put_str_buf.c                                   :+:      :+:    :+:   */
+/*   buf_add_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 21:55:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 22:44:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 15:35:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf_internal.h"
+#define LIBFTPRINTF_INTERNAL
+# include "libftprintf_internal.h"
+#undef LIBFTPRINTF_INTERNAL
 
 inline void __attribute__((__overloadable__))
-	pf_put_str_buf(void)
+	buf_add_data(struct s_data_buf *restrict _Nonnull buf,
+		struct s_flag_data *restrict _Nonnull data)
 {
 	size_t	i;
 
 	i = ~0UL;
-	while (g_data_len > ++i)
-		pf_put_ch_buf(g_data_ptr[i]);
+	while (data->len > ++i)
+		buf_add_ch(buf, data->ptr[i]);
 }
 
 inline void __attribute__((__overloadable__))
-	pf_put_str_buf(size_t len)
+	buf_add_data(struct s_data_buf *restrict _Nonnull buf,
+		struct s_flag_data *restrict _Nonnull data,
+		size_t len)
 {
 	size_t	i;
 
 	i = ~0UL;
-	if (len > g_data_len)
-		len = g_data_len;
+	if (len > data->len)
+		len = data->len;
 	while (len > ++i)
-		pf_put_ch_buf(g_data_ptr[i]);
+		buf_add_ch(buf, data->ptr[i]);
 }
 
 inline void __attribute__((__overloadable__))
-	pf_put_str_buf(const char *restrict str, size_t len)
+	buf_add_data(struct s_data_buf *restrict _Nonnull buf,
+		const char *restrict _Nonnull str,
+		size_t len)
 {
 	size_t	i;
 
 	i = ~0UL;
 	while (len > ++i)
-		pf_put_ch_buf(str[i]);
+		buf_add_ch(buf, str[i]);
 }

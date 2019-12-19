@@ -6,19 +6,27 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:13:32 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 21:47:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 15:29:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libftprintf_internal.h"
+#define LIBFTPRINTF_INTERNAL
+# include "libftprintf_internal.h"
+#undef LIBFTPRINTF_INTERNAL
 
-int	ft_vfprintf(FILE *stream, const char *restrict format, va_list *restrict ap)
+int	ft_vfprintf(FILE *restrict _Nonnull stream,
+		const char *restrict _Nonnull format,
+		va_list *restrict _Nonnull ap)
 {
-	int	out;
+	struct s_data_buf	*buf;
+	int					out;
 
-	if ((out = internal_vprintf(format, ap)))
-		fwrite(g_buf, sizeof(char), g_buf_i, stream);
-	ft_strdel(&g_buf);
+	out = 0;
+	if (!(buf = internal_vprintf(format, ap)))
+		return (out);
+	out = buf->pos;
+	fwrite(buf->buf, sizeof(char), out, stream);
+	buf = free_buf(buf);
 	return (out);
 }
