@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:24:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:34:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 23:57:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 struct s_lpf_buf_ *_Nullable
 	internal_vprintf(const char *restrict _Nonnull format_,
-		va_list *restrict _Nonnull ap_)
+						va_list *restrict _Nonnull ap_)
 {
 	struct s_lpf_buf_	*buf_;
 	struct s_lpf_flag_	flag_;
