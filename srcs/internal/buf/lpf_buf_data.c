@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buf_add_data.c                                     :+:      :+:    :+:   */
+/*   lpf_buf_data_.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 21:55:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:35:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 22:11:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline void __attribute__((__overloadable__))
-	buf_add_data(struct s_data_buf *restrict _Nonnull buf,
-		struct s_flag_data *restrict _Nonnull data)
+	lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
+		struct s_lpf_data_ *restrict _Nonnull data)
 {
 	size_t	i;
 
 	i = ~0UL;
 	while (data->len > ++i)
-		buf_add_ch(buf, data->ptr[i]);
+		lpf_buf_ch_(buf, data->ptr[i]);
 }
 
 inline void __attribute__((__overloadable__))
-	buf_add_data(struct s_data_buf *restrict _Nonnull buf,
-		struct s_flag_data *restrict _Nonnull data,
+	lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
+		struct s_lpf_data_ *restrict _Nonnull data,
 		size_t len)
 {
 	size_t	i;
@@ -36,11 +36,11 @@ inline void __attribute__((__overloadable__))
 	if (len > data->len)
 		len = data->len;
 	while (len > ++i)
-		buf_add_ch(buf, data->ptr[i]);
+		lpf_buf_ch_(buf, data->ptr[i]);
 }
 
 inline void __attribute__((__overloadable__))
-	buf_add_data(struct s_data_buf *restrict _Nonnull buf,
+	lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
 		const char *restrict _Nonnull str,
 		size_t len)
 {
@@ -48,5 +48,5 @@ inline void __attribute__((__overloadable__))
 
 	i = ~0UL;
 	while (len > ++i)
-		buf_add_ch(buf, str[i]);
+		lpf_buf_ch_(buf, str[i]);
 }

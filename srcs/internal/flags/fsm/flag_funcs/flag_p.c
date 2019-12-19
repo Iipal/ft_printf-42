@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 17:58:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 22:30:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline bool
-	flag_p(struct s_data_buf *restrict _Nonnull buf,
-			struct s_flag_info *restrict _Nonnull flag,
+	flag_p(struct s_lpf_buf_ *restrict _Nonnull buf,
+			struct s_lpf_flag_ *restrict _Nonnull flag,
 						va_list *restrict _Nonnull ap)
 {
-	struct s_flag_data	data;
+	struct s_lpf_data_	data;
 	intptr_t			addr;
 	ssize_t				width;
 
@@ -29,11 +29,11 @@ inline bool
 	data.len = ft_strlen(data.ptr);
 	width = (ssize_t)flag->width - (ssize_t)(data.len + 2UL);
 	if (0 < width && !IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS))
-		buf_add_ch(buf, ' ', (size_t)width);
-	buf_add_data(buf, "0x", 2UL);
-	buf_add_data(buf, &data);
+		lpf_buf_ch_(buf, ' ', (size_t)width);
+	lpf_buf_data_(buf, "0x", 2UL);
+	lpf_buf_data_(buf, &data);
 	if (0 < width && IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS))
-		buf_add_ch(buf, ' ', (size_t)width);
+		lpf_buf_ch_(buf, ' ', (size_t)width);
 	ft_strdel(&data.ptr);
 	return (true);
 }

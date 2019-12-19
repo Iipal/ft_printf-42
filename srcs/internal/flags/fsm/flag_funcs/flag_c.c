@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vsprintf.c                                      :+:      :+:    :+:   */
+/*   flag_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 18:04:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:13:04 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/12/19 22:04:29 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/19 22:12:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #define LIBFTPRINTF_INTERNAL
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline int	ft_vsprintf(char *restrict _Nonnull dst,
-				const char *restrict _Nonnull format,
-				va_list *restrict _Nonnull ap)
+inline bool
+	flag_c(struct s_lpf_buf_ *restrict _Nonnull buf,
+			struct s_lpf_flag_ *restrict _Nonnull flag,
+						va_list *restrict _Nonnull ap)
 {
-	struct s_lpf_buf_	*buf;
-	int					out;
-
-	out = 0;
-	if (!(buf = internal_vprintf(format, ap)))
-		return (out);
-	out = buf->pos;
-	ft_strncpy(dst, buf->buf, out);
-	dst[out] = '\0';
-	buf = lpf_buf_free_(buf);
-	return (out);
+	if (flag->symbol == '%')
+		lpf_buf_ch_(buf, '%');
+	else
+		lpf_buf_ch_(buf, va_arg(*ap, int));
+	return (true);
 }

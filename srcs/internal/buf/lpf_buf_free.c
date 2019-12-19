@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vsprintf.c                                      :+:      :+:    :+:   */
+/*   lpf_buf_free_.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 18:04:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:13:04 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/12/19 14:52:59 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/19 15:22:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #define LIBFTPRINTF_INTERNAL
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline int	ft_vsprintf(char *restrict _Nonnull dst,
-				const char *restrict _Nonnull format,
-				va_list *restrict _Nonnull ap)
+inline void *_Nullable
+	lpf_buf_free_(struct s_lpf_buf_ *restrict _Nonnull buf)
 {
-	struct s_lpf_buf_	*buf;
-	int					out;
-
-	out = 0;
-	if (!(buf = internal_vprintf(format, ap)))
-		return (out);
-	out = buf->pos;
-	ft_strncpy(dst, buf->buf, out);
-	dst[out] = '\0';
-	buf = lpf_buf_free_(buf);
-	return (out);
+	ft_strdel(&buf->buf);
+	free(buf);
+	return (NULL);
 }

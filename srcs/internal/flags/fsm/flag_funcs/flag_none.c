@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lpf_ch_buf.c                                       :+:      :+:    :+:   */
+/*   flag_none.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:29:38 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/12/19 21:52:13 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/19 22:17:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,10 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline void __attribute__((__overloadable__))
-	buf_add_ch(struct s_data_buf *restrict _Nonnull buf, char ch)
+inline bool
+	flag_none(struct s_lpf_buf_ *restrict _Nonnull __attribute__((unused)) buf,
+			struct s_lpf_flag_ *restrict _Nonnull __attribute__((unused)) flag,
+					va_list *restrict _Nonnull __attribute__((unused)) ap)
 {
-	if (buf->size <= buf->pos)
-	{
-		buf->buf = ft_memrealloc(buf->buf, buf->size, buf->size * 2UL);
-		buf->size *= 2UL;
-	}
-	buf->buf[buf->pos++] = ch;
-}
-
-inline void __attribute__((__overloadable__))
-	buf_add_ch(struct s_data_buf *restrict _Nonnull buf, char ch, size_t n)
-{
-	while (n--)
-		buf_add_ch(buf, ch);
+	return (false);
 }

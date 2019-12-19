@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 17:25:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:29:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/19 22:13:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline int	ft_vdprintf(int fd,
 				const char *restrict _Nonnull format,
 				va_list *restrict _Nonnull ap)
 {
-	struct s_data_buf	*buf;
+	struct s_lpf_buf_	*buf;
 	int					out;
 
 	out = 0;
@@ -27,6 +27,6 @@ inline int	ft_vdprintf(int fd,
 		return (out);
 	out = buf->pos;
 	write(fd, buf->buf, out);
-	buf = free_buf(buf);
+	buf = lpf_buf_free_(buf);
 	return (out);
 }

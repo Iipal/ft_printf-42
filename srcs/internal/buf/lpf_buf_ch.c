@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_buf.c                                     :+:      :+:    :+:   */
+/*   lpf_buf_ch.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 14:52:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:22:35 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/19 22:29:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline void *_Nullable
-	free_buf(struct s_data_buf *restrict _Nonnull buf)
+inline void __attribute__((__overloadable__))
+	lpf_buf_ch_(struct s_lpf_buf_ *restrict _Nonnull buf, char ch)
 {
-	if (buf->buf)
-		ft_strdel(&buf->buf);
-	free(buf);
-	return (NULL);
+	if (buf->size <= buf->pos)
+	{
+		buf->buf = ft_memrealloc(buf->buf, buf->size, buf->size << 1UL);
+		buf->size <<= 1UL;
+	}
+	buf->buf[buf->pos++] = ch;
+}
+
+inline void __attribute__((__overloadable__))
+	lpf_buf_ch_(struct s_lpf_buf_ *restrict _Nonnull buf, char ch, size_t n)
+{
+	while (n--)
+		lpf_buf_ch_(buf, ch);
 }
