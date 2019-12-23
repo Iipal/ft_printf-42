@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:18:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:25:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 22:18:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #undef LIBFTPRINTF_INTERNAL
 #include <stdio.h>
 
-static inline int8_t __attribute__((__const__))
+static inline int8_t __attribute__((__always_inline__,__const__))
 	s_get_specificator_bit(char spec_ch)
 {
 	switch (spec_ch) {
@@ -25,7 +25,7 @@ static inline int8_t __attribute__((__const__))
 	}
 }
 
-static inline int8_t __attribute__((__const__))
+static inline int8_t __attribute__((__always_inline__,__const__))
 	s_get_type_spec_bit(char spec_ch)
 {
 	switch (spec_ch) {
@@ -38,15 +38,6 @@ static inline int8_t __attribute__((__const__))
 	}
 }
 
-static inline char __attribute__((__const__))
-	s_force_get_flag(const char *restrict format,
-					size_t *restrict fmt_i)
-{
-	if (ft_strntoblank(format + *fmt_i) - *fmt_i == 1)
-		return (format[*fmt_i]);
-	return (0);
-}
-
 bool
 	flag_parser(struct s_lpf_flag_ *restrict flag,
 						const char *restrict format,
@@ -55,9 +46,7 @@ bool
 	int8_t	spec_n;
 
 	*flag = (struct s_lpf_flag_) { S_FLAG_INFO_REFRESH };
-	if ((flag->symbol = s_force_get_flag(format, fmt_i)))
-		return (true);
-	spec_n = s_get_specificator_bit(format[*fmt_i]);
+	spec_n = s_get_specificator_bit(format[++(*fmt_i)]);
 	while (spec_n - 1 != -1) {
 		SET_BIT(flag->spec_mask, TO_N_BIT(spec_n - 1));
 		spec_n = s_get_specificator_bit(format[++(*fmt_i)]);
