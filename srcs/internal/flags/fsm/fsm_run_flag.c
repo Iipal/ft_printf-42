@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:41:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:35:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 12:20:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,24 @@
 static inline enum e_fsm_flag_state __attribute__((__const__))
 	s_get_index(char symbol)
 {
-	static const char	arr[16] = { 'd', 'i', 's', 'c', '%', 'u', 'p', 'o', 0 };
-	ptrdiff_t			i;
+	int8_t										i;
+	static const char *const restrict _Nonnull	arr = "disc%upo";
+	static const enum e_fsm_flag_state			state_table[9] = {
+		[0] = fsm_flag_di,
+		[1] = fsm_flag_di,
+		[2] = fsm_flag_s,
+		[3] = fsm_flag_c,
+		[4] = fsm_flag_c,
+		[5] = fsm_flag_u,
+		[6] = fsm_flag_p,
+		[7] = fsm_flag_o,
+		[8] = fsm_flag_none
+	};
 
-	i = 0L;
+	i = 0;
 	while (arr[i] && symbol != arr[i])
 		++i;
-	switch (i) {
-		case 0L:
-		case 1L: return (fsm_flag_di);
-		case 2L: return (fsm_flag_s);
-		case 3L:
-		case 4L: return (fsm_flag_c);
-		case 5L: return (fsm_flag_u);
-		case 6L: return (fsm_flag_p);
-		case 7L: return (fsm_flag_o);
-		default: return (fsm_flag_none);
-	}
+	return (state_table[i]);
 }
 
 inline bool __attribute__((always_inline))
