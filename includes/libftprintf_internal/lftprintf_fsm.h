@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:45:43 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:15:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:21:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,42 +32,42 @@ enum	e_fsm_flag_state
 	fsm_flag_o,
 } __attribute__((packed));
 
-typedef bool (*_Nonnull t_fsm_callback)(struct s_lpf_buf_ *restrict _Nonnull,
-									struct s_lpf_flag_ *restrict _Nonnull,
-											va_list *restrict _Nonnull);
+typedef bool (* t_fsm_callback)(struct s_lpf_buf_ *restrict,
+								struct s_lpf_flag_ *restrict,
+											va_list *restrict);
 
 extern bool
-fsm_run_flag(struct s_lpf_buf_ *restrict _Nonnull buf,
-			struct s_lpf_flag_ *restrict _Nonnull flag,
-						va_list *restrict _Nonnull ap);
+fsm_run_flag(struct s_lpf_buf_ *restrict buf,
+			struct s_lpf_flag_ *restrict flag,
+						va_list *restrict ap);
 
 extern bool
-flag_none(struct s_lpf_buf_ *restrict _Nonnull __attribute__((unused)) buf,
-			struct s_lpf_flag_ *restrict _Nonnull __attribute__((unused)) flag,
-						va_list *restrict _Nonnull __attribute__((unused)) ap);
+flag_none(struct s_lpf_buf_ *restrict __attribute__((unused)) buf,
+			struct s_lpf_flag_ *restrict __attribute__((unused)) flag,
+						va_list *restrict __attribute__((unused)) ap);
 extern bool
-flag_di(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_flag_ *restrict _Nonnull flag,
-					va_list *restrict _Nonnull ap);
+flag_di(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_flag_ *restrict flag,
+					va_list *restrict ap);
 extern bool
-flag_s(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_flag_ *restrict _Nonnull flag,
-					va_list *restrict _Nonnull ap);
+flag_s(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_flag_ *restrict flag,
+					va_list *restrict ap);
 extern bool
-flag_c(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_flag_ *restrict _Nonnull flag,
-					va_list *restrict _Nonnull ap);
+flag_c(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_flag_ *restrict flag,
+					va_list *restrict ap);
 extern bool
-flag_p(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_flag_ *restrict _Nonnull flag,
-					va_list *restrict _Nonnull ap);
+flag_p(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_flag_ *restrict flag,
+					va_list *restrict ap);
 extern bool
-flag_o(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_flag_ *restrict _Nonnull flag,
-					va_list *restrict _Nonnull ap);
+flag_o(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_flag_ *restrict flag,
+					va_list *restrict ap);
 extern bool
-flag_u(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_flag_ *restrict _Nonnull flag,
-					va_list *restrict _Nonnull ap);
+flag_u(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_flag_ *restrict flag,
+					va_list *restrict ap);
 
 #endif

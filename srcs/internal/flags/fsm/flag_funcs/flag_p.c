@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:42:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:30:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:26:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline bool
-	flag_p(struct s_lpf_buf_ *restrict _Nonnull buf,
-			struct s_lpf_flag_ *restrict _Nonnull flag,
-						va_list *restrict _Nonnull ap)
+	flag_p(struct s_lpf_buf_ *restrict buf,
+			struct s_lpf_flag_ *restrict flag,
+						va_list *restrict ap)
 {
 	struct s_lpf_data_	data;
 	intptr_t			addr;

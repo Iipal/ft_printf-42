@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:52:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:17:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:26:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline bool
-	flag_none(struct s_lpf_buf_ *restrict _Nonnull __attribute__((unused)) buf,
-			struct s_lpf_flag_ *restrict _Nonnull __attribute__((unused)) flag,
-					va_list *restrict _Nonnull __attribute__((unused)) ap)
+	flag_none(struct s_lpf_buf_ *restrict __attribute__((unused)) buf,
+			struct s_lpf_flag_ *restrict __attribute__((unused)) flag,
+					va_list *restrict __attribute__((unused)) ap)
 {
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:18:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/20 00:14:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:25:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,18 @@ static inline int8_t __attribute__((__const__))
 }
 
 static inline char __attribute__((__const__))
-	s_force_get_flag(const char *restrict _Nonnull format,
-					size_t *restrict _Nonnull fmt_i)
+	s_force_get_flag(const char *restrict format,
+					size_t *restrict fmt_i)
 {
-	size_t	i = ++(*fmt_i);
-
-	while (!F_ISBLANK(format[i]) && format[i])
-		++i;
-	if (i - *fmt_i == 1)
+	if (ft_strntoblank(format + *fmt_i) - *fmt_i == 1)
 		return (format[*fmt_i]);
 	return (0);
 }
 
 bool
-	flag_parser(struct s_lpf_flag_ *restrict _Nonnull flag,
-						const char *restrict _Nonnull format,
-							size_t *restrict _Nonnull fmt_i)
+	flag_parser(struct s_lpf_flag_ *restrict flag,
+						const char *restrict format,
+							size_t *restrict fmt_i)
 {
 	int8_t	spec_n;
 

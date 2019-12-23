@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:30:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:26:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #undef LIBFTPRINTF_INTERNAL
 
 static inline void __attribute__((__always_inline__))
-	s_fmt_data_to_buf(struct s_lpf_buf_ *restrict _Nonnull buf,
-					struct s_lpf_flag_ *restrict _Nonnull flag,
-					struct s_lpf_data_ *restrict _Nonnull data)
+	s_fmt_data_to_buf(struct s_lpf_buf_ *restrict buf,
+					struct s_lpf_flag_ *restrict flag,
+					struct s_lpf_data_ *restrict data)
 {
 	size_t	swidth;
 	size_t	dwidth;
@@ -47,9 +47,9 @@ static inline void __attribute__((__always_inline__))
 }
 
 extern bool
-	flag_s(struct s_lpf_buf_ *restrict _Nonnull buf,
-			struct s_lpf_flag_ *restrict _Nonnull flag,
-						va_list *restrict _Nonnull ap)
+	flag_s(struct s_lpf_buf_ *restrict buf,
+			struct s_lpf_flag_ *restrict flag,
+						va_list *restrict ap)
 {
 	struct s_lpf_data_	data;
 

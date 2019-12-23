@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 23:55:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:20:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@
 # include "lftprintf_bits_masks.h"
 # include "lftprintf_errno.h"
 
-struct s_lpf_buf_ *_Nullable
-internal_vprintf(const char *restrict _Nonnull format,
-					va_list *restrict _Nonnull ap);
+struct s_lpf_buf_
+*internal_vprintf(const char *restrict format,
+					va_list *restrict ap);
 
 bool
-flag_parser(struct s_lpf_flag_ *restrict _Nonnull flag,
-					const char *restrict _Nonnull format,
-						size_t *restrict _Nonnull fmt_i);
+flag_parser(struct s_lpf_flag_ *restrict flag,
+					const char *restrict format,
+						size_t *restrict fmt_i);
 
-extern char *_Nullable
-get_signed_data(va_list *restrict _Nonnull ap, int8_t type);
-extern char *_Nullable
-get_unsigned_data(va_list *restrict _Nonnull ap, int base, int8_t type);
+extern char
+*get_signed_data(va_list *restrict ap, int8_t type);
+extern char
+*get_unsigned_data(va_list *restrict ap, int base, int8_t type);
 
 #endif

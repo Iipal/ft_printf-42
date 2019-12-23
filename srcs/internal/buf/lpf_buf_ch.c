@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:29:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:28:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline void __attribute__((__overloadable__))
-	lpf_buf_ch_(struct s_lpf_buf_ *restrict _Nonnull buf, char ch)
+	lpf_buf_ch_(struct s_lpf_buf_ *restrict buf, char ch)
 {
 	if (buf->size <= buf->pos)
 	{
@@ -26,7 +26,7 @@ inline void __attribute__((__overloadable__))
 }
 
 inline void __attribute__((__overloadable__))
-	lpf_buf_ch_(struct s_lpf_buf_ *restrict _Nonnull buf, char ch, size_t n)
+	lpf_buf_ch_(struct s_lpf_buf_ *restrict buf, char ch, size_t n)
 {
 	while (n--)
 		lpf_buf_ch_(buf, ch);

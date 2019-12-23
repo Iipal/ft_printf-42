@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 22:14:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:22:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 struct s_lpf_buf_
 {
-	char *restrict _Nullable	buf;
-	size_t						pos;
-	size_t						size;
+	char *restrict	buf;
+	size_t			pos;
+	size_t			size;
 } __attribute__((aligned(__BIGGEST_ALIGNMENT__)));
 
 # ifndef S_DATA_BUF_INIT
@@ -33,29 +33,29 @@ struct s_lpf_buf_
 
 struct s_lpf_data_
 {
-	char *restrict _Nullable	ptr;
-	size_t						len;
+	char *restrict	ptr;
+	size_t			len;
 }  __attribute__((aligned(__BIGGEST_ALIGNMENT__)));
 
 extern void __attribute__((__overloadable__))
-lpf_buf_ch_(struct s_lpf_buf_ *restrict _Nonnull buf, char ch);
+lpf_buf_ch_(struct s_lpf_buf_ *restrict buf, char ch);
 extern void __attribute__((__overloadable__))
-lpf_buf_ch_(struct s_lpf_buf_ *restrict _Nonnull buf, char ch, size_t n);
+lpf_buf_ch_(struct s_lpf_buf_ *restrict buf, char ch, size_t n);
 
 extern void __attribute__((__overloadable__))
-lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_data_ *restrict _Nonnull data);
+lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_data_ *restrict data);
 extern void __attribute__((__overloadable__))
-lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_data_ *restrict _Nonnull data,
+lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_data_ *restrict data,
 		size_t len);
 extern void __attribute__((__overloadable__))
-lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
-		const char *restrict _Nonnull str,
-		size_t len);
+lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
+					const char *restrict str,
+					size_t len);
 
-extern void *_Nullable
-lpf_buf_free_(struct s_lpf_buf_ *restrict _Nonnull buf);
+extern void *
+lpf_buf_free_(struct s_lpf_buf_ *restrict buf);
 
 struct s_lpf_flag_
 {

@@ -15,8 +15,8 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline void __attribute__((__overloadable__))
-	lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_data_ *restrict _Nonnull data)
+	lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_data_ *restrict data)
 {
 	size_t	i;
 
@@ -26,8 +26,8 @@ inline void __attribute__((__overloadable__))
 }
 
 inline void __attribute__((__overloadable__))
-	lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
-		struct s_lpf_data_ *restrict _Nonnull data,
+	lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
+		struct s_lpf_data_ *restrict data,
 		size_t len)
 {
 	size_t	i;
@@ -40,8 +40,8 @@ inline void __attribute__((__overloadable__))
 }
 
 inline void __attribute__((__overloadable__))
-	lpf_buf_data_(struct s_lpf_buf_ *restrict _Nonnull buf,
-		const char *restrict _Nonnull str,
+	lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
+		const char *restrict str,
 		size_t len)
 {
 	size_t	i;

@@ -14,8 +14,8 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline void *_Nullable
-	lpf_buf_free_(struct s_lpf_buf_ *restrict _Nonnull buf)
+inline void
+	*lpf_buf_free_(struct s_lpf_buf_ *restrict buf)
 {
 	ft_strdel(&buf->buf);
 	free(buf);

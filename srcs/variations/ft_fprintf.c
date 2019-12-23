@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 13:05:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:18:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_fprintf(FILE *restrict _Nonnull stream,
-		const char *restrict _Nonnull format, ...)
+int	ft_fprintf(FILE *restrict  stream,
+		const char *restrict  format, ...)
 {
 	va_list	ap;
 	int		out;

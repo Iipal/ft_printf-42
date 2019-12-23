@@ -6,15 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:51:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 13:05:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:22:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-inline int	ft_snprintf(char *restrict _Nonnull dst,
-				size_t len,
-				const char *restrict _Nonnull format, ...)
+inline int
+ft_snprintf(char *restrict dst, size_t len, const char *restrict format, ...)
 {
 	va_list	ap;
 	int		out;

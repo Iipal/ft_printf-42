@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 21:41:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 12:20:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:26:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 static inline enum e_fsm_flag_state __attribute__((__const__))
 	s_get_index(char symbol)
 {
-	int8_t										i;
-	static const char *const restrict _Nonnull	arr = "disc%upo";
-	static const enum e_fsm_flag_state			state_table[9] = {
+	static const char					arr[16] = "disc%upo";
+	static const enum e_fsm_flag_state	state_table[16] = {
 		[0] = fsm_flag_di,
 		[1] = fsm_flag_di,
 		[2] = fsm_flag_s,
@@ -28,19 +27,16 @@ static inline enum e_fsm_flag_state __attribute__((__const__))
 		[5] = fsm_flag_u,
 		[6] = fsm_flag_p,
 		[7] = fsm_flag_o,
-		[8] = fsm_flag_none
+		[8 ... 15] = fsm_flag_none
 	};
 
-	i = 0;
-	while (arr[i] && symbol != arr[i])
-		++i;
-	return (state_table[i]);
+	return (state_table[ft_strchrnul(arr, symbol) - arr]);
 }
 
 inline bool __attribute__((always_inline))
-	fsm_run_flag(struct s_lpf_buf_ *restrict _Nonnull buf,
-				struct s_lpf_flag_ *restrict _Nonnull flag,
-							va_list *restrict _Nonnull ap)
+	fsm_run_flag(struct s_lpf_buf_ *restrict buf,
+				struct s_lpf_flag_ *restrict flag,
+							va_list *restrict ap)
 {
 	const static t_fsm_callback	callback_table[8] = {
 		[fsm_flag_none] = flag_none,
