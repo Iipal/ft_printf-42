@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:45:43 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:21:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/24 01:33:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum	e_fsm_flag_state
 	fsm_flag_o,
 } __attribute__((packed));
 
-typedef bool (* t_fsm_callback)(struct s_lpf_buf_ *restrict,
+typedef bool (*t_fsm_callback)(struct s_lpf_buf_ *restrict,
 								struct s_lpf_flag_ *restrict,
 											va_list *restrict);
 

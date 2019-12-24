@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:20:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/24 01:36:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@
 # include "lftprintf_errno.h"
 
 struct s_lpf_buf_
-*internal_vprintf(const char *restrict format,
-					va_list *restrict ap);
+*internal_vprintf(const char *restrict fmt, va_list *restrict ap);
 
-bool
-flag_parser(struct s_lpf_flag_ *restrict flag,
-					const char *restrict format,
-						size_t *restrict fmt_i);
+struct s_lpf_flag_
+*flag_parser(const char *restrict format, size_t *restrict fmt_i);
 
 extern char
 *get_signed_data(va_list *restrict ap, int8_t type);

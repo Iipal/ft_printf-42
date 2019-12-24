@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:24:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:24:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/24 01:30:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 #undef LIBFTPRINTF_INTERNAL
 
 struct s_lpf_buf_
-	*internal_vprintf(const char *restrict format,
-						va_list *restrict ap)
+	*internal_vprintf(const char *restrict fmt, va_list *restrict ap)
 {
 	struct s_lpf_buf_	*buf;
-	struct s_lpf_flag_	flag;
 	size_t				fmt_i;
 	bool				is_valid;
 
@@ -28,11 +26,11 @@ struct s_lpf_buf_
 	*buf = (struct s_lpf_buf_) { S_DATA_BUF_INIT };
 	fmt_i = ~0UL;
 	is_valid = true;
-	while (format[++fmt_i]) {
-		if (format[fmt_i] != '%') {
-			lpf_buf_ch_(buf, format[fmt_i]);
-		} else if (flag_parser(&flag, format, &fmt_i)) {
-			if (!(is_valid = fsm_run_flag(buf, &flag, ap)))
+	while (fmt[++fmt_i]) {
+		if (fmt[fmt_i] != '%') {
+			lpf_buf_ch_(buf, fmt[fmt_i]);
+		} else {
+			if (!(is_valid = fsm_run_flag(buf, flag_parser(fmt, &fmt_i), ap)))
 				break ;
 		}
 	}
