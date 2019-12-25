@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:52:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:26:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/25 21:26:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline bool
-	flag_none(struct s_lpf_buf_ *restrict __attribute__((unused)) buf,
-			struct s_lpf_flag_ *restrict __attribute__((unused)) flag,
-					va_list *restrict __attribute__((unused)) ap)
+bool	flag_none(struct s_lpf_buf_ *restrict __attribute__((unused)) buf,
+				struct s_lpf_flag_ *restrict __attribute__((unused)) flag,
+						va_list *restrict __attribute__((unused)) ap)
 {
 	return (false);
 }

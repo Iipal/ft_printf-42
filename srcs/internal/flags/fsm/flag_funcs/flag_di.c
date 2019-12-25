@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:27:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/25 21:26:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline bool
-	flag_di(struct s_lpf_buf_ *restrict buf,
-			struct s_lpf_flag_ *restrict flag,
-						va_list *restrict ap)
+bool	flag_di(struct s_lpf_buf_ *restrict buf,
+				struct s_lpf_flag_ *restrict flag,
+							va_list *restrict ap)
 {
 	struct s_lpf_data_	data;
 	int					wch;

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:38:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:26:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/25 21:25:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-static inline void __attribute__((always_inline))
+extern inline void __attribute__((always_inline))
 	s_fmt_data_to_buf(struct s_lpf_buf_ *restrict buf,
 					struct s_lpf_flag_ *restrict flag,
 					struct s_lpf_data_ *restrict data)
@@ -30,7 +30,7 @@ static inline void __attribute__((always_inline))
 		lpf_buf_data_(buf, data);
 }
 
-inline bool
+bool
 	flag_o(struct s_lpf_buf_ *restrict buf,
 			struct s_lpf_flag_ *restrict flag,
 						va_list *restrict ap)
