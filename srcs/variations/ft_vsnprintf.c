@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:07:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:29:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/23 21:23:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline int	ft_vsnprintf(char *restrict _Nonnull dst,
-				size_t len,
-				const char *restrict _Nonnull format,
-				va_list *restrict _Nonnull ap)
+inline int	ft_vsnprintf(char *restrict dst, size_t len,
+				const char *restrict format,
+				va_list *restrict ap)
 {
-	struct s_data_buf	*buf;
+	struct s_lpf_buf_	*buf;
 	int					out;
 
 	out = 0;
@@ -31,6 +30,6 @@ inline int	ft_vsnprintf(char *restrict _Nonnull dst,
 		out = len;
 	ft_strncpy(dst, buf->buf, out);
 	dst[out] = '\0';
-	free_buf(buf);
+	lpf_buf_free_(buf);
 	return (out);
 }

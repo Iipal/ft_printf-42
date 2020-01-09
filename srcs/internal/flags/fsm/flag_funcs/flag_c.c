@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vdprintf.c                                      :+:      :+:    :+:   */
+/*   flag_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 17:25:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:23:02 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/12/19 22:04:29 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/12/25 21:26:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #define LIBFTPRINTF_INTERNAL
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline int
-ft_vdprintf(int fd, const char *restrict format, va_list *restrict ap)
+bool	flag_c(struct s_lpf_buf_ *restrict buf,
+				struct s_lpf_flag_ *restrict flag,
+							va_list *restrict ap)
 {
-	struct s_lpf_buf_	*buf;
-	int					out;
-
-	out = 0;
-	if (!(buf = internal_vprintf(format, ap)))
-		return (out);
-	out = buf->pos;
-	write(fd, buf->buf, out);
-	buf = lpf_buf_free_(buf);
-	return (out);
+	if (flag->symbol == '%')
+		lpf_buf_ch_(buf, '%');
+	else
+		lpf_buf_ch_(buf, va_arg(*ap, int));
+	return (true);
 }

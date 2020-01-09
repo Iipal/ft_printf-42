@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 15:35:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/25 21:26:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 # include "libftprintf_internal.h"
 #undef LIBFTPRINTF_INTERNAL
 
-inline bool
-	flag_di(struct s_data_buf *restrict _Nonnull buf,
-			struct s_flag_info *restrict _Nonnull flag,
-						va_list *restrict _Nonnull ap)
+bool	flag_di(struct s_lpf_buf_ *restrict buf,
+				struct s_lpf_flag_ *restrict flag,
+							va_list *restrict ap)
 {
-	struct s_flag_data	data;
+	struct s_lpf_data_	data;
 	int					wch;
 
 	if (!(data.ptr = get_signed_data(ap, flag->type_mask)))
@@ -27,11 +26,11 @@ inline bool
 	wch = IS_BIT(flag->spec_mask, PF_BIT_SPEC_DOT) ? '0' : ' ';
 	data.len = ft_strlen(data.ptr);
 	if (IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS) && wch != '0')
-		buf_add_data(buf, &data);
+		lpf_buf_data_(buf, &data);
 	if (flag->width > data.len)
-		buf_add_ch(buf, wch, flag->width - data.len);
+		lpf_buf_ch_(buf, wch, flag->width - data.len);
 	if (!IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS) || wch == '0')
-		buf_add_data(buf, &data);
+		lpf_buf_data_(buf, &data);
 	ft_strdel(&data.ptr);
 	return (true);
 }

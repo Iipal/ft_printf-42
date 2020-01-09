@@ -1,0 +1,65 @@
+not FSM       : took 341481 us
+not FSM       : took 406134 us
+not FSM       : took 342400 us
+not FSM       : took 336265 us
+not FSM       : took 374458 us
+not FSM       : took 351555 us
+not FSM       : took 361639 us
+not FSM       : took 340142 us
+not FSM       : took 338399 us
+not FSM       : took 337477 us
+---
+via FSM v0.0.1: took 1149532 us
+via FSM v0.0.1: took 1150641 us
+via FSM v0.0.1: took 1172873 us
+via FSM v0.0.1: took 1149413 us
+via FSM v0.0.1: took 1205759 us
+via FSM v0.0.1: took 1141004 us
+via FSM v0.0.1: took 1160422 us
+via FSM v0.0.1: took 1161994 us
+via FSM v0.0.1: took 1134101 us
+via FSM v0.0.1: took 1145153 us
+---
+via FSM v0.0.2: took 363420 us
+via FSM v0.0.2: took 362129 us
+via FSM v0.0.2: took 385956 us
+via FSM v0.0.2: took 363567 us
+via FSM v0.0.2: took 366236 us
+via FSM v0.0.2: took 367138 us
+via FSM v0.0.2: took 362304 us
+via FSM v0.0.2: took 373723 us
+via FSM v0.0.2: took 357180 us
+via FSM v0.0.2: took 362466 us
+---
+via FSM v0.0.3: took 351757 us
+via FSM v0.0.3: took 349682 us
+via FSM v0.0.3: took 351794 us
+via FSM v0.0.3: took 339944 us
+via FSM v0.0.3: took 373124 us
+via FSM v0.0.3: took 346413 us
+via FSM v0.0.3: took 343111 us
+via FSM v0.0.3: took 343479 us
+via FSM v0.0.3: took 338683 us
+via FSM v0.0.3: took 349265 us
+---
+via FSM v0.0.4: took 290456 us
+via FSM v0.0.4: took 313291 us
+via FSM v0.0.4: took 286560 us
+via FSM v0.0.4: took 288964 us
+via FSM v0.0.4: took 284566 us
+via FSM v0.0.4: took 284659 us
+via FSM v0.0.4: took 349258 us
+via FSM v0.0.4: took 287056 us
+via FSM v0.0.4: took 283190 us
+via FSM v0.0.4: took 285927 us
+---
+via FSM v0.0.5: took 278221 us
+via FSM v0.0.5: took 288197 us
+via FSM v0.0.5: took 287484 us
+via FSM v0.0.5: took 277231 us
+via FSM v0.0.5: took 286293 us
+via FSM v0.0.5: took 280234 us
+via FSM v0.0.5: took 281436 us
+via FSM v0.0.5: took 285973 us
+via FSM v0.0.5: took 299939 us
+via FSM v0.0.5: took 390211 us
