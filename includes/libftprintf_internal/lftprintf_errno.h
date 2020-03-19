@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:14:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 13:01:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:04:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 #  error "include only libftprintf.h"
 # endif
 
-# define E_PF_INVALID "libftprintf: Something invalid."
+# define E_PF_INVALID "libftprintf: Something invalid.\n"
 
 #endif

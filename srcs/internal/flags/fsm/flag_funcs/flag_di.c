@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:08:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/25 21:26:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:28:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 bool	flag_di(struct s_lpf_buf_ *restrict buf,
 				struct s_lpf_flag_ *restrict flag,
-							va_list *restrict ap)
+				va_list ap)
 {
 	struct s_lpf_data_	data;
 	int					wch;
@@ -24,13 +24,14 @@ bool	flag_di(struct s_lpf_buf_ *restrict buf,
 	if (!(data.ptr = get_signed_data(ap, flag->type_mask)))
 		return (false);
 	wch = IS_BIT(flag->spec_mask, PF_BIT_SPEC_DOT) ? '0' : ' ';
-	data.len = ft_strlen(data.ptr);
+	data.len = strlen(data.ptr);
 	if (IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS) && wch != '0')
 		lpf_buf_data_(buf, &data);
 	if (flag->width > data.len)
 		lpf_buf_ch_(buf, wch, flag->width - data.len);
 	if (!IS_BIT(flag->spec_mask, PF_BIT_SPEC_MINUS) || wch == '0')
 		lpf_buf_data_(buf, &data);
-	ft_strdel(&data.ptr);
+	free(data.ptr);
+	data.ptr = NULL;
 	return (true);
 }

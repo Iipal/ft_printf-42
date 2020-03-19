@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lftprintf_bits_masks.h                             :+:      :+:    :+:   */
+/*   lftprintf_bits.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:20:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/19 12:47:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 21:18:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
 #  error "include only libftprintf.h"
 # endif
 
-# include "libft_bits_macroses.h"
+
+# define TO_N_BIT(n) (1 << (n))
+
+# define SET_BIT(mask, bit) ((mask) |= (bit))
+# define TOGGLE_BIT(mask, bit) ((mask) ^= (bit))
+# define UNSET_BIT(mask, bit) ((mask) &= ~(bit))
+
+# define IS_BIT(mask, bit) (((mask) & (bit)) == (bit))
 
 /*
 ** g_flag_spec_mask bit masks.

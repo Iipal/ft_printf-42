@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:38:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/25 21:25:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:28:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ extern inline void __attribute__((always_inline))
 		lpf_buf_data_(buf, data);
 }
 
-bool
-	flag_o(struct s_lpf_buf_ *restrict buf,
+bool	flag_o(struct s_lpf_buf_ *restrict buf,
 			struct s_lpf_flag_ *restrict flag,
-						va_list *restrict ap)
+			va_list ap)
 {
 	struct s_lpf_data_	data;
 
 	if (!(data.ptr = get_unsigned_data(ap, 8, flag->type_mask)))
 		return (false);
-	data.len = ft_strlen(data.ptr);
+	data.len = strlen(data.ptr);
 	s_fmt_data_to_buf(buf, flag, &data);
-	ft_strdel(&data.ptr);
+	free(data.ptr);
+	data.ptr = NULL;
 	return (true);
 }

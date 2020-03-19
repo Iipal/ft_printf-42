@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 22:04:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/25 21:26:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:13:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 
 bool	flag_c(struct s_lpf_buf_ *restrict buf,
 				struct s_lpf_flag_ *restrict flag,
-							va_list *restrict ap)
+				va_list ap)
 {
-	if (flag->symbol == '%')
-		lpf_buf_ch_(buf, '%');
-	else
-		lpf_buf_ch_(buf, va_arg(*ap, int));
+	lpf_buf_ch_(buf, (flag->symbol == '%') ? '%' : va_arg(ap, int));
 	return (true);
 }

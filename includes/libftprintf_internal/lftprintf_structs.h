@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:22:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:23:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct s_lpf_data_
 {
 	char *restrict	ptr;
 	size_t			len;
-}  __attribute__((aligned(__BIGGEST_ALIGNMENT__)));
+} __attribute__((aligned(__BIGGEST_ALIGNMENT__)));
 
 extern void __attribute__((__overloadable__))
 lpf_buf_ch_(struct s_lpf_buf_ *restrict buf, char ch);
@@ -51,11 +51,10 @@ lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
 		size_t len);
 extern void __attribute__((__overloadable__))
 lpf_buf_data_(struct s_lpf_buf_ *restrict buf,
-					const char *restrict str,
-					size_t len);
+		const char *restrict str,
+		size_t len);
 
-extern void *
-lpf_buf_free_(struct s_lpf_buf_ *restrict buf);
+extern void	*lpf_buf_free_(struct s_lpf_buf_ *restrict buf);
 
 struct s_lpf_flag_
 {
@@ -63,11 +62,10 @@ struct s_lpf_flag_
 	char	symbol;
 	int8_t	spec_mask;
 	int8_t	type_mask;
-	char	_dummy[5] __attribute__((unused));
 } __attribute__((aligned(__BIGGEST_ALIGNMENT__)));
 
 # ifndef S_FLAG_INFO_REFRESH
-#  define S_FLAG_INFO_REFRESH 0UL, 0, 0, 0, { 0, 0, 0, 0, 0 }
+#  define S_FLAG_INFO_REFRESH 0, 0, 0, 0
 # endif
 
 #endif

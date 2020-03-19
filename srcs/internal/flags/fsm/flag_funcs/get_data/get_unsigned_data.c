@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:42:39 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:27:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:23:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 #undef LIBFTPRINTF_INTERNAL
 
 extern char __attribute__((__const__,__always_inline__))
-	*get_unsigned_data(va_list *restrict ap, int base, int8_t type)
+	*get_unsigned_data(va_list ap, int base, int8_t type)
 {
-	if (!type || IS_BIT(type, PF_BIT_TYPE_H) || IS_BIT(type, PF_BIT_TYPE_HH))
-		return (ft_ultoa(va_arg(*ap, unsigned int), ft_strnew(24UL), base));
-	else if (type)
-		return (ft_ultoa(va_arg(*ap, unsigned long), ft_strnew(24UL), base));
-	return (NULL);
+	unsigned long	value = 0;
+	char	*out = NULL;
+
+	if (!type || IS_BIT(type, PF_BIT_TYPE_H) || IS_BIT(type, PF_BIT_TYPE_HH)) {
+		value = va_arg(ap, unsigned int);
+		out = lpf_ultoap_base(value, calloc(24UL, sizeof(char)), base);
+	} else if (type) {
+		value = va_arg(ap, unsigned long);
+		out = lpf_ultoap_base(value, calloc(24UL, sizeof(char)), base);
+	}
+	return (out);
 }

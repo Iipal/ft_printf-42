@@ -20,7 +20,7 @@ inline void __attribute__((__overloadable__))
 {
 	size_t	i;
 
-	i = ~0UL;
+	i = ~((size_t)0);
 	while (data->len > ++i)
 		lpf_buf_ch_(buf, data->ptr[i]);
 }
@@ -32,7 +32,7 @@ inline void __attribute__((__overloadable__))
 {
 	size_t	i;
 
-	i = ~0UL;
+	i = ~((size_t)0);
 	if (len > data->len)
 		len = data->len;
 	while (len > ++i)
@@ -46,7 +46,7 @@ inline void __attribute__((__overloadable__))
 {
 	size_t	i;
 
-	i = ~0UL;
+	i = ~((size_t)0);
 	while (len > ++i)
 		lpf_buf_ch_(buf, str[i]);
 }

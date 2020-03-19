@@ -17,7 +17,9 @@
 inline void
 	*lpf_buf_free_(struct s_lpf_buf_ *restrict buf)
 {
-	ft_strdel(&buf->buf);
+	free(buf->buf);
+	buf->buf = NULL;
 	free(buf);
+	buf = NULL;
 	return (NULL);
 }

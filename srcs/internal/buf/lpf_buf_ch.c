@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 16:34:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:28:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 21:16:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline void __attribute__((__overloadable__))
 {
 	if (buf->size <= buf->pos)
 	{
-		buf->buf = ft_memrealloc(buf->buf, buf->size, buf->size << 1UL);
+		buf->buf = realloc(buf->buf, buf->size << 1UL);
 		buf->size <<= 1UL;
 	}
 	buf->buf[buf->pos++] = ch;

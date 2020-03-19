@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 17:25:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/23 21:23:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:02:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #undef LIBFTPRINTF_INTERNAL
 
 inline int
-ft_vdprintf(int fd, const char *restrict format, va_list *restrict ap)
+ft_vdprintf(int fd, const char *restrict format, va_list ap)
 {
 	struct s_lpf_buf_	*buf;
 	int					out;

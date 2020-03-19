@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:10:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/25 21:25:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:10:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,15 @@ static inline void __attribute__((__always_inline__))
 	}
 }
 
-bool
-	flag_s(struct s_lpf_buf_ *restrict buf,
+bool	flag_s(struct s_lpf_buf_ *restrict buf,
 			struct s_lpf_flag_ *restrict flag,
-						va_list *restrict ap)
+						va_list ap)
 {
 	struct s_lpf_data_	data;
 
-	if (!(data.ptr = (char*)va_arg(*ap, char*)))
+	if (!(data.ptr = (char*)va_arg(ap, char*)))
 		data.ptr = "(null)";
-	data.len = ft_strlen(data.ptr);
+	data.len = strlen(data.ptr);
 	s_fmt_data_to_buf(buf, flag, &data);
 	return (true);
 }

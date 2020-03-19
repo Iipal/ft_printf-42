@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 21:45:43 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/24 01:33:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/03/19 22:06:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,40 @@ enum	e_fsm_flag_state
 } __attribute__((packed));
 
 typedef bool (*t_fsm_callback)(struct s_lpf_buf_ *restrict,
-								struct s_lpf_flag_ *restrict,
-											va_list *restrict);
+					struct s_lpf_flag_ *restrict, va_list);
 
 extern bool
 fsm_run_flag(struct s_lpf_buf_ *restrict buf,
 			struct s_lpf_flag_ *restrict flag,
-						va_list *restrict ap);
+						va_list ap);
 
 extern bool
 flag_none(struct s_lpf_buf_ *restrict __attribute__((unused)) buf,
 			struct s_lpf_flag_ *restrict __attribute__((unused)) flag,
-						va_list *restrict __attribute__((unused)) ap);
+						va_list __attribute__((unused)) ap);
 extern bool
 flag_di(struct s_lpf_buf_ *restrict buf,
-		struct s_lpf_flag_ *restrict flag,
-					va_list *restrict ap);
+	struct s_lpf_flag_ *restrict flag,
+	va_list ap);
 extern bool
 flag_s(struct s_lpf_buf_ *restrict buf,
-		struct s_lpf_flag_ *restrict flag,
-					va_list *restrict ap);
+	struct s_lpf_flag_ *restrict flag,
+	va_list ap);
 extern bool
 flag_c(struct s_lpf_buf_ *restrict buf,
-		struct s_lpf_flag_ *restrict flag,
-					va_list *restrict ap);
+	struct s_lpf_flag_ *restrict flag,
+	va_list ap);
 extern bool
 flag_p(struct s_lpf_buf_ *restrict buf,
-		struct s_lpf_flag_ *restrict flag,
-					va_list *restrict ap);
+	struct s_lpf_flag_ *restrict flag,
+	va_list ap);
 extern bool
 flag_o(struct s_lpf_buf_ *restrict buf,
-		struct s_lpf_flag_ *restrict flag,
-					va_list *restrict ap);
+	struct s_lpf_flag_ *restrict flag,
+	va_list ap);
 extern bool
 flag_u(struct s_lpf_buf_ *restrict buf,
-		struct s_lpf_flag_ *restrict flag,
-					va_list *restrict ap);
+	struct s_lpf_flag_ *restrict flag,
+	va_list ap);
 
 #endif
